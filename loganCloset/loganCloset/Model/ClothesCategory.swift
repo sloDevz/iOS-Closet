@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ClothesType {
+enum ClothesCategory {
 
     case hat
     case top

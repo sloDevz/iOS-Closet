@@ -7,11 +7,11 @@
 
 import UIKit
 
-struct Clothes {
+struct Clothes: Hashable {
 
     let clothesOrderNumber: Int
     let createdDate: Date
-    let clothesType: ClothesType
+    let clothesType: ClothesCategory
     let itemImage: UIImage
     let mainColor: UIColor?
     let season: Season?
