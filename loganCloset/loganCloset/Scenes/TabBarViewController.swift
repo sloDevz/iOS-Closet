@@ -13,8 +13,6 @@ final class TabBarViewController: UITabBarController {
     //MARK: - Properties
     private var clothesManager = ClothesManager()
 
-
-
     private let clothesIcon = UIImage(
         named: "MyClothes_icon")?
         .withRenderingMode(.alwaysOriginal
@@ -51,9 +49,17 @@ final class TabBarViewController: UITabBarController {
     private func configureTabBar() {
         self.tabBar.backgroundColor = .systemBackground
 
-        let myClothesViewController = MyClothesViewController(clothesManager: clothesManager)
-        let homeViewController = HomeViewController(clothesManager: clothesManager)
-        let myStyleSetViewController = MyStyleSetViewController(clothesManager: clothesManager)
+        let myClothesViewController = UINavigationController(
+            rootViewController: MyClothesViewController(clothesManager: clothesManager)
+        )
+        let homeViewController = UINavigationController(
+            rootViewController: HomeViewController(clothesManager: clothesManager)
+        )
+        let myStyleSetViewController = UINavigationController(
+            rootViewController: MyStyleSetViewController(clothesManager: clothesManager)
+        )
+
+        myStyleSetViewController.isNavigationBarHidden = false
 
         myClothesViewController.tabBarItem = UITabBarItem(
             title: "옷",
@@ -70,7 +76,7 @@ final class TabBarViewController: UITabBarController {
             image: styleIcon,
             selectedImage: styleSelectedIcon
         )
-        self.setViewControllers([myClothesViewController, homeViewController, myStyleSetViewController], animated: false)
+        setViewControllers([myClothesViewController, homeViewController, myStyleSetViewController], animated: false)
     }
 
 

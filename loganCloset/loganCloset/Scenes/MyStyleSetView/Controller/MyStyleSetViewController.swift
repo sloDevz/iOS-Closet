@@ -25,11 +25,19 @@ final class MyStyleSetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
+        setViewAppearance()
     }
 
     //MARK: - Methodes
-
+    private func setViewAppearance() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .systemBackground
+        self.navigationItem.standardAppearance = appearance
+        self.navigationItem.scrollEdgeAppearance = appearance
+        
+        view.backgroundColor = UIColor(white: 0.95, alpha: 1)
+    }
 
 }
 
