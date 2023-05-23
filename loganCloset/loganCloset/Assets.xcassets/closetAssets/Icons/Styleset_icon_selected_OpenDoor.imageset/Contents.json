@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Styleset_icon_selected_OpenDoor.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Styleset_icon_selected_OpenDoor@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Styleset_icon_selected_OpenDoor@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

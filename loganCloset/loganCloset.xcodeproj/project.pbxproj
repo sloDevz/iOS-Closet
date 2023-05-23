@@ -31,6 +31,8 @@
 		F1831CDC2A1B59C10050D50F /* MyClothesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CDB2A1B59C10050D50F /* MyClothesViewController.swift */; };
 		F1831CDE2A1B59FC0050D50F /* MyStyleSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CDD2A1B59FC0050D50F /* MyStyleSetViewController.swift */; };
 		F1831CE02A1B5A3E0050D50F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CDF2A1B5A3E0050D50F /* TabBarViewController.swift */; };
+		F1831CE92A1C5C010050D50F /* MyClothesItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CE82A1C5C010050D50F /* MyClothesItemCell.swift */; };
+		F1831CEC2A1C6F910050D50F /* CategoryFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CEB2A1C6F910050D50F /* CategoryFilter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		F1831CDB2A1B59C10050D50F /* MyClothesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClothesViewController.swift; sourceTree = "<group>"; };
 		F1831CDD2A1B59FC0050D50F /* MyStyleSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStyleSetViewController.swift; sourceTree = "<group>"; };
 		F1831CDF2A1B5A3E0050D50F /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		F1831CE82A1C5C010050D50F /* MyClothesItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClothesItemCell.swift; sourceTree = "<group>"; };
+		F1831CEB2A1C6F910050D50F /* CategoryFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,11 +96,10 @@
 		F1188BF72A15EA47002B0835 /* loganCloset */ = {
 			isa = PBXGroup;
 			children = (
-				F1831CD72A1B0F050050D50F /* ClothesManager.swift */,
+				F1831CEA2A1C6F4B0050D50F /* Manager */,
 				F1188C132A160AE8002B0835 /* Util */,
 				F1188C0E2A1608C8002B0835 /* Model */,
-				F1188C0F2A1608CB002B0835 /* View */,
-				F1188C102A1608CD002B0835 /* Controller */,
+				F1188C0F2A1608CB002B0835 /* Scenes */,
 				F1831CB92A1A5BC00050D50F /* Font */,
 				F1188BF82A15EA47002B0835 /* AppDelegate.swift */,
 				F1188BFA2A15EA47002B0835 /* SceneDelegate.swift */,
@@ -118,20 +121,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		F1188C0F2A1608CB002B0835 /* View */ = {
+		F1188C0F2A1608CB002B0835 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F1831CDF2A1B5A3E0050D50F /* TabBarViewController.swift */,
+				F1831CE12A1C5B390050D50F /* HomeView */,
+				F1831CE22A1C5B610050D50F /* MyClothesView */,
+				F1831CE32A1C5B740050D50F /* MyStyleSetView */,
 			);
-			path = View;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		F1188C102A1608CD002B0835 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				F1188BFC2A15EA47002B0835 /* HomeViewController.swift */,
-				F1831CDB2A1B59C10050D50F /* MyClothesViewController.swift */,
-				F1831CDD2A1B59FC0050D50F /* MyStyleSetViewController.swift */,
-				F1831CDF2A1B5A3E0050D50F /* TabBarViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -139,6 +143,7 @@
 		F1188C132A160AE8002B0835 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				F1831CEB2A1C6F910050D50F /* CategoryFilter.swift */,
 				F1831CCE2A1A65810050D50F /* Extension */,
 			);
 			path = Util;
@@ -166,6 +171,55 @@
 				F1831CCC2A1A5E9C0050D50F /* UIFont+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		F1831CE12A1C5B390050D50F /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				F1188C102A1608CD002B0835 /* Controller */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		F1831CE22A1C5B610050D50F /* MyClothesView */ = {
+			isa = PBXGroup;
+			children = (
+				F1831CE42A1C5B890050D50F /* Controller */,
+				F1831CE82A1C5C010050D50F /* MyClothesItemCell.swift */,
+			);
+			path = MyClothesView;
+			sourceTree = "<group>";
+		};
+		F1831CE32A1C5B740050D50F /* MyStyleSetView */ = {
+			isa = PBXGroup;
+			children = (
+				F1831CE52A1C5B8F0050D50F /* Controller */,
+			);
+			path = MyStyleSetView;
+			sourceTree = "<group>";
+		};
+		F1831CE42A1C5B890050D50F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F1831CDB2A1B59C10050D50F /* MyClothesViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F1831CE52A1C5B8F0050D50F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F1831CDD2A1B59FC0050D50F /* MyStyleSetViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F1831CEA2A1C6F4B0050D50F /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F1831CD72A1B0F050050D50F /* ClothesManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,7 +308,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1831CD42A1B0B0D0050D50F /* ClothesCategory.swift in Sources */,
+				F1831CEC2A1C6F910050D50F /* CategoryFilter.swift in Sources */,
 				F1831CDC2A1B59C10050D50F /* MyClothesViewController.swift in Sources */,
+				F1831CE92A1C5C010050D50F /* MyClothesItemCell.swift in Sources */,
 				F1831CD02A1AFA120050D50F /* StyleSet.swift in Sources */,
 				F1188BFD2A15EA47002B0835 /* HomeViewController.swift in Sources */,
 				F1831CD22A1B0AD30050D50F /* Season.swift in Sources */,
@@ -408,8 +464,7 @@
 				INFOPLIST_FILE = loganCloset/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -418,9 +473,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.slowook.loganCloset;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -436,8 +494,7 @@
 				INFOPLIST_FILE = loganCloset/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -446,9 +503,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.slowook.loganCloset;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
