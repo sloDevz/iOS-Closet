@@ -7,13 +7,14 @@
 
 import Foundation
 
-enum ClothesCategory {
+enum ClothesCategory: String, CaseIterable {
 
-    case hat
-    case top
-    case outer
-    case bottom
-    case shoes
-    case accessory
+    case none
+    case hat = "모자"
+    case outer = "겉옷"
+    case top = "상의"
+    case bottom = "하의"
+    case shoes = "신발"
+    case accessory = "악세사리"
     
 }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Styleset_icon_DarkMode.png",
+      "filename" : "Add_Clothes_image_icon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Styleset_icon_DarkMode@2x.png",
+      "filename" : "Add_Clothes_image_icon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Styleset_icon_DarkMode@3x.png",
+      "filename" : "Add_Clothes_image_icon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

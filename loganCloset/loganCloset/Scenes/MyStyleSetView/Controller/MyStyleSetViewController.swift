@@ -12,6 +12,22 @@ final class MyStyleSetViewController: UIViewController {
 
     //MARK: - properties
     private var clothesManager: ClothesManager?
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "MY STYLE"
+        label.font = UIFont.importedUIFont(
+            name: .pretendardExtraBold,
+            fontSize: 18
+        )
+        label.sizeToFit()
+        return label
+    }()
+    private lazy var filterButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Filter"), for: .normal)
+        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        return button
+    }()
 
     //MARK: - Life Cycle
     init(clothesManager: ClothesManager? = nil) {
@@ -26,6 +42,7 @@ final class MyStyleSetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewAppearance()
+        setNavigationBarItems()
     }
 
     //MARK: - Methodes
@@ -39,5 +56,14 @@ final class MyStyleSetViewController: UIViewController {
         view.backgroundColor = UIColor(white: 0.95, alpha: 1)
     }
 
+    private func setNavigationBarItems() {
+        navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: filterButton)
+    }
+
+    @objc
+    private func filterButtonTapped() {
+        print(#function)
+    }
 }
 

@@ -22,11 +22,11 @@ final class TabBarViewController: UITabBarController {
         .withRenderingMode(.alwaysOriginal
         )
     private let homeIcon = UIImage(
-        named: "Home_icons_24px_GNB")?
+        named: "Home_icons")?
         .withRenderingMode(.alwaysOriginal
         )
     private let homeSelectedIcon = UIImage(
-        named: "Home_icons_Selected24px_GNB")?
+        named: "Home_icons_Selected")?
         .withRenderingMode(.alwaysOriginal
         )
     private let styleIcon = UIImage(
