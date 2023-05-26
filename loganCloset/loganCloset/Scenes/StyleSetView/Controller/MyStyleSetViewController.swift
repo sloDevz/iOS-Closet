@@ -78,7 +78,7 @@ final class MyStyleSetViewController: UIViewController {
     private func setCollectionView() {
         myStyleCollectionView.backgroundColor = .systemBackground
         myStyleCollectionView.delegate = self
-        myStyleCollectionView.register(MyStyleSetCell.self, forCellWithReuseIdentifier: MyStyleSetCell.reuseidentifier)
+        myStyleCollectionView.register(StyleSetCell.self, forCellWithReuseIdentifier: StyleSetCell.reuseidentifier)
     }
 
     private func configureCollectionViewLayoutConstraint() {
@@ -111,8 +111,8 @@ final class MyStyleSetViewController: UIViewController {
     private func configureDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: myStyleCollectionView)  { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: MyStyleSetCell.reuseidentifier,
-                for: indexPath) as? MyStyleSetCell
+                withReuseIdentifier: StyleSetCell.reuseidentifier,
+                for: indexPath) as? StyleSetCell
             cell?.configureItemImage(with: item)
             return cell
         }

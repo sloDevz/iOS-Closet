@@ -39,7 +39,8 @@
 		F18D9E832A20896100B3BFF5 /* EmptyStyleSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E822A20896100B3BFF5 /* EmptyStyleSetView.swift */; };
 		F18D9E852A20A30F00B3BFF5 /* EditStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E842A20A30F00B3BFF5 /* EditStyleViewController.swift */; };
 		F18D9E872A20AF1000B3BFF5 /* ItemImageButtom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E862A20AF1000B3BFF5 /* ItemImageButtom.swift */; };
-		F1DCEEAE2A1F113400ABD806 /* MyStyleSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEEAD2A1F113400ABD806 /* MyStyleSetCell.swift */; };
+		F18D9E892A20CB0F00B3BFF5 /* StyleItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */; };
+		F1DCEEAE2A1F113400ABD806 /* StyleSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,7 +77,8 @@
 		F18D9E822A20896100B3BFF5 /* EmptyStyleSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStyleSetView.swift; sourceTree = "<group>"; };
 		F18D9E842A20A30F00B3BFF5 /* EditStyleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStyleViewController.swift; sourceTree = "<group>"; };
 		F18D9E862A20AF1000B3BFF5 /* ItemImageButtom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageButtom.swift; sourceTree = "<group>"; };
-		F1DCEEAD2A1F113400ABD806 /* MyStyleSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStyleSetCell.swift; sourceTree = "<group>"; };
+		F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleItemCell.swift; sourceTree = "<group>"; };
+		F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,8 +214,9 @@
 			isa = PBXGroup;
 			children = (
 				F1831CE52A1C5B8F0050D50F /* Controller */,
-				F1DCEEAD2A1F113400ABD806 /* MyStyleSetCell.swift */,
+				F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */,
 				F18D9E822A20896100B3BFF5 /* EmptyStyleSetView.swift */,
+				F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */,
 			);
 			path = StyleSetView;
 			sourceTree = "<group>";
@@ -329,7 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1831CD42A1B0B0D0050D50F /* ClothesCategory.swift in Sources */,
-				F1DCEEAE2A1F113400ABD806 /* MyStyleSetCell.swift in Sources */,
+				F1DCEEAE2A1F113400ABD806 /* StyleSetCell.swift in Sources */,
 				F18D9E872A20AF1000B3BFF5 /* ItemImageButtom.swift in Sources */,
 				F1831CDC2A1B59C10050D50F /* MyClothesViewController.swift in Sources */,
 				F1831CE92A1C5C010050D50F /* MyClothesItemCell.swift in Sources */,
@@ -337,6 +340,7 @@
 				F18D9E832A20896100B3BFF5 /* EmptyStyleSetView.swift in Sources */,
 				F1188BFD2A15EA47002B0835 /* HomeViewController.swift in Sources */,
 				F1831CD22A1B0AD30050D50F /* Season.swift in Sources */,
+				F18D9E892A20CB0F00B3BFF5 /* StyleItemCell.swift in Sources */,
 				F1831CEE2A1D237F0050D50F /* MyClothesHeaderView.swift in Sources */,
 				F1188BF92A15EA47002B0835 /* AppDelegate.swift in Sources */,
 				F1831CCD2A1A5E9C0050D50F /* UIFont+.swift in Sources */,

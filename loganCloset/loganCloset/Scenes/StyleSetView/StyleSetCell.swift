@@ -1,5 +1,5 @@
 //
-//  MyStyleSetCell.swift
+//  StyleSetCell.swift
 //  loganCloset
 //
 //  Created by DONGWOOK SEO on 2023/05/25.
@@ -8,13 +8,13 @@
 import UIKit
 import SnapKit
 
-final class MyStyleSetCell: UICollectionViewCell {
+final class StyleSetCell: UICollectionViewCell {
 
     // MARK: - Constants
 
 
     // MARK: - Properties
-    static let reuseidentifier = String(describing: MyStyleSetCell.self)
+    static let reuseidentifier = String(describing: StyleSetCell.self)
     
     // MARK: - UI Components
     let contentContainer: UIView = {
