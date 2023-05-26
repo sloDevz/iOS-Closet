@@ -77,7 +77,7 @@ final class TabBarViewController: UITabBarController {
             selectedImage: styleSelectedIcon
         )
         setViewControllers([myClothesViewController, homeViewController, myStyleSetViewController], animated: false)
+        self.selectedIndex = 1
     }
-
 
 }
