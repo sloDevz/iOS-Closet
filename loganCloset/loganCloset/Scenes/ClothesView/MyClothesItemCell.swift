@@ -90,7 +90,6 @@ final class MyClothesItemCell: UICollectionViewCell {
     }
 
     private func setAppearanceFor(contenteMode: Bool) {
-        print(contenteMode)
         cameraImage.isHidden = contenteMode
         addItemLabel.isHidden = contenteMode
         itemImage.isHidden = !contenteMode

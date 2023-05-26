@@ -137,8 +137,8 @@
 			children = (
 				F1831CDF2A1B5A3E0050D50F /* TabBarViewController.swift */,
 				F1831CE12A1C5B390050D50F /* HomeView */,
-				F1831CE22A1C5B610050D50F /* MyClothesView */,
-				F1831CE32A1C5B740050D50F /* MyStyleSetView */,
+				F1831CE22A1C5B610050D50F /* ClothesView */,
+				F1831CE32A1C5B740050D50F /* StyleSetView */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -193,24 +193,24 @@
 			path = HomeView;
 			sourceTree = "<group>";
 		};
-		F1831CE22A1C5B610050D50F /* MyClothesView */ = {
+		F1831CE22A1C5B610050D50F /* ClothesView */ = {
 			isa = PBXGroup;
 			children = (
 				F1831CE42A1C5B890050D50F /* Controller */,
 				F1831CE82A1C5C010050D50F /* MyClothesItemCell.swift */,
 				F1831CED2A1D237F0050D50F /* MyClothesHeaderView.swift */,
 			);
-			path = MyClothesView;
+			path = ClothesView;
 			sourceTree = "<group>";
 		};
-		F1831CE32A1C5B740050D50F /* MyStyleSetView */ = {
+		F1831CE32A1C5B740050D50F /* StyleSetView */ = {
 			isa = PBXGroup;
 			children = (
 				F1831CE52A1C5B8F0050D50F /* Controller */,
 				F1DCEEAD2A1F113400ABD806 /* MyStyleSetCell.swift */,
 				F18D9E822A20896100B3BFF5 /* EmptyStyleSetView.swift */,
 			);
-			path = MyStyleSetView;
+			path = StyleSetView;
 			sourceTree = "<group>";
 		};
 		F1831CE42A1C5B890050D50F /* Controller */ = {
