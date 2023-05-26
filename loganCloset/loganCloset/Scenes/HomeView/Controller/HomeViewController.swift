@@ -10,7 +10,9 @@ import SnapKit
 
 final class HomeViewController: UIViewController {
 
-    //MARK: - properties
+    // MARK: - Constants
+
+    // MARK: - Properties
     private var clothesManager: ClothesManager?
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -22,14 +24,12 @@ final class HomeViewController: UIViewController {
         label.sizeToFit()
         return label
     }()
-    private lazy var filterButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "Filter"), for: .normal)
-        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
-        return button
-    }()
 
-    //MARK: - Life Cycle
+    // MARK: - UI Components
+    let latestStyleSetView = LatestStyleView(frame: .zero)
+    let latestClothesView = LatestClothesView(frame: .zero)
+
+    // MARK: - LifeCycle
     init(clothesManager: ClothesManager? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.clothesManager = clothesManager
@@ -38,34 +38,65 @@ final class HomeViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewAppearance()
         setNavigationBarItems()
+
+        configureView()
+        configureHierachy()
+        setViewLayout()
     }
 
-    //MARK: - Methodes
-    
+    // MARK: - Public
+
+    // MARK: - Private
     private func setViewAppearance() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .systemBackground
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
-        
+
         view.backgroundColor = UIColor(white: 0.95, alpha: 1)
     }
 
     private func setNavigationBarItems() {
         navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: filterButton)
     }
 
-    @objc
-    private func filterButtonTapped() {
-        print(#function)
+    private func configureHierachy() {
+        view.addSubview(latestStyleSetView)
+        view.addSubview(latestClothesView)
     }
-    
+
+    private func configureView() {
+        let latestStyle = clothesManager?.dummyStyleSets.first
+        latestStyleSetView.configureItemImage(with: latestStyle)
+
+        let myClothes = clothesManager?.dummyCloset
+        latestClothesView.configureItemImage(with: myClothes)
+    }
+
+    private func setViewLayout() {
+        guard let navigationController else { return }
+        let barHeight = navigationController.navigationBar.frame.height + 56
+
+        latestStyleSetView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().inset(barHeight + 24)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(264)
+        }
+
+        latestClothesView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(latestStyleSetView.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(264)
+        }
+    }
+
 }
 

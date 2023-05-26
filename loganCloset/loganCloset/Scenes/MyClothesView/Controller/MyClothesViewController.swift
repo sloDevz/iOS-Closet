@@ -55,8 +55,8 @@ final class MyClothesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBarItems()
         setViewAppearance()
+        setNavigationBarItems()
         setCollectionView()
         configureCollectionViewLayoutConstraint()
         applySsnapShot(animation: false)
@@ -169,37 +169,37 @@ final class MyClothesViewController: UIViewController {
     private func applySsnapShot(animation: Bool) {
         var snapShot = SnapShot()
 
-        if let hats = clothesManager?.dummyCloset.filter({ clothes in
+        if let hats = clothesManager?.dummyCloset?.filter({ clothes in
             clothes.clothesCategory == .hat
         }) {
             snapShot.appendSections([ClothesCategory.hat])
             snapShot.appendItems([Clothes(clothesCategory: .none)] + hats)
         }
-        if let outers = clothesManager?.dummyCloset.filter({ clothes in
+        if let outers = clothesManager?.dummyCloset?.filter({ clothes in
             clothes.clothesCategory == .outer
         }){
             snapShot.appendSections([ClothesCategory.outer])
             snapShot.appendItems([Clothes(clothesCategory: .none)] + outers)
         }
-        if let tops = clothesManager?.dummyCloset.filter({ clothes in
+        if let tops = clothesManager?.dummyCloset?.filter({ clothes in
             clothes.clothesCategory == .top
         }){
             snapShot.appendSections([ClothesCategory.top])
             snapShot.appendItems([Clothes(clothesCategory: .none)] + tops)
         }
-        if let bottoms = clothesManager?.dummyCloset.filter({ clothes in
+        if let bottoms = clothesManager?.dummyCloset?.filter({ clothes in
             clothes.clothesCategory == .bottom
         }){
             snapShot.appendSections([ClothesCategory.bottom])
             snapShot.appendItems([Clothes(clothesCategory: .none)] + bottoms)
         }
-        if let shoes = clothesManager?.dummyCloset.filter({ clothes in
+        if let shoes = clothesManager?.dummyCloset?.filter({ clothes in
             clothes.clothesCategory == .shoes
         }){
             snapShot.appendSections([ClothesCategory.shoes])
             snapShot.appendItems([Clothes(clothesCategory: .none)] + shoes)
         }
-        if let accessories = clothesManager?.dummyCloset.filter({ clothes in
+        if let accessories = clothesManager?.dummyCloset?.filter({ clothes in
             clothes.clothesCategory == .accessory
         }){
             snapShot.appendSections([ClothesCategory.accessory])

@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct StyleSet {
+struct StyleSet: Hashable {
 
     let name: String
     let items: [Clothes]
     let genDate: Date
+    let identifier = UUID()
 
 }

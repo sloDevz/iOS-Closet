@@ -23,7 +23,7 @@ final class MyClothesHeaderView: UICollectionReusableView {
     //MARK: - LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        configureTitle()
     }
 
     required init?(coder: NSCoder) {
@@ -31,7 +31,7 @@ final class MyClothesHeaderView: UICollectionReusableView {
     }
 
     //MARK: - Methodes
-    private func configure() {
+    private func configureTitle() {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(20)

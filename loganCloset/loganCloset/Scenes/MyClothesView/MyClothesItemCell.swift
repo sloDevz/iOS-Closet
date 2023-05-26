@@ -24,6 +24,7 @@ final class MyClothesItemCell: UICollectionViewCell {
     }()
     let cameraImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named: "Camera")
         return imageView
     }()
@@ -36,6 +37,7 @@ final class MyClothesItemCell: UICollectionViewCell {
     }()
     let itemImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     let tagLabel: UILabel = {
@@ -90,6 +92,8 @@ final class MyClothesItemCell: UICollectionViewCell {
     private func setAppearanceFor(contenteMode: Bool) {
         cameraImage.isHidden = contenteMode
         addItemLabel.isHidden = contenteMode
+        itemImage.isHidden = !contenteMode
+        tagLabel.isEnabled = !contenteMode
     }
 
     func setAppearanceForselectedMode() {

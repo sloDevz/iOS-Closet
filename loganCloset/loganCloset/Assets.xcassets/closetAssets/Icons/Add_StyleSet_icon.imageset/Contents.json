@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "Add_StyleSet_icon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -11,7 +12,6 @@
           "value" : "light"
         }
       ],
-      "filename" : "Home_icons_Selected.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -22,11 +22,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Home_icons_Selected_DarkMode.png",
+      "filename" : "Add_StyleSet_icon_Dark.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Add_StyleSet_icon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -37,7 +38,6 @@
           "value" : "light"
         }
       ],
-      "filename" : "Home_icons_Selected@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -48,11 +48,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Home_icons_Selected_DarkMode@2x.png",
+      "filename" : "Add_StyleSet_icon_Dark@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Add_StyleSet_icon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -63,7 +64,6 @@
           "value" : "light"
         }
       ],
-      "filename" : "Home_icons_Selected@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -74,7 +74,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Home_icons_Selected_DarkMode@3x.png",
+      "filename" : "Add_StyleSet_icon_Dark@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
