@@ -1,5 +1,5 @@
 //
-//  MyClothesItemCell.swift
+//  ClothesItemCell.swift
 //  loganCloset
 //
 //  Created by DONGWOOK SEO on 2023/05/23.
@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-final class MyClothesItemCell: UICollectionViewCell {
+final class ClothesItemCell: UICollectionViewCell {
 
-    static let reuseidentifier = String(describing: MyClothesItemCell.self)
+    static let reuseidentifier = String(describing: ClothesItemCell.self)
 
     let contentContainer: UIView = {
         let view = UIView()

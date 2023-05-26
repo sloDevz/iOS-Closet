@@ -28,11 +28,11 @@
 		F1831CD22A1B0AD30050D50F /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CD12A1B0AD30050D50F /* Season.swift */; };
 		F1831CD42A1B0B0D0050D50F /* ClothesCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CD32A1B0B0D0050D50F /* ClothesCategory.swift */; };
 		F1831CD82A1B0F050050D50F /* ClothesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CD72A1B0F050050D50F /* ClothesManager.swift */; };
-		F1831CDC2A1B59C10050D50F /* MyClothesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CDB2A1B59C10050D50F /* MyClothesViewController.swift */; };
-		F1831CDE2A1B59FC0050D50F /* MyStyleSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CDD2A1B59FC0050D50F /* MyStyleSetViewController.swift */; };
+		F1831CDC2A1B59C10050D50F /* ClothesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CDB2A1B59C10050D50F /* ClothesViewController.swift */; };
+		F1831CDE2A1B59FC0050D50F /* StyleSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CDD2A1B59FC0050D50F /* StyleSetViewController.swift */; };
 		F1831CE02A1B5A3E0050D50F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CDF2A1B5A3E0050D50F /* TabBarViewController.swift */; };
-		F1831CE92A1C5C010050D50F /* MyClothesItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CE82A1C5C010050D50F /* MyClothesItemCell.swift */; };
-		F1831CEE2A1D237F0050D50F /* MyClothesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CED2A1D237F0050D50F /* MyClothesHeaderView.swift */; };
+		F1831CE92A1C5C010050D50F /* ClothesItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CE82A1C5C010050D50F /* ClothesItemCell.swift */; };
+		F1831CEE2A1D237F0050D50F /* ClothesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1831CED2A1D237F0050D50F /* ClothesHeaderView.swift */; };
 		F18D9E7D2A1F9BB600B3BFF5 /* LatestClothesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E7C2A1F9BB600B3BFF5 /* LatestClothesView.swift */; };
 		F18D9E7F2A1F9BC500B3BFF5 /* LatestStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E7E2A1F9BC500B3BFF5 /* LatestStyleView.swift */; };
 		F18D9E812A1FC13400B3BFF5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E802A1FC13400B3BFF5 /* Constants.swift */; };
@@ -40,6 +40,7 @@
 		F18D9E852A20A30F00B3BFF5 /* EditStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E842A20A30F00B3BFF5 /* EditStyleViewController.swift */; };
 		F18D9E872A20AF1000B3BFF5 /* ItemImageButtom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E862A20AF1000B3BFF5 /* ItemImageButtom.swift */; };
 		F18D9E892A20CB0F00B3BFF5 /* StyleItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */; };
+		F18D9E8B2A20E1BF00B3BFF5 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E8A2A20E1BF00B3BFF5 /* Preview.swift */; };
 		F1DCEEAE2A1F113400ABD806 /* StyleSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,11 +67,11 @@
 		F1831CD12A1B0AD30050D50F /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
 		F1831CD32A1B0B0D0050D50F /* ClothesCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesCategory.swift; sourceTree = "<group>"; };
 		F1831CD72A1B0F050050D50F /* ClothesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesManager.swift; sourceTree = "<group>"; };
-		F1831CDB2A1B59C10050D50F /* MyClothesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClothesViewController.swift; sourceTree = "<group>"; };
-		F1831CDD2A1B59FC0050D50F /* MyStyleSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStyleSetViewController.swift; sourceTree = "<group>"; };
+		F1831CDB2A1B59C10050D50F /* ClothesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesViewController.swift; sourceTree = "<group>"; };
+		F1831CDD2A1B59FC0050D50F /* StyleSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetViewController.swift; sourceTree = "<group>"; };
 		F1831CDF2A1B5A3E0050D50F /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		F1831CE82A1C5C010050D50F /* MyClothesItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClothesItemCell.swift; sourceTree = "<group>"; };
-		F1831CED2A1D237F0050D50F /* MyClothesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClothesHeaderView.swift; sourceTree = "<group>"; };
+		F1831CE82A1C5C010050D50F /* ClothesItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesItemCell.swift; sourceTree = "<group>"; };
+		F1831CED2A1D237F0050D50F /* ClothesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesHeaderView.swift; sourceTree = "<group>"; };
 		F18D9E7C2A1F9BB600B3BFF5 /* LatestClothesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestClothesView.swift; sourceTree = "<group>"; };
 		F18D9E7E2A1F9BC500B3BFF5 /* LatestStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestStyleView.swift; sourceTree = "<group>"; };
 		F18D9E802A1FC13400B3BFF5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -78,6 +79,7 @@
 		F18D9E842A20A30F00B3BFF5 /* EditStyleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStyleViewController.swift; sourceTree = "<group>"; };
 		F18D9E862A20AF1000B3BFF5 /* ItemImageButtom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageButtom.swift; sourceTree = "<group>"; };
 		F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleItemCell.swift; sourceTree = "<group>"; };
+		F18D9E8A2A20E1BF00B3BFF5 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				F1831CCE2A1A65810050D50F /* Extension */,
+				F18D9E8A2A20E1BF00B3BFF5 /* Preview.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -204,8 +207,8 @@
 			isa = PBXGroup;
 			children = (
 				F1831CE42A1C5B890050D50F /* Controller */,
-				F1831CE82A1C5C010050D50F /* MyClothesItemCell.swift */,
-				F1831CED2A1D237F0050D50F /* MyClothesHeaderView.swift */,
+				F1831CE82A1C5C010050D50F /* ClothesItemCell.swift */,
+				F1831CED2A1D237F0050D50F /* ClothesHeaderView.swift */,
 			);
 			path = ClothesView;
 			sourceTree = "<group>";
@@ -224,7 +227,7 @@
 		F1831CE42A1C5B890050D50F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F1831CDB2A1B59C10050D50F /* MyClothesViewController.swift */,
+				F1831CDB2A1B59C10050D50F /* ClothesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -232,7 +235,7 @@
 		F1831CE52A1C5B8F0050D50F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F1831CDD2A1B59FC0050D50F /* MyStyleSetViewController.swift */,
+				F1831CDD2A1B59FC0050D50F /* StyleSetViewController.swift */,
 				F18D9E842A20A30F00B3BFF5 /* EditStyleViewController.swift */,
 			);
 			path = Controller;
@@ -334,15 +337,16 @@
 				F1831CD42A1B0B0D0050D50F /* ClothesCategory.swift in Sources */,
 				F1DCEEAE2A1F113400ABD806 /* StyleSetCell.swift in Sources */,
 				F18D9E872A20AF1000B3BFF5 /* ItemImageButtom.swift in Sources */,
-				F1831CDC2A1B59C10050D50F /* MyClothesViewController.swift in Sources */,
-				F1831CE92A1C5C010050D50F /* MyClothesItemCell.swift in Sources */,
+				F1831CDC2A1B59C10050D50F /* ClothesViewController.swift in Sources */,
+				F1831CE92A1C5C010050D50F /* ClothesItemCell.swift in Sources */,
 				F1831CD02A1AFA120050D50F /* StyleSet.swift in Sources */,
 				F18D9E832A20896100B3BFF5 /* EmptyStyleSetView.swift in Sources */,
 				F1188BFD2A15EA47002B0835 /* HomeViewController.swift in Sources */,
 				F1831CD22A1B0AD30050D50F /* Season.swift in Sources */,
 				F18D9E892A20CB0F00B3BFF5 /* StyleItemCell.swift in Sources */,
-				F1831CEE2A1D237F0050D50F /* MyClothesHeaderView.swift in Sources */,
+				F1831CEE2A1D237F0050D50F /* ClothesHeaderView.swift in Sources */,
 				F1188BF92A15EA47002B0835 /* AppDelegate.swift in Sources */,
+				F18D9E8B2A20E1BF00B3BFF5 /* Preview.swift in Sources */,
 				F1831CCD2A1A5E9C0050D50F /* UIFont+.swift in Sources */,
 				F1188C122A16090A002B0835 /* Clothes.swift in Sources */,
 				F1831CD82A1B0F050050D50F /* ClothesManager.swift in Sources */,
@@ -350,7 +354,7 @@
 				F18D9E7F2A1F9BC500B3BFF5 /* LatestStyleView.swift in Sources */,
 				F1831CE02A1B5A3E0050D50F /* TabBarViewController.swift in Sources */,
 				F1188BFB2A15EA47002B0835 /* SceneDelegate.swift in Sources */,
-				F1831CDE2A1B59FC0050D50F /* MyStyleSetViewController.swift in Sources */,
+				F1831CDE2A1B59FC0050D50F /* StyleSetViewController.swift in Sources */,
 				F18D9E852A20A30F00B3BFF5 /* EditStyleViewController.swift in Sources */,
 				F18D9E812A1FC13400B3BFF5 /* Constants.swift in Sources */,
 			);

@@ -1,5 +1,5 @@
 //
-//  MyClothesViewController.swift
+//  ClothesViewController.swift
 //  loganCloset
 //
 //  Created by DONGWOOK SEO on 2023/05/22.
@@ -8,12 +8,11 @@
 import UIKit
 import SnapKit
 
-final class MyClothesViewController: UIViewController {
-
-    private typealias DataSource = UICollectionViewDiffableDataSource<ClothesCategory, Clothes>
-    private typealias SnapShot = NSDiffableDataSourceSnapshot<ClothesCategory, Clothes>
+final class ClothesViewController: UIViewController {
 
     //MARK: - Constant
+    private typealias DataSource = UICollectionViewDiffableDataSource<ClothesCategory, Clothes>
+    private typealias SnapShot = NSDiffableDataSourceSnapshot<ClothesCategory, Clothes>
     private enum Constant {
         static let headerViewElementKind: String = "section-header"
     }
@@ -121,8 +120,8 @@ final class MyClothesViewController: UIViewController {
     private func configureDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: clothesCollectionView)  { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: MyClothesItemCell.reuseidentifier,
-                for: indexPath) as? MyClothesItemCell
+                withReuseIdentifier: ClothesItemCell.reuseidentifier,
+                for: indexPath) as? ClothesItemCell
             cell?.configureContent(with: item)
             return cell
         }
@@ -133,8 +132,8 @@ final class MyClothesViewController: UIViewController {
             indexPath: IndexPath) -> UICollectionReusableView? in
 
             guard let supplementaryView = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind, withReuseIdentifier: MyClothesHeaderView.reuseableIdentifier,
-                for: indexPath) as? MyClothesHeaderView else
+                ofKind: kind, withReuseIdentifier: ClothesHeaderView.reuseableIdentifier,
+                for: indexPath) as? ClothesHeaderView else
             {
                 fatalError("Cannot create header view")
             }
@@ -150,12 +149,12 @@ final class MyClothesViewController: UIViewController {
     private func setCollectionView() {
         clothesCollectionView.backgroundColor = .systemBackground
         clothesCollectionView.delegate = self
-        clothesCollectionView.register(MyClothesItemCell.self,
-                                       forCellWithReuseIdentifier: MyClothesItemCell.reuseidentifier
+        clothesCollectionView.register(ClothesItemCell.self,
+                                       forCellWithReuseIdentifier: ClothesItemCell.reuseidentifier
         )
-        clothesCollectionView.register(MyClothesHeaderView.self,
+        clothesCollectionView.register(ClothesHeaderView.self,
                                        forSupplementaryViewOfKind: Constant.headerViewElementKind,
-                                       withReuseIdentifier: MyClothesHeaderView.reuseableIdentifier
+                                       withReuseIdentifier: ClothesHeaderView.reuseableIdentifier
         )
     }
 
@@ -216,7 +215,7 @@ final class MyClothesViewController: UIViewController {
 
 }
 
-extension MyClothesViewController: UICollectionViewDelegate {
+extension ClothesViewController: UICollectionViewDelegate {
 
 }
 

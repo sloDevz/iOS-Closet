@@ -45,7 +45,6 @@ final class StyleItemCell: UICollectionViewCell {
 
     // MARK: - Public
     func configureContent(with item: Clothes) {
-        guard item.clothesCategory != .none else { return }
         itemImage.image = item.itemImage
     }
 
@@ -65,3 +64,19 @@ final class StyleItemCell: UICollectionViewCell {
     }
 
 }
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+struct View_Preview: PreviewProvider {
+    static var previews: some View {
+        UIViewPreview {
+            let cell = StyleItemCell()
+            cell.configureContent(with: Clothes(clothesCategory: .hat, itemImage: UIImage(named: "Hats")))
+            return cell
+        }
+        .frame(width: 180, height: 180) // 원하는 수치만큼 뷰 크기 조절 가능
+        .previewLayout(.sizeThatFits)
+    }
+}
+#endif

@@ -10,6 +10,8 @@ import SnapKit
 
 final class EditStyleViewController: UIViewController {
     // MARK: - Constants
+    private typealias DataSource = UICollectionViewDiffableDataSource<ClothesCategory, Clothes>
+    private typealias SnapShot = NSDiffableDataSourceSnapshot<ClothesCategory, Clothes>
 
     // MARK: - Properties
     var clothesManager: ClothesManager?
@@ -26,3 +28,14 @@ final class EditStyleViewController: UIViewController {
     // MARK: - Private
 
 }
+
+#if DEBUG
+import SwiftUI
+struct EditStyleViewController_Previews: PreviewProvider {
+    static var previews: some View { Container().edgesIgnoringSafeArea(.all) }
+    struct Container: UIViewControllerRepresentable {
+        func makeUIViewController(context: Context) -> UIViewController { return EditStyleViewController() }
+        func updateUIViewController(_ uiViewController: UIViewController,context: Context) { }
+    }
+}
+#endif

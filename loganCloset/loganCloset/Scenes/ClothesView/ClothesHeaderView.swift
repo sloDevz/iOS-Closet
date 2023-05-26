@@ -1,5 +1,5 @@
 //
-//  MyClothesHeaderView.swift
+//  ClothesHeaderView.swift
 //  loganCloset
 //
 //  Created by DONGWOOK SEO on 2023/05/24.
@@ -8,10 +8,10 @@
 import UIKit
 import SnapKit
 
-final class MyClothesHeaderView: UICollectionReusableView {
+final class ClothesHeaderView: UICollectionReusableView {
 
     //MARK: - Properties
-    static let reuseableIdentifier = String(describing: MyClothesHeaderView.self)
+    static let reuseableIdentifier = String(describing: ClothesHeaderView.self)
 
     let titleLabel: UILabel = {
         let label = UILabel()

@@ -49,19 +49,19 @@ final class TabBarViewController: UITabBarController {
     private func configureTabBar() {
         self.tabBar.backgroundColor = .systemBackground
 
-        let myClothesViewController = UINavigationController(
-            rootViewController: MyClothesViewController(clothesManager: clothesManager)
+        let clothesViewController = UINavigationController(
+            rootViewController: ClothesViewController(clothesManager: clothesManager)
         )
         let homeViewController = UINavigationController(
             rootViewController: HomeViewController(clothesManager: clothesManager)
         )
-        let myStyleSetViewController = UINavigationController(
-            rootViewController: MyStyleSetViewController(clothesManager: clothesManager)
+        let styleSetViewController = UINavigationController(
+            rootViewController: StyleSetViewController(clothesManager: clothesManager)
         )
 
-        myStyleSetViewController.isNavigationBarHidden = false
+        styleSetViewController.isNavigationBarHidden = false
 
-        myClothesViewController.tabBarItem = UITabBarItem(
+        clothesViewController.tabBarItem = UITabBarItem(
             title: "옷",
             image: clothesIcon,
             selectedImage: clothesSelectedIcon
@@ -71,12 +71,12 @@ final class TabBarViewController: UITabBarController {
             image: homeIcon,
             selectedImage: homeSelectedIcon
         )
-        myStyleSetViewController.tabBarItem = UITabBarItem(
+        styleSetViewController.tabBarItem = UITabBarItem(
             title: "스타일",
             image: styleIcon,
             selectedImage: styleSelectedIcon
         )
-        setViewControllers([myClothesViewController, homeViewController, myStyleSetViewController], animated: false)
+        setViewControllers([clothesViewController, homeViewController, styleSetViewController], animated: false)
         self.selectedIndex = 1
     }
 

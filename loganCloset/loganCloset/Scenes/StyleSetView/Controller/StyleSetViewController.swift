@@ -1,5 +1,5 @@
 //
-//  MyStyleSetViewController.swift
+//  StyleSetViewController.swift
 //  loganCloset
 //
 //  Created by DONGWOOK SEO on 2023/05/22.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class MyStyleSetViewController: UIViewController {
+final class StyleSetViewController: UIViewController {
 
     enum Section {
         case main
@@ -136,6 +136,6 @@ final class MyStyleSetViewController: UIViewController {
     }
 }
 
-extension MyStyleSetViewController: UICollectionViewDelegate {
+extension StyleSetViewController: UICollectionViewDelegate {
 
 }
