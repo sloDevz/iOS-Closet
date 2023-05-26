@@ -54,7 +54,7 @@ final class ClothesManager {
             ],
             genDate: Date()),
         StyleSet(
-            name: "필승 면접 코디",
+            name: "필승 면접박살 코디",
             items: [
                 dummyCloset![9]
             ],

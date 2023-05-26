@@ -90,15 +90,11 @@ final class MyClothesItemCell: UICollectionViewCell {
     }
 
     private func setAppearanceFor(contenteMode: Bool) {
+        print(contenteMode)
         cameraImage.isHidden = contenteMode
         addItemLabel.isHidden = contenteMode
         itemImage.isHidden = !contenteMode
-        tagLabel.isEnabled = !contenteMode
-    }
-
-    func setAppearanceForselectedMode() {
-        contentContainer.layer.borderWidth = 1.0
-        contentContainer.layer.borderColor = CGColor(gray: 1, alpha: 1)
+        tagLabel.isHidden = !contenteMode
     }
 
     func configureContent(with item: Clothes) {
