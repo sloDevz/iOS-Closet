@@ -132,10 +132,21 @@ final class StyleSetViewController: UIViewController {
 
     @objc
     private func addStyleButtonTapped() {
-        print(#function)
+        navigationController?.pushViewController(
+            StyleDetailViewController(),
+            animated: true
+        )
     }
 }
 
 extension StyleSetViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let styleSet = dataSource.itemIdentifier(for: indexPath) else { return }
+        navigationController?.pushViewController(
+            StyleDetailViewController(styleSet: styleSet),
+            animated: true
+        )
+    }
 
 }

@@ -19,7 +19,6 @@ final class LatestClothesView: UIView {
         let view =  UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 8
-        view.layer.masksToBounds = true
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOffset = CGSize(width: 1, height: 1)
         view.layer.shadowOpacity = 0.1
@@ -43,6 +42,7 @@ final class LatestClothesView: UIView {
     let descriptLabel: UILabel = {
         let label = UILabel()
         label.text = "My StyleSet"
+        label.textColor = .black
         label.font = UIFont.importedUIFont(name: .pretendardBold, fontSize: 16)
         label.textAlignment = .center
         return label

@@ -29,6 +29,7 @@ final class StyleSetCell: UICollectionViewCell {
     }()
     let stackViewContainer: UIView = {
         let view =  UIView()
+        view.layer.cornerRadius = 8
         view.backgroundColor = .white
         return view
     }()
@@ -55,6 +56,7 @@ final class StyleSetCell: UICollectionViewCell {
     let descriptLabel: UILabel = {
         let label = UILabel()
         label.text = "My StyleSet"
+        label.textColor = .black
         label.font = UIFont.importedUIFont(name: .pretendardBold, fontSize: 14)
         label.textAlignment = .center
         return label

@@ -59,7 +59,7 @@ final class HomeViewController: UIViewController {
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
 
-        view.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        view.backgroundColor = .systemBackground
     }
 
     private func setNavigationBarItems() {

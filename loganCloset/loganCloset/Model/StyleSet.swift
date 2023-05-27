@@ -14,4 +14,12 @@ struct StyleSet: Hashable {
     let genDate: Date
     let identifier = UUID()
 
+    func StyleSetItem(of parts: StyleSetCategory) -> [Clothes]? {
+        let styleItems = items.filter { item in
+            item.styleSetCategory == parts
+        }
+        guard !styleItems.isEmpty else { return nil }
+
+        return styleItems
+    }
 }

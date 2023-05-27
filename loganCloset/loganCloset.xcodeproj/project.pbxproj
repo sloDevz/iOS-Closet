@@ -37,10 +37,11 @@
 		F18D9E7F2A1F9BC500B3BFF5 /* LatestStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E7E2A1F9BC500B3BFF5 /* LatestStyleView.swift */; };
 		F18D9E812A1FC13400B3BFF5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E802A1FC13400B3BFF5 /* Constants.swift */; };
 		F18D9E832A20896100B3BFF5 /* EmptyStyleSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E822A20896100B3BFF5 /* EmptyStyleSetView.swift */; };
-		F18D9E852A20A30F00B3BFF5 /* EditStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E842A20A30F00B3BFF5 /* EditStyleViewController.swift */; };
+		F18D9E852A20A30F00B3BFF5 /* StyleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E842A20A30F00B3BFF5 /* StyleDetailViewController.swift */; };
 		F18D9E872A20AF1000B3BFF5 /* ItemImageButtom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E862A20AF1000B3BFF5 /* ItemImageButtom.swift */; };
 		F18D9E892A20CB0F00B3BFF5 /* StyleItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */; };
 		F18D9E8B2A20E1BF00B3BFF5 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E8A2A20E1BF00B3BFF5 /* Preview.swift */; };
+		F18D9E8D2A2234E100B3BFF5 /* StyleSetCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E8C2A2234E100B3BFF5 /* StyleSetCategory.swift */; };
 		F1DCEEAE2A1F113400ABD806 /* StyleSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,10 +77,11 @@
 		F18D9E7E2A1F9BC500B3BFF5 /* LatestStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestStyleView.swift; sourceTree = "<group>"; };
 		F18D9E802A1FC13400B3BFF5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F18D9E822A20896100B3BFF5 /* EmptyStyleSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStyleSetView.swift; sourceTree = "<group>"; };
-		F18D9E842A20A30F00B3BFF5 /* EditStyleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStyleViewController.swift; sourceTree = "<group>"; };
+		F18D9E842A20A30F00B3BFF5 /* StyleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleDetailViewController.swift; sourceTree = "<group>"; };
 		F18D9E862A20AF1000B3BFF5 /* ItemImageButtom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageButtom.swift; sourceTree = "<group>"; };
 		F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleItemCell.swift; sourceTree = "<group>"; };
 		F18D9E8A2A20E1BF00B3BFF5 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
+		F18D9E8C2A2234E100B3BFF5 /* StyleSetCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetCategory.swift; sourceTree = "<group>"; };
 		F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,6 +138,7 @@
 				F1831CCF2A1AFA120050D50F /* StyleSet.swift */,
 				F1831CD12A1B0AD30050D50F /* Season.swift */,
 				F1831CD32A1B0B0D0050D50F /* ClothesCategory.swift */,
+				F18D9E8C2A2234E100B3BFF5 /* StyleSetCategory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,7 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				F1831CDD2A1B59FC0050D50F /* StyleSetViewController.swift */,
-				F18D9E842A20A30F00B3BFF5 /* EditStyleViewController.swift */,
+				F18D9E842A20A30F00B3BFF5 /* StyleDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				F18D9E872A20AF1000B3BFF5 /* ItemImageButtom.swift in Sources */,
 				F1831CDC2A1B59C10050D50F /* ClothesViewController.swift in Sources */,
 				F1831CE92A1C5C010050D50F /* ClothesItemCell.swift in Sources */,
+				F18D9E8D2A2234E100B3BFF5 /* StyleSetCategory.swift in Sources */,
 				F1831CD02A1AFA120050D50F /* StyleSet.swift in Sources */,
 				F18D9E832A20896100B3BFF5 /* EmptyStyleSetView.swift in Sources */,
 				F1188BFD2A15EA47002B0835 /* HomeViewController.swift in Sources */,
@@ -355,7 +359,7 @@
 				F1831CE02A1B5A3E0050D50F /* TabBarViewController.swift in Sources */,
 				F1188BFB2A15EA47002B0835 /* SceneDelegate.swift in Sources */,
 				F1831CDE2A1B59FC0050D50F /* StyleSetViewController.swift in Sources */,
-				F18D9E852A20A30F00B3BFF5 /* EditStyleViewController.swift in Sources */,
+				F18D9E852A20A30F00B3BFF5 /* StyleDetailViewController.swift in Sources */,
 				F18D9E812A1FC13400B3BFF5 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

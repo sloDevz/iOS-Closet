@@ -10,14 +10,18 @@ import SnapKit
 
 final class ClothesViewController: UIViewController {
 
-    //MARK: - Constant
+    // MARK: - Constant
     private typealias DataSource = UICollectionViewDiffableDataSource<ClothesCategory, Clothes>
     private typealias SnapShot = NSDiffableDataSourceSnapshot<ClothesCategory, Clothes>
     private enum Constant {
         static let headerViewElementKind: String = "section-header"
     }
 
-    //MARK: - properties
+    // MARK: - Properties
+    private var clothesManager: ClothesManager?
+    private lazy var dataSource: DataSource = configureDataSource()
+
+    // MARK: - UI Components
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "MY CLOTHES"
@@ -26,23 +30,23 @@ final class ClothesViewController: UIViewController {
             fontSize: 18
         )
         label.sizeToFit()
+
         return label
     }()
     private lazy var filterButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Filter"), for: .normal)
         button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+
         return button
     }()
-    private var clothesManager: ClothesManager?
-    private lazy var dataSource: DataSource = configureDataSource()
     private lazy var clothesCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
 
         return collectionView
     }()
 
-    //MARK: - Life Cycle
+    // MARK: - LifeCycle
     init(clothesManager: ClothesManager? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.clothesManager = clothesManager
@@ -58,11 +62,11 @@ final class ClothesViewController: UIViewController {
         setNavigationBarItems()
         setCollectionView()
         configureCollectionViewLayoutConstraint()
-        applySsnapShot(animation: false)
+        applySnapShot(animation: false)
 
     }
 
-    //MARK: - Methodes
+    // MARK: - Private
     private func setViewAppearance() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -165,7 +169,7 @@ final class ClothesViewController: UIViewController {
         }
     }
 
-    private func applySsnapShot(animation: Bool) {
+    private func applySnapShot(animation: Bool) {
         var snapShot = SnapShot()
 
         if let hats = clothesManager?.dummyCloset?.filter({ clothes in
@@ -173,12 +177,6 @@ final class ClothesViewController: UIViewController {
         }) {
             snapShot.appendSections([ClothesCategory.hat])
             snapShot.appendItems([Clothes(clothesCategory: .none)] + hats)
-        }
-        if let outers = clothesManager?.dummyCloset?.filter({ clothes in
-            clothes.clothesCategory == .outer
-        }){
-            snapShot.appendSections([ClothesCategory.outer])
-            snapShot.appendItems([Clothes(clothesCategory: .none)] + outers)
         }
         if let tops = clothesManager?.dummyCloset?.filter({ clothes in
             clothes.clothesCategory == .top

@@ -20,6 +20,25 @@ struct Clothes: Hashable {
     let brandName: String?
     let meterial: String?
 
+    var styleSetCategory: StyleSetCategory? {
+        switch clothesCategory {
+        case .none:
+            return nil
+        case .hat:
+            return .head
+        case .outer:
+            return .body
+        case .top:
+            return .body
+        case .bottom:
+            return .bottom
+        case .shoes:
+            return .foot
+        case .accessory:
+            return .accessory
+        }
+    }
+
     init(
          clothesOrderNumber: Int? = nil,
          createdDate: Date? = nil,
