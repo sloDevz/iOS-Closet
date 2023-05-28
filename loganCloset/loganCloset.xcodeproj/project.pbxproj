@@ -43,6 +43,7 @@
 		F18D9E8D2A2234E100B3BFF5 /* StyleSetCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E8C2A2234E100B3BFF5 /* StyleSetCategory.swift */; };
 		F18D9E8F2A22FC2000B3BFF5 /* AddStyleSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E8E2A22FC2000B3BFF5 /* AddStyleSetViewController.swift */; };
 		F1DCEEAE2A1F113400ABD806 /* StyleSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */; };
+		F1DE027F2A230577007F9FF3 /* ItemImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE027E2A230577007F9FF3 /* ItemImageButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		F18D9E8C2A2234E100B3BFF5 /* StyleSetCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetCategory.swift; sourceTree = "<group>"; };
 		F18D9E8E2A22FC2000B3BFF5 /* AddStyleSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStyleSetViewController.swift; sourceTree = "<group>"; };
 		F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetCell.swift; sourceTree = "<group>"; };
+		F1DE027E2A230577007F9FF3 /* ItemImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 				F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */,
 				F18D9E822A20896100B3BFF5 /* EmptyStyleSetView.swift */,
 				F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */,
+				F1DE027E2A230577007F9FF3 /* ItemImageButton.swift */,
 			);
 			path = StyleSetView;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1DE027F2A230577007F9FF3 /* ItemImageButton.swift in Sources */,
 				F1831CD42A1B0B0D0050D50F /* ClothesCategory.swift in Sources */,
 				F1DCEEAE2A1F113400ABD806 /* StyleSetCell.swift in Sources */,
 				F1831CDC2A1B59C10050D50F /* ClothesViewController.swift in Sources */,
