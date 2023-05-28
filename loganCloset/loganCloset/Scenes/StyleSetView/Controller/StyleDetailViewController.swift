@@ -69,9 +69,13 @@ final class StyleDetailViewController: UIViewController {
                 heightDimension: .fractionalWidth(1/3)
             )
             
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            let group = NSCollectionLayoutGroup.horizontal(
+                layoutSize: groupSize,
+                subitems: [item]
+            )
 
             let section = NSCollectionLayoutSection(group: group)
+            section.orthogonalScrollingBehavior = .groupPagingCentered
             return section
         }
 

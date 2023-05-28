@@ -32,8 +32,8 @@ struct Clothes: Hashable {
             return .body
         case .bottom:
             return .bottom
-        case .shoes:
-            return .foot
+        case .footWaer:
+            return .footWaer
         case .accessory:
             return .accessory
         }

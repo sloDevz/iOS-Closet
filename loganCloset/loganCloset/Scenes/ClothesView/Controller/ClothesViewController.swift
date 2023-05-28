@@ -94,7 +94,11 @@ final class ClothesViewController: UIViewController {
             let groupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalHeight(groupFractionalHeight),
                 heightDimension: .fractionalHeight(groupFractionalHeight))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+            let group = NSCollectionLayoutGroup.horizontal(
+                layoutSize: groupSize,
+                subitems: [item]
+            )
 
             let headerSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
@@ -113,7 +117,7 @@ final class ClothesViewController: UIViewController {
                 trailing: .zero
             )
             section.boundarySupplementaryItems = [sectionHeader]
-            section.orthogonalScrollingBehavior = .groupPaging
+            section.orthogonalScrollingBehavior = .groupPagingCentered
             section.interGroupSpacing = 20
 
             return section
@@ -191,9 +195,9 @@ final class ClothesViewController: UIViewController {
             snapShot.appendItems([Clothes(clothesCategory: .none)] + bottoms)
         }
         if let shoes = clothesManager?.dummyCloset?.filter({ clothes in
-            clothes.clothesCategory == .shoes
+            clothes.clothesCategory == .footWaer
         }){
-            snapShot.appendSections([ClothesCategory.shoes])
+            snapShot.appendSections([ClothesCategory.footWaer])
             snapShot.appendItems([Clothes(clothesCategory: .none)] + shoes)
         }
         if let accessories = clothesManager?.dummyCloset?.filter({ clothes in

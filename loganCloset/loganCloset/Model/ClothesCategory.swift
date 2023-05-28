@@ -14,7 +14,7 @@ enum ClothesCategory: String, CaseIterable {
     case outer = "겉옷"
     case top = "상의"
     case bottom = "하의"
-    case shoes = "신발"
+    case footWaer = "신발"
     case accessory = "악세서리"
     
 }

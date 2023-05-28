@@ -18,9 +18,9 @@ final class ClothesManager {
         Clothes(clothesOrderNumber: 5, createdDate: Date(), clothesCategory: .bottom, itemImage: UIImage(named: "Pants3")!, mainColor: .red, season: .all, tags: .none, brandName: nil, meterial: nil),
         Clothes(clothesOrderNumber: 6, createdDate: Date(), clothesCategory: .top, itemImage: UIImage(named: "Shirts1")!, mainColor: .white, season: .all, tags: .none, brandName: nil, meterial: nil),
         Clothes(clothesOrderNumber: 7, createdDate: Date(), clothesCategory: .top, itemImage: UIImage(named: "Shirts2")!, mainColor: .blue, season: .all, tags: .none, brandName: nil, meterial: nil),
-        Clothes(clothesOrderNumber: 8, createdDate: Date(), clothesCategory: .shoes, itemImage: UIImage(named: "shoes")!, mainColor: .white, season: .all, tags: .none, brandName: nil, meterial: nil),
+        Clothes(clothesOrderNumber: 8, createdDate: Date(), clothesCategory: .footWaer, itemImage: UIImage(named: "shoes")!, mainColor: .white, season: .all, tags: .none, brandName: nil, meterial: nil),
         Clothes(clothesOrderNumber: 9, createdDate: Date(), clothesCategory: .bottom, itemImage: UIImage(named: "ShortPant")!, mainColor: .gray, season: .all, tags: .none, brandName: nil, meterial: nil),
-        Clothes(clothesOrderNumber: 10, createdDate: Date(), clothesCategory: .shoes, itemImage: UIImage(named: "Socks")!, mainColor: .white, season: .all, tags: .none, brandName: nil, meterial: nil),
+        Clothes(clothesOrderNumber: 10, createdDate: Date(), clothesCategory: .footWaer, itemImage: UIImage(named: "Socks")!, mainColor: .white, season: .all, tags: .none, brandName: nil, meterial: nil),
         Clothes(clothesOrderNumber: 11, createdDate: Date(), clothesCategory: .top, itemImage: UIImage(named: "TShirts1")!, mainColor: .white, season: .all, tags: .none, brandName: nil, meterial: nil),
         Clothes(clothesOrderNumber: 12, createdDate: Date(), clothesCategory: .top, itemImage: UIImage(named: "TShirts2")!, mainColor: .white, season: .all, tags: .none, brandName: nil, meterial: nil),
     ]

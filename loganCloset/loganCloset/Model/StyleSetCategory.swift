@@ -12,7 +12,7 @@ enum StyleSetCategory: CaseIterable {
     case head
     case body
     case bottom
-    case foot
+    case footWaer
     case accessory
 
 }

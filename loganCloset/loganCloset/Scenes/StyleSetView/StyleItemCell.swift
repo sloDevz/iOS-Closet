@@ -18,7 +18,7 @@ final class StyleItemCell: UICollectionViewCell {
     let contentContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .white
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = 16
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOffset = CGSize(width: 1, height: 1)
         view.layer.shadowOpacity = 0.1
@@ -28,6 +28,8 @@ final class StyleItemCell: UICollectionViewCell {
 
     let itemImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.layer.cornerRadius = 16
+        imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
