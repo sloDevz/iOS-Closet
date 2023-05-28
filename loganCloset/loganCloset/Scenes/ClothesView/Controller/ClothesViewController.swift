@@ -180,31 +180,31 @@ final class ClothesViewController: UIViewController {
             clothes.clothesCategory == .hat
         }) {
             snapShot.appendSections([ClothesCategory.hat])
-            snapShot.appendItems([Clothes(clothesCategory: .none)] + hats)
+            snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + hats)
         }
         if let tops = clothesManager?.dummyCloset?.filter({ clothes in
             clothes.clothesCategory == .top
         }){
             snapShot.appendSections([ClothesCategory.top])
-            snapShot.appendItems([Clothes(clothesCategory: .none)] + tops)
+            snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + tops)
         }
         if let bottoms = clothesManager?.dummyCloset?.filter({ clothes in
             clothes.clothesCategory == .bottom
         }){
             snapShot.appendSections([ClothesCategory.bottom])
-            snapShot.appendItems([Clothes(clothesCategory: .none)] + bottoms)
+            snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + bottoms)
         }
         if let shoes = clothesManager?.dummyCloset?.filter({ clothes in
             clothes.clothesCategory == .footWaer
         }){
             snapShot.appendSections([ClothesCategory.footWaer])
-            snapShot.appendItems([Clothes(clothesCategory: .none)] + shoes)
+            snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + shoes)
         }
         if let accessories = clothesManager?.dummyCloset?.filter({ clothes in
             clothes.clothesCategory == .accessory
         }){
             snapShot.appendSections([ClothesCategory.accessory])
-            snapShot.appendItems([Clothes(clothesCategory: .none)] + accessories)
+            snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!,clothesCategory: .none, season: .all)] + accessories)
         }
 
         dataSource.apply(snapShot, animatingDifferences: animation)

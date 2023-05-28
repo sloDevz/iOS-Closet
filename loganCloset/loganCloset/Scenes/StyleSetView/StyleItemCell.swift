@@ -74,7 +74,7 @@ struct View_Preview: PreviewProvider {
     static var previews: some View {
         UIViewPreview {
             let cell = StyleItemCell()
-            cell.configureContent(with: Clothes(clothesCategory: .hat, itemImage: UIImage(named: "Hats")))
+            cell.configureContent(with: Clothes(itemImage: UIImage(named: "Hats")!, clothesCategory: .hat, season: .all))
             return cell
         }
         .frame(width: 180, height: 180) // 원하는 수치만큼 뷰 크기 조절 가능
