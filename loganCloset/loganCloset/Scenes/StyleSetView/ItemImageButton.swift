@@ -23,18 +23,17 @@ final class ItemImageButton: UIButton {
     // MARK: - LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.contentMode = .scaleAspectFit
+        setupAppearance()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    convenience init(makeSquare: CGFloat, typeFor: buttonType) {
-        let squareFrame = CGRect(x: .zero, y: .zero, width: makeSquare, height: makeSquare)
-        self.init(frame: squareFrame)
+    convenience init(buttonFor: buttonType ) {
+        self.init(frame: .zero)
 
-        switch typeFor {
+        switch buttonFor {
         case .clothes:
             self.setImage(hangerImage, for: .normal)
         case .accessory:
@@ -49,5 +48,14 @@ final class ItemImageButton: UIButton {
         self.setItemImage(with: image)
     }
     // MARK: - Private
+    private func setupAppearance() {
+        self.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        layer.cornerRadius = 16
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 1, height: 1)
+        layer.shadowOpacity = 0.1
+        layer.shadowRadius = 40
+        self.contentMode = .scaleAspectFit
+    }
 
 }

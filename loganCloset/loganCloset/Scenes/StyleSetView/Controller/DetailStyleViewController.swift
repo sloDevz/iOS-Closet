@@ -1,5 +1,5 @@
 //
-//  StyleDetailViewController.swift
+//  DetailStyleViewController.swift
 //  loganCloset
 //
 //  Created by DONGWOOK SEO on 2023/05/26.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class StyleDetailViewController: UIViewController {
+final class DetailStyleViewController: UIViewController {
 
     // MARK: - Constants
     private typealias DataSource = UICollectionViewDiffableDataSource<StyleSetCategory, Clothes>
@@ -129,17 +129,17 @@ final class StyleDetailViewController: UIViewController {
 
 }
 
-extension StyleDetailViewController: UICollectionViewDelegate {
+extension DetailStyleViewController: UICollectionViewDelegate {
 
 }
 
 #if DEBUG
 import SwiftUI
-struct StyleDetailViewController_Previews: PreviewProvider {
+struct DetailStyleViewController_Previews: PreviewProvider {
     static var previews: some View { Container().edgesIgnoringSafeArea(.all) }
     struct Container: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            return StyleDetailViewController(
+            return DetailStyleViewController(
                 styleSet: ClothesManager().dummyStyleSets[0]
             )
         }

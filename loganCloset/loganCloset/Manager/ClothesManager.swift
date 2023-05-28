@@ -33,7 +33,6 @@ final class ClothesManager {
                 dummyCloset![2],
                 dummyCloset![10],
                 dummyCloset![4],
-                dummyCloset![9],
                 dummyCloset![7]
             ],
             genDate: Date()),
