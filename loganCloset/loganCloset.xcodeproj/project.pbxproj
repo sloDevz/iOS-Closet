@@ -44,6 +44,7 @@
 		F18D9E8F2A22FC2000B3BFF5 /* AddStyleSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E8E2A22FC2000B3BFF5 /* AddStyleSetViewController.swift */; };
 		F1DCEEAE2A1F113400ABD806 /* StyleSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */; };
 		F1DE027F2A230577007F9FF3 /* ItemImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE027E2A230577007F9FF3 /* ItemImageButton.swift */; };
+		F1DE02812A235525007F9FF3 /* PickingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE02802A235525007F9FF3 /* PickingItemViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		F18D9E8E2A22FC2000B3BFF5 /* AddStyleSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStyleSetViewController.swift; sourceTree = "<group>"; };
 		F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetCell.swift; sourceTree = "<group>"; };
 		F1DE027E2A230577007F9FF3 /* ItemImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageButton.swift; sourceTree = "<group>"; };
+		F1DE02802A235525007F9FF3 /* PickingItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickingItemViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +245,7 @@
 				F1831CDD2A1B59FC0050D50F /* StyleSetViewController.swift */,
 				F18D9E842A20A30F00B3BFF5 /* DetailStyleViewController.swift */,
 				F18D9E8E2A22FC2000B3BFF5 /* AddStyleSetViewController.swift */,
+				F1DE02802A235525007F9FF3 /* PickingItemViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				F18D9E8B2A20E1BF00B3BFF5 /* Preview.swift in Sources */,
 				F1831CCD2A1A5E9C0050D50F /* UIFont+.swift in Sources */,
 				F1188C122A16090A002B0835 /* Clothes.swift in Sources */,
+				F1DE02812A235525007F9FF3 /* PickingItemViewController.swift in Sources */,
 				F1831CD82A1B0F050050D50F /* ClothesManager.swift in Sources */,
 				F18D9E7D2A1F9BB600B3BFF5 /* LatestClothesView.swift in Sources */,
 				F18D9E7F2A1F9BC500B3BFF5 /* LatestStyleView.swift in Sources */,

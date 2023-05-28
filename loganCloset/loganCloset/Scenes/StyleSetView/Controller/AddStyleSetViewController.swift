@@ -119,8 +119,8 @@ final class AddStyleSetViewController: UIViewController {
     private func configureLayoutConstraint() {
         let tabbarHeight = tabBarController?.tabBar.frame.height ?? 50
         let containerInset = view.frame.height/8
+
         clothesButtonContainer.snp.makeConstraints { make in
-            make.center.equalToSuperview()
             make.edges.equalToSuperview().inset(containerInset)
         }
 
@@ -151,7 +151,6 @@ final class AddStyleSetViewController: UIViewController {
             make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(0.1)
         })
         accessoryAddButtonHStackView.snp.makeConstraints { make in
-            make.top.equalTo(clothesButtonContainer.snp.bottom)
             make.bottom.equalToSuperview().inset(tabbarHeight + 25.0)
             make.centerX.equalToSuperview()
         }
@@ -159,7 +158,7 @@ final class AddStyleSetViewController: UIViewController {
 
     @objc
     private func addButtonTapped() {
-        print("ADDDDDDDDDD")
+
     }
 
 }
