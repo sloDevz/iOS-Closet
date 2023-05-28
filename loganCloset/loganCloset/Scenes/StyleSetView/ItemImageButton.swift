@@ -10,18 +10,16 @@ import UIKit
 final class ItemImageButton: UIButton {
 
     // MARK: - Constants
-    enum buttonType {
-        case clothes
-        case accessory
-    }
+
     // MARK: - Properties
+    var category: ClothesCategory?
 
     // MARK: - UI Components
     private var hangerImage = UIImage(named: "hanger_icon") ?? UIImage(systemName: "tshirt")
     private var accessoryImage = UIImage(named: "accessory_Icon") ?? UIImage(systemName: "eyeglasses")
 
     // MARK: - LifeCycle
-    override init(frame: CGRect) {
+    private override init(frame: CGRect) {
         super.init(frame: frame)
         setupAppearance()
     }
@@ -30,14 +28,14 @@ final class ItemImageButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 
-    convenience init(buttonFor: buttonType ) {
+    convenience init(buttonFor: ClothesCategory) {
         self.init(frame: .zero)
-
+        self.category = buttonFor
         switch buttonFor {
-        case .clothes:
-            self.setImage(hangerImage, for: .normal)
         case .accessory:
             self.setImage(accessoryImage, for: .normal)
+        default:
+            self.setImage(hangerImage, for: .normal)
         }
 
     }
@@ -47,6 +45,7 @@ final class ItemImageButton: UIButton {
         guard let image else { return }
         self.setItemImage(with: image)
     }
+
     // MARK: - Private
     private func setupAppearance() {
         self.backgroundColor = UIColor(white: 0.9, alpha: 1)

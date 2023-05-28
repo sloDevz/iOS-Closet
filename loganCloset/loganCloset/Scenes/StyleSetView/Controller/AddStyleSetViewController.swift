@@ -19,6 +19,13 @@ final class AddStyleSetViewController: UIViewController {
         static let accessoryHStackBottomInset: CGFloat = 50
     }
     // MARK: - Properties
+    var generatedStyleSet: [ClothesCategory:Clothes?] = [
+        .hat : nil,
+        .outer : nil,
+        .top : nil,
+        .bottom : nil,
+        .footWaer : nil
+    ]
 
     // MARK: - UI Components
     lazy var clothesButtonContainer: UIView = {
@@ -27,27 +34,27 @@ final class AddStyleSetViewController: UIViewController {
     }()
 
     lazy var headAddButton: ItemImageButton = {
-        var button = ItemImageButton(buttonFor: .clothes)
+        var button = ItemImageButton(buttonFor: .hat)
 
         return button
     }()
     lazy var topAddButton: ItemImageButton = {
-        var button = ItemImageButton(buttonFor: .clothes)
+        var button = ItemImageButton(buttonFor: .top)
 
         return button
     }()
     lazy var outerAddButton: ItemImageButton = {
-        var button = ItemImageButton(buttonFor: .clothes)
+        var button = ItemImageButton(buttonFor: .outer)
 
         return button
     }()
     lazy var bottomAddButton: ItemImageButton = {
-        var button = ItemImageButton(buttonFor: .clothes)
+        var button = ItemImageButton(buttonFor: .bottom)
 
         return button
     }()
     lazy var footwearAddButton: ItemImageButton = {
-        var button = ItemImageButton(buttonFor: .clothes)
+        var button = ItemImageButton(buttonFor: .footWaer)
 
         return button
     }()
