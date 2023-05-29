@@ -13,6 +13,7 @@ final class StyleItemCell: UICollectionViewCell {
 
     // MARK: - Properties
     static let reuseidentifier = String(describing: StyleItemCell.self)
+    var baseClotehs: Clothes?
 
     // MARK: - UI Components
     let contentContainer: UIView = {
@@ -47,6 +48,7 @@ final class StyleItemCell: UICollectionViewCell {
 
     // MARK: - Public
     func configureContent(with item: Clothes) {
+        baseClotehs = item
         itemImage.image = item.itemImage
     }
 

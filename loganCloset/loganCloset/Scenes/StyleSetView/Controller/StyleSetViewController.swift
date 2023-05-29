@@ -132,7 +132,8 @@ final class StyleSetViewController: UIViewController {
 
     @objc
     private func addStyleButtonTapped() {
-        let vc = AddStyleSetViewController()
+        guard let clothesManager else { return }
+        let vc = AddStyleSetViewController(clotheManager: clothesManager)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

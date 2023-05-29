@@ -75,7 +75,7 @@ final class HomeViewController: UIViewController {
         let latestStyle = clothesManager?.dummyStyleSets.first
         latestStyleSetView.configureItemImage(with: latestStyle)
 
-        let myClothes = clothesManager?.dummyCloset
+        let myClothes = clothesManager?.closet
         latestClothesView.configureItemImage(with: myClothes)
     }
 

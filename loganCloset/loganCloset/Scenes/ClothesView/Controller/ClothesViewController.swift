@@ -176,31 +176,31 @@ final class ClothesViewController: UIViewController {
     private func applySnapShot(animation: Bool) {
         var snapShot = SnapShot()
 
-        if let hats = clothesManager?.dummyCloset?.filter({ clothes in
+        if let hats = clothesManager?.closet.filter({ clothes in
             clothes.clothesCategory == .hat
         }) {
             snapShot.appendSections([ClothesCategory.hat])
             snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + hats)
         }
-        if let tops = clothesManager?.dummyCloset?.filter({ clothes in
+        if let tops = clothesManager?.closet.filter({ clothes in
             clothes.clothesCategory == .top
         }){
             snapShot.appendSections([ClothesCategory.top])
             snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + tops)
         }
-        if let bottoms = clothesManager?.dummyCloset?.filter({ clothes in
+        if let bottoms = clothesManager?.closet.filter({ clothes in
             clothes.clothesCategory == .bottom
         }){
             snapShot.appendSections([ClothesCategory.bottom])
             snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + bottoms)
         }
-        if let shoes = clothesManager?.dummyCloset?.filter({ clothes in
+        if let shoes = clothesManager?.closet.filter({ clothes in
             clothes.clothesCategory == .footWaer
         }){
             snapShot.appendSections([ClothesCategory.footWaer])
             snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + shoes)
         }
-        if let accessories = clothesManager?.dummyCloset?.filter({ clothes in
+        if let accessories = clothesManager?.closet.filter({ clothes in
             clothes.clothesCategory == .accessory
         }){
             snapShot.appendSections([ClothesCategory.accessory])

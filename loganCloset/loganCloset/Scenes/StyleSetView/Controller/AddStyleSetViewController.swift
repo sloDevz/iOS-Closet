@@ -19,6 +19,7 @@ final class AddStyleSetViewController: UIViewController {
         static let accessoryHStackBottomInset: CGFloat = 50
     }
     // MARK: - Properties
+    var clotehsManager: ClothesManager?
     var generatedStyleSet: [ClothesCategory:Clothes?] = [
         .hat : nil,
         .outer : nil,
@@ -35,7 +36,6 @@ final class AddStyleSetViewController: UIViewController {
 
     lazy var headAddButton: ItemImageButton = {
         var button = ItemImageButton(buttonFor: .hat)
-
         return button
     }()
     lazy var topAddButton: ItemImageButton = {
@@ -66,6 +66,13 @@ final class AddStyleSetViewController: UIViewController {
 
         return buttons
     }()
+    lazy var ClothesitemButtons: [UIButton] = [
+        headAddButton,
+        outerAddButton,
+        topAddButton,
+        bottomAddButton,
+        footwearAddButton,
+    ]
     private let topItemAddButtonHStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -91,6 +98,15 @@ final class AddStyleSetViewController: UIViewController {
         configureLayoutConstraint()
     }
 
+    init(clotheManager: ClothesManager){
+        super.init(nibName: nil, bundle: nil)
+        clotehsManager = clotheManager
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     // MARK: - Public
 
@@ -98,6 +114,13 @@ final class AddStyleSetViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(addButtonTapped))
+
+        ClothesitemButtons.forEach { button in
+            button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
+        }
+        accessoryAddButtons.forEach { button in
+            button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
+        }
     }
 
     private func configureHierarchy() {
@@ -158,7 +181,17 @@ final class AddStyleSetViewController: UIViewController {
 
     @objc
     private func addButtonTapped() {
+        print(#function)
+    }
 
+    @objc
+    private func itemAddButtonTapped(sender: ItemImageButton) {
+        guard let category = sender.category,
+              let clotehsManager else { return }
+
+        let ItempickingVC = PickingItemViewController(category: category,
+                                                      clothesManager: clotehsManager)
+        self.present(ItempickingVC, animated: true)
     }
 
 }
@@ -169,7 +202,7 @@ struct AddStyleSetViewController_Previews: PreviewProvider {
     static var previews: some View { Container().edgesIgnoringSafeArea(.all) }
     struct Container: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            return AddStyleSetViewController()
+            return AddStyleSetViewController(clotheManager: ClothesManager())
         }
         func updateUIViewController(_ uiViewController: UIViewController,context: Context) { }
     }

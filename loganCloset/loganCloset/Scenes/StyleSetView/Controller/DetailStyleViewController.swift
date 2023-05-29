@@ -59,8 +59,8 @@ final class DetailStyleViewController: UIViewController {
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { section, layoutEnvironment in
             let itemSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalHeight(1.0),
-                heightDimension: .fractionalWidth(1.0)
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(1.0)
             )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
