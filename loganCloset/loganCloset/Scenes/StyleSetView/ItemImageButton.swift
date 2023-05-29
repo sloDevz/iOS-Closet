@@ -12,7 +12,7 @@ final class ItemImageButton: UIButton {
     // MARK: - Constants
 
     // MARK: - Properties
-    var category: ClothesCategory?
+    var category: ClothesCategory? = nil
     var clothes: Clothes?
 
     // MARK: - UI Components
@@ -45,6 +45,7 @@ final class ItemImageButton: UIButton {
     func updateItemData(with clothes: Clothes?) {
         guard let clothes else { return }
         self.setImage(clothes.itemImage, for: .normal)
+        self.clothes = clothes
     }
 
     // MARK: - Private

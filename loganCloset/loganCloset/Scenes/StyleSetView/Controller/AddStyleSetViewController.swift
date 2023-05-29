@@ -21,15 +21,10 @@ final class AddStyleSetViewController: UIViewController {
         static let accessoryHStackBottomInset: CGFloat = 50
     }
     // MARK: - Properties
+    var delegate: StyleSetDataProtocol?
     var clotehsManager: ClothesManager?
     var currentSelectedItemButton: ItemImageButton?
-    var generatedStyleSet: [ClothesCategory:Clothes?] = [
-        .hat : nil,
-        .outer : nil,
-        .top : nil,
-        .bottom : nil,
-        .footWaer : nil
-    ]
+    var generatedStyleSet: [Clothes]?
 
     // MARK: - UI Components
     lazy var clothesButtonContainer: UIView = {
@@ -69,7 +64,7 @@ final class AddStyleSetViewController: UIViewController {
 
         return buttons
     }()
-    lazy var ClothesitemButtons: [UIButton] = [
+    lazy var clothesitemButtons: [ItemImageButton] = [
         headAddButton,
         outerAddButton,
         topAddButton,
@@ -116,14 +111,24 @@ final class AddStyleSetViewController: UIViewController {
     // MARK: - Private
     private func setupUI() {
         view.backgroundColor = .systemBackground
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneButtonTapped))
 
-        ClothesitemButtons.forEach { button in
+        clothesitemButtons.forEach { button in
             button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
         }
         accessoryAddButtons.forEach { button in
             button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
         }
+    }
+
+    private func presentMessageAlert(title: String?, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        let action = UIAlertAction(title: "확인", style: .default,handler: handler)
+
+        alertController.addAction(action)
+
+        present(alertController, animated: true, completion: nil)
     }
 
     private func configureHierarchy() {
@@ -183,8 +188,72 @@ final class AddStyleSetViewController: UIViewController {
     }
 
     @objc
-    private func addButtonTapped() {
-        print(#function)
+    private func doneButtonTapped() {
+
+        let selectedClothesItems = clothesitemButtons.compactMap { button in
+            button.clothes
+        }
+        let selectedAccessoies = accessoryAddButtons.compactMap { button in
+            button.clothes
+        }
+        let allSelectedItems = selectedClothesItems + selectedAccessoies
+
+        if allSelectedItems.isEmpty {
+            presentMessageAlert(title: "아이템이 없어요", message: "StyleSet을 구성할 아이템들을 등록해주세요")
+            return
+        }
+
+        let alertController = UIAlertController(
+            title: "Style Set 이름",
+            message: "Style Set에 어울리는 이름을 정해주세요",
+            preferredStyle: .alert)
+
+        alertController.addTextField { textField in
+            textField.placeholder = "Style set 이름을 입력하세요"
+        }
+
+        let doneAction = UIAlertAction(title: "결정", style: .default) { _ in
+            let inputedSetTitle = alertController.textFields?.first?.text
+            guard let styleSetTitle = inputedSetTitle?.trimmingCharacters(in: .whitespacesAndNewlines), !styleSetTitle.isEmpty else {
+                self.presentMessageAlert(title: "입력오류", message: "잘못된 입력입니다. 올바른 이름을 입력하세요")
+                return
+            }
+
+            let newStyleSet = StyleSet(name: styleSetTitle, items: allSelectedItems, genDate: Date())
+            self.delegate?.updateStyleSetData(data: newStyleSet)
+            self.presentMessageAlert(title: "Style set 등록", message: "새로운 Style set이 등록되었습니다.") { _ in
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+
+        let cancelAntion = UIAlertAction(title: "취소", style: .cancel)
+
+        alertController.addAction(doneAction)
+        alertController.addAction(cancelAntion)
+
+        present(alertController, animated: true)
+
+
+    }
+
+    private func popAlertViewWithTextField(title: String, message: String, placeholder: String,doneTitle: String, canelTitle: String, complition: @escaping (UIAlertAction) -> ()) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+
+        alertController.addTextField { texField in
+            texField.placeholder = placeholder
+        }
+
+        let doneAction = UIAlertAction(title: doneTitle, style: .default,handler: complition)
+        let cancelAction = UIAlertAction(title: canelTitle, style: .cancel)
+
+        alertController.addAction(doneAction)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true)
     }
 
     @objc
