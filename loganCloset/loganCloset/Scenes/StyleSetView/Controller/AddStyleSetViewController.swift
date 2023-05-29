@@ -212,27 +212,32 @@ final class AddStyleSetViewController: UIViewController {
             textField.placeholder = "Style set 이름을 입력하세요"
         }
 
-        let doneAction = UIAlertAction(title: "결정", style: .default) { _ in
+        let doneAction = UIAlertAction(title: "등록", style: .default) { _ in
             let inputedSetTitle = alertController.textFields?.first?.text
-            guard let styleSetTitle = inputedSetTitle?.trimmingCharacters(in: .whitespacesAndNewlines), !styleSetTitle.isEmpty else {
-                self.presentMessageAlert(title: "입력오류", message: "잘못된 입력입니다. 올바른 이름을 입력하세요")
-                return
+
+            if let styleSetTitle = inputedSetTitle?.trimmingCharacters(in: .whitespacesAndNewlines), !styleSetTitle.isEmpty {
+                let newStyleSet = StyleSet(name: styleSetTitle, items: allSelectedItems, genDate: Date())
+                self.delegate?.updateStyleSetData(data: newStyleSet)
+                self.presentMessageAlert(title: "Style set 등록", message: "새로운 Style set이 등록되었습니다.") { _ in
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
 
-            let newStyleSet = StyleSet(name: styleSetTitle, items: allSelectedItems, genDate: Date())
-            self.delegate?.updateStyleSetData(data: newStyleSet)
-            self.presentMessageAlert(title: "Style set 등록", message: "새로운 Style set이 등록되었습니다.") { _ in
-                self.navigationController?.popViewController(animated: true)
+            self.presentMessageAlert(title: "입력오류", message: "잘못된 입력입니다. 올바른 이름을 입력하세요") { _ in
+                self.present(alertController, animated: true)
             }
+
         }
 
-        let cancelAntion = UIAlertAction(title: "취소", style: .cancel)
+        let cancelAntion = UIAlertAction(title: "취소", style: .cancel) { _ in
+            return
+        }
 
         alertController.addAction(doneAction)
         alertController.addAction(cancelAntion)
 
-        present(alertController, animated: true)
 
+        present(alertController, animated: true)
 
     }
 
