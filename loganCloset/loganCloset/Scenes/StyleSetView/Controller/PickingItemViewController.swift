@@ -19,9 +19,11 @@ final class PickingItemViewController: UIViewController {
     private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, Clothes>
 
     // MARK: - Properties
+    var delegate: ClothesDataProtocol?
     var category: ClothesCategory?
     var clothesManager: ClothesManager?
     private lazy var dataSource: DataSource = configureDataSource()
+    var selectedItem: Clothes?
 
     // MARK: - UI Components
     private let buttonsContainer: UIView = {
@@ -177,19 +179,24 @@ final class PickingItemViewController: UIViewController {
 
     @objc
     private func closeButtonTapped() {
-        print(#function)
+        dismiss(animated: true)
     }
 
     @objc
     private func doneButtonTapped() {
-        print(#function)
+        guard let selectedItem else { return }
+        delegate?.updateClothesData(data: selectedItem)
+        dismiss(animated: true)
     }
 
 
 }
 
 extension PickingItemViewController: UICollectionViewDelegate {
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        selectedItem = item
+    }
 }
 
 

@@ -10,6 +10,8 @@ import SnapKit
 
 final class AddStyleSetViewController: UIViewController {
 
+
+
     // MARK: - Constants
     private enum Constant {
         static let clothesAddButtonContainerInset: CGFloat = 120
@@ -20,6 +22,7 @@ final class AddStyleSetViewController: UIViewController {
     }
     // MARK: - Properties
     var clotehsManager: ClothesManager?
+    var currentSelectedItemButton: ItemImageButton?
     var generatedStyleSet: [ClothesCategory:Clothes?] = [
         .hat : nil,
         .outer : nil,
@@ -188,10 +191,21 @@ final class AddStyleSetViewController: UIViewController {
     private func itemAddButtonTapped(sender: ItemImageButton) {
         guard let category = sender.category,
               let clotehsManager else { return }
-
-        let ItempickingVC = PickingItemViewController(category: category,
+        currentSelectedItemButton = sender
+        let ItemPickingVC = PickingItemViewController(category: category,
                                                       clothesManager: clotehsManager)
-        self.present(ItempickingVC, animated: true)
+        ItemPickingVC.delegate = self
+        self.present(ItemPickingVC, animated: true)
+    }
+
+}
+
+extension AddStyleSetViewController: ClothesDataProtocol {
+
+    func updateClothesData(data: Clothes?) {
+        guard let data else { return }
+        currentSelectedItemButton?.updateItemData(with: data)
+        currentSelectedItemButton = nil
     }
 
 }

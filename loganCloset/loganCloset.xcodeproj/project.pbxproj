@@ -45,6 +45,8 @@
 		F1DCEEAE2A1F113400ABD806 /* StyleSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */; };
 		F1DE027F2A230577007F9FF3 /* ItemImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE027E2A230577007F9FF3 /* ItemImageButton.swift */; };
 		F1DE02812A235525007F9FF3 /* PickingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE02802A235525007F9FF3 /* PickingItemViewController.swift */; };
+		F1DE02862A24DAE3007F9FF3 /* ClothesDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE02852A24DAE3007F9FF3 /* ClothesDataProtocol.swift */; };
+		F1DE02882A24DB51007F9FF3 /* StyleSetDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE02872A24DB51007F9FF3 /* StyleSetDataProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,8 @@
 		F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetCell.swift; sourceTree = "<group>"; };
 		F1DE027E2A230577007F9FF3 /* ItemImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageButton.swift; sourceTree = "<group>"; };
 		F1DE02802A235525007F9FF3 /* PickingItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickingItemViewController.swift; sourceTree = "<group>"; };
+		F1DE02852A24DAE3007F9FF3 /* ClothesDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesDataProtocol.swift; sourceTree = "<group>"; };
+		F1DE02872A24DB51007F9FF3 /* StyleSetDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetDataProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,7 @@
 		F1188BF72A15EA47002B0835 /* loganCloset */ = {
 			isa = PBXGroup;
 			children = (
+				F1DE02842A24DA99007F9FF3 /* Protocol */,
 				F18D9E802A1FC13400B3BFF5 /* Constants.swift */,
 				F1831CEA2A1C6F4B0050D50F /* Manager */,
 				F1188C132A160AE8002B0835 /* Util */,
@@ -258,6 +263,15 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		F1DE02842A24DA99007F9FF3 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				F1DE02852A24DAE3007F9FF3 /* ClothesDataProtocol.swift */,
+				F1DE02872A24DB51007F9FF3 /* StyleSetDataProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -349,8 +363,10 @@
 				F1831CDC2A1B59C10050D50F /* ClothesViewController.swift in Sources */,
 				F1831CE92A1C5C010050D50F /* ClothesItemCell.swift in Sources */,
 				F18D9E8D2A2234E100B3BFF5 /* StyleSetCategory.swift in Sources */,
+				F1DE02882A24DB51007F9FF3 /* StyleSetDataProtocol.swift in Sources */,
 				F1831CD02A1AFA120050D50F /* StyleSet.swift in Sources */,
 				F18D9E832A20896100B3BFF5 /* EmptyStyleSetView.swift in Sources */,
+				F1DE02862A24DAE3007F9FF3 /* ClothesDataProtocol.swift in Sources */,
 				F18D9E8F2A22FC2000B3BFF5 /* AddStyleSetViewController.swift in Sources */,
 				F1188BFD2A15EA47002B0835 /* HomeViewController.swift in Sources */,
 				F1831CD22A1B0AD30050D50F /* Season.swift in Sources */,

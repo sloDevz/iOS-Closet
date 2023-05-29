@@ -13,6 +13,7 @@ final class ItemImageButton: UIButton {
 
     // MARK: - Properties
     var category: ClothesCategory?
+    var clothes: Clothes?
 
     // MARK: - UI Components
     private var hangerImage = UIImage(named: "hanger_icon") ?? UIImage(systemName: "tshirt")
@@ -41,9 +42,9 @@ final class ItemImageButton: UIButton {
     }
 
     // MARK: - Public
-    func setItemImage(with image: UIImage?) {
-        guard let image else { return }
-        self.setItemImage(with: image)
+    func updateItemData(with clothes: Clothes?) {
+        guard let clothes else { return }
+        self.setImage(clothes.itemImage, for: .normal)
     }
 
     // MARK: - Private
