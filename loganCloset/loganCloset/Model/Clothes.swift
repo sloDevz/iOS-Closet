@@ -15,7 +15,7 @@ struct Clothes: Hashable {
     let itemImage: UIImage
     let clothesCategory: ClothesCategory
     let season: Season
-    let mainColor: UIColor?
+    let mainColor: MainColor?
     let tags: [String]?
     let brandName: String?
     let meterial: String?
@@ -43,7 +43,7 @@ struct Clothes: Hashable {
         itemImage: UIImage,
         clothesCategory: ClothesCategory,
         season: Season,
-        mainColor: UIColor? = nil,
+        mainColor: MainColor? = nil,
         tags: [String]? = nil,
         brandName: String? = nil,
         meterial: String? = nil)

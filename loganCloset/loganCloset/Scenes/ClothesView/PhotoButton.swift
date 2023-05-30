@@ -1,24 +1,20 @@
 //
-//  ItemImageButton.swift
+//  PhotoButton.swift
 //  loganCloset
 //
-//  Created by DONGWOOK SEO on 2023/05/28.
+//  Created by DONGWOOK SEO on 2023/05/30.
 //
 
 import UIKit
 
-final class ItemImageButton: UIButton {
+final class PhotoButton: UIButton {
 
     // MARK: - Constants
 
     // MARK: - Properties
-    var category: ClothesCategory? = nil
-    var clothes: Clothes?
 
     // MARK: - UI Components
-    private var hangerImage = UIImage(named: "hanger_icon") ?? UIImage(systemName: "tshirt")
-    private var accessoryImage = UIImage(named: "accessory_Icon") ?? UIImage(systemName: "eyeglasses")
-
+    private var cameraImage = UIImage(named: "Add_Clothes_image_icon") ?? UIImage(systemName: "camera")
     // MARK: - LifeCycle
     private override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,23 +25,15 @@ final class ItemImageButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 
-    convenience init(buttonFor: ClothesCategory) {
+    convenience init() {
         self.init(frame: .zero)
-        self.category = buttonFor
-        switch buttonFor {
-        case .accessory:
-            self.setImage(accessoryImage, for: .normal)
-        default:
-            self.setImage(hangerImage, for: .normal)
-        }
-
+        self.setImage(cameraImage, for: .normal)
     }
 
     // MARK: - Public
-    func updateItemData(with clothes: Clothes?) {
-        guard let clothes else { return }
-        self.setImage(clothes.itemImage, for: .normal)
-        self.clothes = clothes
+    func updateButtonImage(with image: UIImage?) {
+        guard let image else { return }
+        self.setImage(image, for: .normal)
     }
 
     // MARK: - Private
@@ -62,4 +50,21 @@ final class ItemImageButton: UIButton {
         self.contentMode = .scaleAspectFit
     }
 
+    
 }
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+struct PhotoButton_Preview: PreviewProvider {
+    static var previews: some View {
+        UIViewPreview {
+            let cell = PhotoButton()
+            cell.updateButtonImage(with: UIImage(named: "Add_Clothes_image_icon"))
+            return cell
+        }
+        .frame(width: 400, height: 400) // 원하는 수치만큼 뷰 크기 조절 가능
+        .previewLayout(.sizeThatFits)
+    }
+}
+#endif
