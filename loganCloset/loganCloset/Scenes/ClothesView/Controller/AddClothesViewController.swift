@@ -9,14 +9,6 @@ import UIKit
 
 final class AddClothesViewController: UIViewController {
 
-    enum Section {
-        case material
-        case mainColor
-    }
-
-    private typealias DataSource = UICollectionViewDiffableDataSource<Section, String>
-    private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, String>
-
     // MARK: - Constants
     enum Constants {
         static let offsetOfEachUIComponents: CGFloat = 15
