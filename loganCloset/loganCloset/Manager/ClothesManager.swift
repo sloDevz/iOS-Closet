@@ -59,7 +59,20 @@ final class ClothesManager {
         Clothes(itemImage: UIImage(named: "ShortPant")!, clothesCategory: .bottom, season: .all, mainColor: .gray, tags: nil, brandName: nil, meterial: nil),
         Clothes(itemImage: UIImage(named: "Socks")!, clothesCategory: .footWaer, season: .all, mainColor: .white, tags: nil, brandName: nil, meterial: nil),
         Clothes(itemImage: UIImage(named: "TShirts1")!, clothesCategory: .top, season: .all, mainColor: .white, tags: nil, brandName: nil, meterial: nil),
-        Clothes(itemImage: UIImage(named: "TShirts2")!, clothesCategory: .top, season: .all, mainColor: .white, tags: nil, brandName: nil, meterial: nil)
+        Clothes(itemImage: UIImage(named: "TShirts2")!, clothesCategory: .top, season: .all, mainColor: .white, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "backPack1")!, clothesCategory: .accessory, season: .all, mainColor: .white, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "Belt")!, clothesCategory: .accessory, season: .all, mainColor: .black, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "clutch1")!, clothesCategory: .accessory, season: .all, mainColor: .black, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "clutch2")!, clothesCategory: .accessory, season: .all, mainColor: .red, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "clutch3")!, clothesCategory: .accessory, season: .all, mainColor: .brown, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "earring")!, clothesCategory: .accessory, season: .all, mainColor: .yellow, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "Hats2")!, clothesCategory: .hat, season: .all, mainColor: .black, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "Hats3")!, clothesCategory: .hat, season: .all, mainColor: .brown, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "Hats4")!, clothesCategory: .hat, season: .all, mainColor: .black, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "neckglass")!, clothesCategory: .accessory, season: .all, mainColor: .yellow, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "sunglasses1")!, clothesCategory: .accessory, season: .all, mainColor: .black, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "sunglasses2")!, clothesCategory: .accessory, season: .all, mainColor: .yellow, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "sunglasses3")!, clothesCategory: .accessory, season: .all, mainColor: .brown, tags: nil, brandName: nil, meterial: nil),
     ]
 
     lazy var dummyStyleSets: [StyleSet] = [

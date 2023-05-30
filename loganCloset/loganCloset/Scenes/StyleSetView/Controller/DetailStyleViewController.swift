@@ -58,29 +58,66 @@ final class DetailStyleViewController: UIViewController {
 
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { section, layoutEnvironment in
-            let itemSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(1.0)
-            )
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-            let groupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1/3),
-                heightDimension: .fractionalWidth(1/3)
-            )
-            
-            let group = NSCollectionLayoutGroup.horizontal(
-                layoutSize: groupSize,
-                subitems: [item]
-            )
-
-            let section = NSCollectionLayoutSection(group: group)
-            section.orthogonalScrollingBehavior = .groupPagingCentered
-            return section
+            let sectionLayoutKind = StyleSetCategory.allCases[section]
+            switch sectionLayoutKind {
+            case.accessory:
+                return self.generateLayoutForAccessory()
+            default:
+                return self.generateLayoutForClothes()
+            }
         }
-
         return layout
     }
+
+    private func generateLayoutForClothes() -> NSCollectionLayoutSection {
+        let inset = CGFloat(2)
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1/3),
+            heightDimension: .fractionalWidth(1/3)
+        )
+
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
+        section.orthogonalScrollingBehavior = .groupPagingCentered
+        return section
+    }
+
+    private func generateLayoutForAccessory() -> NSCollectionLayoutSection {
+        let inset = CGFloat(8)
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1/4),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalWidth(1/4)
+        )
+
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitems: [item, item, item, item]
+        )
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
+        return section
+    }
+    
 
     private func configureDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: styleDetailCollectionView) { collectionView, indexPath, item in
@@ -113,7 +150,7 @@ final class DetailStyleViewController: UIViewController {
         guard let styleSet else { return }
         var snapShot = SnapShot()
 
-        let sections = StyleSetCategory.allCases.dropLast()
+        let sections = StyleSetCategory.allCases
         let items = styleSet.items
 
         sections.forEach { section in

@@ -185,6 +185,12 @@ final class ClothesViewController: UIViewController {
             snapShot.appendSections([ClothesCategory.hat])
             snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + hats)
 
+        let outers = allClothes.filter({ clothes in
+            clothes.clothesCategory == .outer
+        })
+            snapShot.appendSections([ClothesCategory.outer])
+            snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + outers)
+
         let tops = allClothes.filter({ clothes in
             clothes.clothesCategory == .top
         })
