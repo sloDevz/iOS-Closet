@@ -72,10 +72,10 @@ final class HomeViewController: UIViewController {
     }
 
     private func configureView() {
-        let latestStyle = clothesManager?.dummyStyleSets.first
+        let latestStyle = clothesManager?.fetchStyleSets().first
         latestStyleSetView.configureItemImage(with: latestStyle)
 
-        let myClothes = clothesManager?.closet
+        let myClothes = clothesManager?.fetchCloset()
         latestClothesView.configureItemImage(with: myClothes)
     }
 

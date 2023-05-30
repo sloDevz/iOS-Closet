@@ -9,7 +9,39 @@ import UIKit
 
 final class ClothesManager {
 
-    var closet: [Clothes] = []
+    // MARK: - Constants
+
+    // MARK: - Properties
+    private var closet: [Clothes] = []
+    private var styleSets: [StyleSet] = []
+
+    // MARK: - LifeCycle
+    init() {
+        self.closet = closet + dummyCloset
+        self.styleSets = styleSets + dummyStyleSets
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Public
+    func fetchCloset() -> [Clothes] {
+        return closet
+    }
+
+    func fetchStyleSets() -> [StyleSet] {
+        return styleSets
+    }
+
+    // MARK: - Private
+
+
+
+
+
+
+    // MARK: - MockData
     private let dummyCloset:[Clothes] = [
         Clothes(itemImage: UIImage(named: "Hats")!, clothesCategory: .hat, season: .all, mainColor: nil, tags: ["hello"], brandName: "Nike", meterial: nil),
         Clothes(itemImage: UIImage(named: "Pants1")!, clothesCategory: .bottom, season: .all, mainColor: .brown, tags: nil, brandName: nil, meterial: nil),
@@ -59,9 +91,5 @@ final class ClothesManager {
             ],
             genDate: Date())
     ]
-
-    init() {
-        self.closet = closet + dummyCloset
-    }
 
 }

@@ -174,38 +174,41 @@ final class ClothesViewController: UIViewController {
     }
 
     private func applySnapShot(animation: Bool) {
+        guard let clothesManager else { return }
+        let allClothes = clothesManager.fetchCloset()
+
         var snapShot = SnapShot()
 
-        if let hats = clothesManager?.closet.filter({ clothes in
+        let hats = allClothes.filter({ clothes in
             clothes.clothesCategory == .hat
-        }) {
+        })
             snapShot.appendSections([ClothesCategory.hat])
             snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + hats)
-        }
-        if let tops = clothesManager?.closet.filter({ clothes in
+
+        let tops = allClothes.filter({ clothes in
             clothes.clothesCategory == .top
-        }){
+        })
             snapShot.appendSections([ClothesCategory.top])
             snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + tops)
-        }
-        if let bottoms = clothesManager?.closet.filter({ clothes in
+
+        let bottoms = allClothes.filter({ clothes in
             clothes.clothesCategory == .bottom
-        }){
+        })
             snapShot.appendSections([ClothesCategory.bottom])
             snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + bottoms)
-        }
-        if let shoes = clothesManager?.closet.filter({ clothes in
+
+        let shoes = allClothes.filter({ clothes in
             clothes.clothesCategory == .footWaer
-        }){
+        })
             snapShot.appendSections([ClothesCategory.footWaer])
             snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + shoes)
-        }
-        if let accessories = clothesManager?.closet.filter({ clothes in
+
+        let accessories = allClothes.filter({ clothes in
             clothes.clothesCategory == .accessory
-        }){
+        })
             snapShot.appendSections([ClothesCategory.accessory])
             snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!,clothesCategory: .none, season: .all)] + accessories)
-        }
+
 
         dataSource.apply(snapShot, animatingDifferences: animation)
     }

@@ -24,6 +24,7 @@ final class PickingItemViewController: UIViewController {
     var clothesManager: ClothesManager?
     private lazy var dataSource: DataSource = configureDataSource()
     var selectedItem: Clothes?
+    var selectedCellIndexPath: IndexPath?
 
     // MARK: - UI Components
     private let buttonsContainer: UIView = {
@@ -163,7 +164,7 @@ final class PickingItemViewController: UIViewController {
     private func applySnapShot(animation: Bool) {
 
         guard let category,
-              let closet = clothesManager?.closet else { return }
+              let closet = clothesManager?.fetchCloset() else { return }
 
         let filteredItems = closet.filter { item in
             item.clothesCategory == category
@@ -195,8 +196,38 @@ final class PickingItemViewController: UIViewController {
 extension PickingItemViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+
+        if let selectedCellIndexPath,
+           let preSelectedCell = collectionView.cellForItem(at: selectedCellIndexPath) as? StyleItemCell {
+            preSelectedCell.toggleSelectiedSign()
+            preSelectedCell.layer.cornerRadius = 16
+            preSelectedCell.layer.borderWidth = 0
+            preSelectedCell.layer.borderColor = UIColor.clear.cgColor
+            UIView.animate(withDuration: 0.1) {
+                preSelectedCell.transform = CGAffineTransform.identity
+
+            }
+        }
+
+        if selectedCellIndexPath == indexPath {
+            selectedItem = nil
+            selectedCellIndexPath = nil
+            return
+        }
+
+        if let selectedCell = collectionView.cellForItem(at: indexPath) as? StyleItemCell {
+            selectedCell.toggleSelectiedSign()
+            selectedCell.layer.cornerRadius = 16
+            selectedCell.layer.borderWidth = 5
+            selectedCell.layer.borderColor = UIColor.separator.cgColor
+            UIView.animate(withDuration: 0.1) {
+                selectedCell.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            }
+            selectedCellIndexPath = indexPath
+        }
         selectedItem = item
     }
+    
 }
 
 

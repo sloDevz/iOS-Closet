@@ -16,6 +16,15 @@ final class StyleItemCell: UICollectionViewCell {
     var baseClotehs: Clothes?
 
     // MARK: - UI Components
+    let selectedSign: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "pawprint.fill")
+        imageView.tintColor = UIColor.separator
+        imageView.contentMode = .scaleAspectFit
+        imageView.isHidden = true
+        return imageView
+    }()
+
     let contentContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -52,13 +61,23 @@ final class StyleItemCell: UICollectionViewCell {
         itemImage.image = item.itemImage
     }
 
+    func toggleSelectiedSign() {
+        selectedSign.isHidden.toggle()
+    }
+
+
     // MARK: - Private
     private func configureHierachy() {
         contentView.addSubview(contentContainer)
+        contentView.addSubview(selectedSign)
         contentContainer.addSubview(itemImage)
     }
 
     private func configureLayout() {
+        selectedSign.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.edges.equalToSuperview().inset(20)
+        }
         contentContainer.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

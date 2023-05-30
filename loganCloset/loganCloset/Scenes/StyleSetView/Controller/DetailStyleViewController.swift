@@ -140,7 +140,7 @@ struct DetailStyleViewController_Previews: PreviewProvider {
     struct Container: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
             return DetailStyleViewController(
-                styleSet: ClothesManager().dummyStyleSets[0]
+                styleSet: ClothesManager().fetchStyleSets()[0]
             )
         }
         func updateUIViewController(_ uiViewController: UIViewController,context: Context) { }

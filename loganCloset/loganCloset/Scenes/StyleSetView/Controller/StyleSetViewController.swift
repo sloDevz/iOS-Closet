@@ -121,7 +121,7 @@ final class StyleSetViewController: UIViewController {
 
     private func applySnapShot(animation: Bool) {
         var snapShot = SnapShot()
-        guard let styles = clothesManager?.dummyStyleSets else { return }
+        guard let styles = clothesManager?.fetchStyleSets() else { return }
 
         styles.isEmpty ? (emptyStyleSetView.isHidden = false) : (emptyStyleSetView.isHidden = true)
 
