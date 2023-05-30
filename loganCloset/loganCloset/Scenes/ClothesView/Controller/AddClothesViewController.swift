@@ -154,8 +154,11 @@ final class AddClothesViewController: UIViewController {
         tagInputTextField.delegate = self
         brandNameInputTextField.delegate = self
 
-        
         setupMainColorAndMaterialPickerView()
+
+        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
+        confirmButton.setTitleColor(.cyan, for: .highlighted)
     }
 
     private func setKeyboardNotification() {
@@ -173,6 +176,15 @@ final class AddClothesViewController: UIViewController {
           object: nil
         )
       }
+
+    @objc
+    private func cancelButtonTapped() {
+        self.dismiss(animated: true)
+    }
+    @objc
+    private func confirmButtonTapped() {
+        print(#function)
+    }
 
     @objc
     private func keyboardWillShow(_ notification: Notification) {
