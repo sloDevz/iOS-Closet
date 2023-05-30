@@ -32,7 +32,7 @@ final class StyleSetViewController: UIViewController {
         label.font = UIFont.importedUIFont(name: .pretendardExtraBold,fontSize: 18)
         return label
     }()
-    private let emptyStyleSetView = EmptyStyleSetView()
+    private let emptyStyleSetGuideView = TextOnlyView(text: "등록된 세트가 없습니다")
     private lazy var addStyleButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Add_StyleSet_icon"), for: .normal)
@@ -83,11 +83,11 @@ final class StyleSetViewController: UIViewController {
 
     private func configureCollectionViewLayoutConstraint() {
         view.addSubview(myStyleCollectionView)
-        view.addSubview(emptyStyleSetView)
+        view.addSubview(emptyStyleSetGuideView)
         myStyleCollectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        emptyStyleSetView.snp.makeConstraints { make in
+        emptyStyleSetGuideView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
@@ -123,7 +123,7 @@ final class StyleSetViewController: UIViewController {
         var snapShot = SnapShot()
         guard let styles = clothesManager?.fetchStyleSets() else { return }
 
-        styles.isEmpty ? (emptyStyleSetView.isHidden = false) : (emptyStyleSetView.isHidden = true)
+        styles.isEmpty ? (emptyStyleSetGuideView.isHidden = false) : (emptyStyleSetGuideView.isHidden = true)
 
         snapShot.appendSections([Section.main])
         snapShot.appendItems(styles)
@@ -134,8 +134,19 @@ final class StyleSetViewController: UIViewController {
     private func addStyleButtonTapped() {
         guard let clothesManager else { return }
         let vc = AddStyleSetViewController(clotheManager: clothesManager)
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
+}
+
+extension StyleSetViewController: StyleSetDataProtocol {
+
+    func updateStyleSetData(data: StyleSet?) {
+        guard let data else { return }
+        clothesManager?.addStyleSet(styleSet: data)
+        applySnapShot(animation: true)
+    }
+
 }
 
 extension StyleSetViewController: UICollectionViewDelegate {

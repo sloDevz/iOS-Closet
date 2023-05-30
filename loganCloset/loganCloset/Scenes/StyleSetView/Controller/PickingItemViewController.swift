@@ -27,6 +27,7 @@ final class PickingItemViewController: UIViewController {
     var selectedCellIndexPath: IndexPath?
 
     // MARK: - UI Components
+    private let emptyGuideView = TextOnlyView(text: "아이템이 없습니다. \n아이템을 등록하세요")
     private let buttonsContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
@@ -66,7 +67,6 @@ final class PickingItemViewController: UIViewController {
         setupUILayout()
         setCollectionView()
         applySnapShot(animation: false)
-        configureCollectionViewLayoutConstraint()
     }
 
     init(category: ClothesCategory? = nil, clothesManager: ClothesManager) {
@@ -83,10 +83,17 @@ final class PickingItemViewController: UIViewController {
     // MARK: - Private
 
     private func setupUILayout() {
+        view.addSubview(categorizedCollectionView)
         view.addSubview(buttonsContainer)
+        view.addSubview(emptyGuideView)
         buttonsContainer.addSubview(doneButton)
         buttonsContainer.addSubview(closeButton)
         buttonsContainer.addSubview(buttonsSeperator)
+
+        categorizedCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(buttonsContainer.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
 
         buttonsContainer.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
@@ -107,6 +114,11 @@ final class PickingItemViewController: UIViewController {
             make.height.equalTo(1)
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
+        }
+
+        emptyGuideView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(buttonsContainer.snp.bottom)
         }
     }
 
@@ -153,14 +165,6 @@ final class PickingItemViewController: UIViewController {
         )
     }
 
-    private func configureCollectionViewLayoutConstraint() {
-        view.addSubview(categorizedCollectionView)
-        categorizedCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(buttonsContainer.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
-        }
-    }
-
     private func applySnapShot(animation: Bool) {
 
         guard let category,
@@ -169,6 +173,8 @@ final class PickingItemViewController: UIViewController {
         let filteredItems = closet.filter { item in
             item.clothesCategory == category
         }
+
+        filteredItems.isEmpty ? (emptyGuideView.isHidden = false) : (emptyGuideView.isHidden = true)
 
         var snapShot = SnapShot()
 

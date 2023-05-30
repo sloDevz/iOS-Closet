@@ -1,5 +1,5 @@
 //
-//  EmptyStyleSetView.swift
+//  OnlyTextView.swift
 //  loganCloset
 //
 //  Created by DONGWOOK SEO on 2023/05/26.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class EmptyStyleSetView: UIView {
+final class TextOnlyView: UIView {
     // MARK: - Constants
 
     // MARK: - Properties
@@ -16,7 +16,6 @@ final class EmptyStyleSetView: UIView {
     // MARK: - UI Components
     let emptyTextLabel: UILabel = {
         let label = UILabel()
-        label.text = "등록된 세트가 없습니다"
         label.font = UIFont.importedUIFont(name: .pretendardBold, fontSize: 20)
         label.textColor = UIColor(white: 0.7, alpha: 1)
         label.textAlignment = .center
@@ -32,6 +31,11 @@ final class EmptyStyleSetView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    convenience init(text: String) {
+        self.init(frame: .zero)
+        emptyTextLabel.text = text
     }
 
     // MARK: - Public
