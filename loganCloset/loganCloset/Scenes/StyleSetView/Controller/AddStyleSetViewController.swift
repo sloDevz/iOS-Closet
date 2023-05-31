@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import PhotosUI
 
 final class AddStyleSetViewController: UIViewController {
 
@@ -23,6 +24,12 @@ final class AddStyleSetViewController: UIViewController {
     var clotehsManager: ClothesManager?
     var currentSelectedItemButton: ItemImageButton?
     var generatedStyleSet: [Clothes]?
+    var selectedBackground: UIImage?
+    private lazy var photoPicker: PHPickerViewController = {
+        let picker = PHPickerViewController(configuration: createPHPickerConfiguration())
+        picker.delegate = self
+        return picker
+    }()
 
     // MARK: - UI Components
     private let selectBackgroundbutton = UIButton()
@@ -197,9 +204,15 @@ final class AddStyleSetViewController: UIViewController {
         }
     }
 
+    private func createPHPickerConfiguration() -> PHPickerConfiguration {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        return configuration
+    }
+
     @objc
     private func selectBackgroundbuttonTapped() {
-        print(#function)
+        self.present(photoPicker, animated: true)
     }
 
     @objc
@@ -231,7 +244,8 @@ final class AddStyleSetViewController: UIViewController {
             let inputedSetTitle = alertController.textFields?.first?.text
 
             if let styleSetTitle = inputedSetTitle?.trimmingCharacters(in: .whitespacesAndNewlines), !styleSetTitle.isEmpty {
-                let newStyleSet = StyleSet(name: styleSetTitle, items: allSelectedItems, genDate: Date())
+                var newStyleSet = StyleSet(name: styleSetTitle, items: allSelectedItems, genDate: Date())
+                newStyleSet.backgroundImage = self.selectedBackground
                 self.delegate?.updateStyleSetData(data: newStyleSet)
                 self.presentMessageAlert(title: "Style set 등록", message: "새로운 Style set이 등록되었습니다.") { _ in
                     self.navigationController?.popViewController(animated: true)
@@ -297,6 +311,23 @@ extension AddStyleSetViewController: ClothesDataProtocol {
         currentSelectedItemButton = nil
     }
 
+}
+
+extension AddStyleSetViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        photoPicker.dismiss(animated: true)
+
+        let itemProvider = results.first?.itemProvider
+
+        if let itemProvider = itemProvider,
+           itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                DispatchQueue.main.async {
+                    self.selectedBackground = image as? UIImage
+                }
+            }
+        }
+    }
 }
 
 #if DEBUG

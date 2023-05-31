@@ -13,7 +13,7 @@ struct StyleSet: Hashable {
     let items: [Clothes]
     let genDate: Date
     let identifier = UUID()
-    let backgroundImage: UIImage? = nil
+    var backgroundImage: UIImage? = nil
 
     func StyleSetItem(of parts: StyleSetCategory) -> [Clothes]? {
         let styleItems = items.filter { item in

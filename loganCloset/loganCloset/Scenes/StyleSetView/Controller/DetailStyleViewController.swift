@@ -54,7 +54,9 @@ final class DetailStyleViewController: UIViewController {
         view.backgroundColor = .systemBackground
 
         guard let backgroundImage  else { return }
-        styleDetailCollectionView.backgroundView = UIImageView(image: backgroundImage)
+        let background = UIImageView(image: backgroundImage)
+        background.contentMode = .scaleAspectFill
+        styleDetailCollectionView.backgroundView = background
 
     }
 
