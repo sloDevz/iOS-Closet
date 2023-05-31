@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import PhotosUI
 
 final class AddClothesViewController: UIViewController {
