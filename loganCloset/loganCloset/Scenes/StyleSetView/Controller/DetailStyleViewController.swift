@@ -16,6 +16,7 @@ final class DetailStyleViewController: UIViewController {
 
     // MARK: - Properties
     private var styleSet: StyleSet?
+    private var backgroundImage: UIImage?
     private lazy var dataSource: DataSource = configureDataSource()
 
     // MARK: - UI Components
@@ -39,6 +40,7 @@ final class DetailStyleViewController: UIViewController {
     init(styleSet: StyleSet? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.styleSet = styleSet
+        self.backgroundImage = styleSet?.backgroundImage
     }
 
     required init?(coder: NSCoder) {
@@ -51,9 +53,8 @@ final class DetailStyleViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .systemBackground
 
-//        guard let styleSet,
-//              let back = styleSet.backgroundImage else { return }
-//        styleDetailCollectionView.backgroundView = UIImageView(image: back)
+        guard let backgroundImage  else { return }
+        styleDetailCollectionView.backgroundView = UIImageView(image: backgroundImage)
 
     }
 

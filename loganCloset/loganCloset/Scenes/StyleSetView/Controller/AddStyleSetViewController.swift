@@ -10,8 +10,6 @@ import SnapKit
 
 final class AddStyleSetViewController: UIViewController {
 
-
-
     // MARK: - Constants
     private enum Constant {
         static let clothesAddButtonContainerInset: CGFloat = 120
@@ -96,7 +94,6 @@ final class AddStyleSetViewController: UIViewController {
         setupUI()
         configureHierarchy()
         configureLayoutConstraint()
-        configureBackgoundButton()
     }
 
     init(clotheManager: ClothesManager){
@@ -122,6 +119,9 @@ final class AddStyleSetViewController: UIViewController {
         accessoryAddButtons.forEach { button in
             button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
         }
+
+        selectBackgroundbutton.setImage(UIImage(named: "backgroundIcon") ?? UIImage(systemName: "person.and.background.dotted"), for: .normal)
+        selectBackgroundbutton.addTarget(self, action: #selector(selectBackgroundbuttonTapped), for: .touchUpInside)
     }
 
     private func presentMessageAlert(title: String?, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
@@ -141,7 +141,7 @@ final class AddStyleSetViewController: UIViewController {
         accessoryAddButtons.forEach { button in
             accessoryAddButtonHStackView.addArrangedSubview(button)
         }
-        
+
         view.addSubview(selectBackgroundbutton)
         view.addSubview(clothesButtonContainer)
         clothesButtonContainer.addSubview(headAddButton)
@@ -156,7 +156,9 @@ final class AddStyleSetViewController: UIViewController {
         let containerInset = view.frame.height/8
 
         selectBackgroundbutton.snp.makeConstraints { make in
-            make.top.trailing.equalToSuperview().inset(20)
+            make.bottom.equalTo(footwearAddButton.snp.bottom)
+            make.leading.equalTo(footwearAddButton.snp.trailing).offset(20)
+            make.width.height.equalTo(50)
         }
 
         clothesButtonContainer.snp.makeConstraints { make in
@@ -195,14 +197,9 @@ final class AddStyleSetViewController: UIViewController {
         }
     }
 
-    private func configureBackgoundButton() {
-        selectBackgroundbutton.setImage(UIImage(named: "backgroundIcon") ?? UIImage(systemName: "person.and.background.dotted"), for: .normal)
-        selectBackgroundbutton.addTarget(self, action: #selector(selectBackgroundbuttonTapped), for: .touchUpInside)
-    }
-
     @objc
     private func selectBackgroundbuttonTapped() {
-
+        print(#function)
     }
 
     @objc
