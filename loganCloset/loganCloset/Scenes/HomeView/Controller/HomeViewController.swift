@@ -69,8 +69,10 @@ final class HomeViewController: UIViewController {
     }
 
     private func configureHierachy() {
-        view.addSubview(latestStyleSetView)
-        view.addSubview(latestClothesView)
+        view.addSubview(homeScrollView)
+        homeScrollView.addSubview(contentView)
+        contentView.addSubview(latestStyleSetView)
+        contentView.addSubview(latestClothesView)
     }
 
     private func configureView() {
@@ -83,11 +85,17 @@ final class HomeViewController: UIViewController {
 
     private func setViewLayout() {
         guard let navigationController else { return }
-        let barHeight = navigationController.navigationBar.frame.height + 56
-
+        homeScrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        contentView.snp.makeConstraints { make in
+            make.leading.top.trailing.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalTo(latestClothesView).offset(30)
+        }
         latestStyleSetView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().inset(barHeight + 24)
+            make.top.equalToSuperview().inset(24)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(264)
         }
