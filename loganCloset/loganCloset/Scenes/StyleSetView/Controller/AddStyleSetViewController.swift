@@ -27,6 +27,8 @@ final class AddStyleSetViewController: UIViewController {
     var generatedStyleSet: [Clothes]?
 
     // MARK: - UI Components
+    private let selectBackgroundbutton = UIButton()
+
     lazy var clothesButtonContainer: UIView = {
         let view = UIView()
         return view
@@ -94,6 +96,7 @@ final class AddStyleSetViewController: UIViewController {
         setupUI()
         configureHierarchy()
         configureLayoutConstraint()
+        configureBackgoundButton()
     }
 
     init(clotheManager: ClothesManager){
@@ -138,7 +141,8 @@ final class AddStyleSetViewController: UIViewController {
         accessoryAddButtons.forEach { button in
             accessoryAddButtonHStackView.addArrangedSubview(button)
         }
-
+        
+        view.addSubview(selectBackgroundbutton)
         view.addSubview(clothesButtonContainer)
         clothesButtonContainer.addSubview(headAddButton)
         clothesButtonContainer.addSubview(topItemAddButtonHStackView)
@@ -150,6 +154,10 @@ final class AddStyleSetViewController: UIViewController {
     private func configureLayoutConstraint() {
         let tabbarHeight = tabBarController?.tabBar.frame.height ?? 50
         let containerInset = view.frame.height/8
+
+        selectBackgroundbutton.snp.makeConstraints { make in
+            make.top.trailing.equalToSuperview().inset(20)
+        }
 
         clothesButtonContainer.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(containerInset)
@@ -185,6 +193,16 @@ final class AddStyleSetViewController: UIViewController {
             make.bottom.equalToSuperview().inset(tabbarHeight + 25.0)
             make.centerX.equalToSuperview()
         }
+    }
+
+    private func configureBackgoundButton() {
+        selectBackgroundbutton.setImage(UIImage(named: "backgroundIcon") ?? UIImage(systemName: "person.and.background.dotted"), for: .normal)
+        selectBackgroundbutton.addTarget(self, action: #selector(selectBackgroundbuttonTapped), for: .touchUpInside)
+    }
+
+    @objc
+    private func selectBackgroundbuttonTapped() {
+
     }
 
     @objc

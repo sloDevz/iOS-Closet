@@ -28,32 +28,28 @@ final class PickingItemViewController: UIViewController {
 
     // MARK: - UI Components
     private let emptyGuideView = TextOnlyView(text: "아이템이 없습니다. \n아이템을 등록하세요")
-    private let buttonsContainer: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemBackground
-        return view
-    }()
-    private let buttonsSeperator: UIView = {
-        let view = UIView()
-        view.backgroundColor = .separator
-        return view
-    }()
-    private lazy var closeButton: UIButton = {
-        let button = UIButton()
-        button.titleLabel?.font = UIFont.importedUIFont(name: .pretendardSemiBold, fontSize: 18)
-        button.setTitle("닫기", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+
+    private let navigationBar = UINavigationBar()
+
+
+
+    private lazy var closeButton: UIBarButtonItem = {
+       let button  = UIBarButtonItem()
+        button.title = "닫기"
+        button.style = .plain
+        button.target = self
+        button.action = #selector(closeButtonTapped)
         return button
     }()
-    private lazy var doneButton: UIButton = {
-        let button = UIButton()
-        button.titleLabel?.font = UIFont.importedUIFont(name: .pretendardSemiBold, fontSize: 18)
-        button.setTitle("선택", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+    private lazy var doneButton: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        button.title = "선택"
+        button.style = .done
+        button.target = self
+        button.action = #selector(doneButtonTapped)
         return button
     }()
+
     private lazy var categorizedCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
 
@@ -63,10 +59,12 @@ final class PickingItemViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setNaviBar()
         setupUILayout()
         setCollectionView()
         applySnapShot(animation: false)
+
+
     }
 
     init(category: ClothesCategory? = nil, clothesManager: ClothesManager) {
@@ -81,44 +79,32 @@ final class PickingItemViewController: UIViewController {
     // MARK: - Public
 
     // MARK: - Private
+    private func setNaviBar() {
+        let navigationItem = UINavigationItem()
+        navigationItem.setRightBarButton(doneButton, animated: true)
+        navigationItem.setLeftBarButton(closeButton, animated: true)
+        navigationBar.setItems([navigationItem], animated: true)
+    }
 
     private func setupUILayout() {
+        view.addSubview(navigationBar)
         view.addSubview(categorizedCollectionView)
-        view.addSubview(buttonsContainer)
         view.addSubview(emptyGuideView)
-        buttonsContainer.addSubview(doneButton)
-        buttonsContainer.addSubview(closeButton)
-        buttonsContainer.addSubview(buttonsSeperator)
 
-        categorizedCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(buttonsContainer.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
-        }
 
-        buttonsContainer.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(60)
-        }
-
-        doneButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().inset(25)
-        }
-
-        closeButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(25)
-        }
-
-        buttonsSeperator.snp.makeConstraints { make in
-            make.height.equalTo(1)
+        navigationBar.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
             make.width.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.leading.top.trailing.equalToSuperview()
+        }
+        categorizedCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(navigationBar.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
 
         emptyGuideView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(buttonsContainer.snp.bottom)
+            make.top.equalTo(navigationBar.snp.bottom)
         }
     }
 

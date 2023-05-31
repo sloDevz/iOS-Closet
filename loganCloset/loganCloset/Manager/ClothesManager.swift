@@ -39,6 +39,11 @@ final class ClothesManager {
         styleSets.append(styleSet)
     }
 
+    func addClothes(clothes: Clothes?) {
+        guard let clothes else { return }
+        closet.append(clothes)
+    }
+
     // MARK: - Private
 
 

@@ -5,7 +5,7 @@
 //  Created by DONGWOOK SEO on 2023/05/22.
 //
 
-import Foundation
+import UIKit
 
 struct StyleSet: Hashable {
 
@@ -13,6 +13,7 @@ struct StyleSet: Hashable {
     let items: [Clothes]
     let genDate: Date
     let identifier = UUID()
+    let backgroundImage: UIImage? = nil
 
     func StyleSetItem(of parts: StyleSetCategory) -> [Clothes]? {
         let styleItems = items.filter { item in

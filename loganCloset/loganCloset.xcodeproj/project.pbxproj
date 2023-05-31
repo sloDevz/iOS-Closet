@@ -51,6 +51,7 @@
 		F1DE028C2A25D232007F9FF3 /* PhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE028B2A25D232007F9FF3 /* PhotoButton.swift */; };
 		F1DE028E2A2629FE007F9FF3 /* MainColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE028D2A2629FE007F9FF3 /* MainColor.swift */; };
 		F1DE02902A262D64007F9FF3 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE028F2A262D63007F9FF3 /* Material.swift */; };
+		F1DE02922A276721007F9FF3 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE02912A276721007F9FF3 /* AlertManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		F1DE028B2A25D232007F9FF3 /* PhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoButton.swift; sourceTree = "<group>"; };
 		F1DE028D2A2629FE007F9FF3 /* MainColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainColor.swift; sourceTree = "<group>"; };
 		F1DE028F2A262D63007F9FF3 /* Material.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
+		F1DE02912A276721007F9FF3 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 			children = (
 				F1831CCE2A1A65810050D50F /* Extension */,
 				F18D9E8A2A20E1BF00B3BFF5 /* Preview.swift */,
+				F1DE02912A276721007F9FF3 /* AlertManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				F1188C122A16090A002B0835 /* Clothes.swift in Sources */,
 				F1DE02812A235525007F9FF3 /* PickingItemViewController.swift in Sources */,
 				F1831CD82A1B0F050050D50F /* ClothesManager.swift in Sources */,
+				F1DE02922A276721007F9FF3 /* AlertManager.swift in Sources */,
 				F18D9E7D2A1F9BB600B3BFF5 /* LatestClothesView.swift in Sources */,
 				F1DE02902A262D64007F9FF3 /* Material.swift in Sources */,
 				F18D9E7F2A1F9BC500B3BFF5 /* LatestStyleView.swift in Sources */,

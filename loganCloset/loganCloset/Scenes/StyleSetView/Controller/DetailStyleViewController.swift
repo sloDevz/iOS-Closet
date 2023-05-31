@@ -50,6 +50,11 @@ final class DetailStyleViewController: UIViewController {
     // MARK: - Private
     private func setupUI() {
         view.backgroundColor = .systemBackground
+
+//        guard let styleSet,
+//              let back = styleSet.backgroundImage else { return }
+//        styleDetailCollectionView.backgroundView = UIImageView(image: back)
+
     }
 
     private func setHierarchy() {

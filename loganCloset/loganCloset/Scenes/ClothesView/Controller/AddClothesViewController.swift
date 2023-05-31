@@ -24,10 +24,11 @@ final class AddClothesViewController: UIViewController {
         }
     }
     private var category: ClothesCategory? = nil
-    private var season: Season? = nil
+    private var season: Season = .all
     private var itemTags: String? = nil
     private var brandName: String? = nil
-    private var meterial: String? = nil
+    private var material: String? = nil
+    private var mainColor: MainColor? = nil
 
     private let colors = MainColor.allCases
     private let materials = Material.allCases
@@ -35,10 +36,10 @@ final class AddClothesViewController: UIViewController {
     // MARK: - UI Components
     private var addClothesScrollView =  UIScrollView()
     private var contentView = UIView()
-    private let cancelButton: UIButton = {
+    private let closeButton: UIButton = {
         let button = UIButton()
         let titlefont = UIFont.importedUIFont(name: .pretendardBold, fontSize: 18)
-        button.setTitle("취소", for: .normal)
+        button.setTitle("닫기", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = titlefont
         return button
@@ -54,7 +55,7 @@ final class AddClothesViewController: UIViewController {
             category.rawValue
         }
         let segmentControl = UISegmentedControl(items: categories)
-        
+
         segmentControl.selectedSegmentIndex = 0
         return segmentControl
     }()
@@ -131,6 +132,8 @@ final class AddClothesViewController: UIViewController {
         configureHierarchy()
         configureLayoutConstraint()
         setKeyboardNotification()
+        hideKeyboardWhenTappedAround()
+
     }
 
     init() {
@@ -164,15 +167,13 @@ final class AddClothesViewController: UIViewController {
 
     private func configureUIComponents() {
         photoButton.addTarget(self, action: #selector(photoButtonTapped), for: .touchUpInside)
-        categorySelectSegment.addTarget(self, action: #selector(categorySegmentValueChanged), for: .valueChanged)
-        seasonSelectSegment.addTarget(self, action: #selector(seasonSegmentValueChanged), for: .valueChanged)
 
         tagInputTextField.delegate = self
         brandNameInputTextField.delegate = self
 
         setupMainColorAndMaterialPickerView()
 
-        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
     }
 
@@ -193,12 +194,27 @@ final class AddClothesViewController: UIViewController {
     }
 
     @objc
-    private func cancelButtonTapped() {
+    private func closeButtonTapped() {
         self.dismiss(animated: true)
     }
     @objc
     private func confirmButtonTapped() {
-        print(#function)
+        setSeasonBySegment()
+        setCategoryBySegment()
+
+        guard let clothesImage,
+        let category else { return }
+        var tags:[String]? = nil
+        if let itemTags {
+            tags = itemTags.components(separatedBy: "#")
+        }
+
+        let newItem = Clothes(itemImage: clothesImage, clothesCategory: category, season: season, mainColor: mainColor, tags: tags, brandName: brandName, meterial: material)
+        delegate?.updateClothesData(data: newItem)
+        AlertManager.presentMessageAlert(viewController: self, title: "아이템 등록", message: "새로운 아이템을 등록했습니다.") { _ in
+            self.dismiss(animated: true)
+        }
+
     }
 
     @objc
@@ -228,13 +244,30 @@ final class AddClothesViewController: UIViewController {
     }
 
     @objc
-    private func categorySegmentValueChanged(sender: UISegmentedControl) {
-        print(sender.selectedSegmentIndex)
+    private func setCategoryBySegment() {
+        let selectedIndex = categorySelectSegment.selectedSegmentIndex
+
+        switch selectedIndex {
+        case 0:
+            self.category = .hat
+        case 1:
+            self.category = .outer
+        case 2:
+            self.category = .top
+        case 3:
+            self.category = .bottom
+        case 4:
+            self.category = .footWaer
+        case 5:
+            self.category = .accessory
+        default:
+            self.category = ClothesCategory.none
+        }
     }
 
     @objc
-    private func seasonSegmentValueChanged(sender: UISegmentedControl) {
-        let selectedIndex = sender.selectedSegmentIndex
+    private func setSeasonBySegment() {
+        let selectedIndex = seasonSelectSegment.selectedSegmentIndex
 
         switch selectedIndex {
         case 0:
@@ -259,7 +292,7 @@ final class AddClothesViewController: UIViewController {
     private func configureHierarchy() {
         view.addSubview(addClothesScrollView)
         addClothesScrollView.addSubview(contentView)
-        contentView.addSubview(cancelButton)
+        contentView.addSubview(closeButton)
         contentView.addSubview(seperatorView)
         contentView.addSubview(photoButton)
         contentView.addSubview(categorySelectSegment)
@@ -273,21 +306,22 @@ final class AddClothesViewController: UIViewController {
 
     private func configureLayoutConstraint() {
         addClothesScrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
             make.bottom.equalTo(confirmButton).offset(30)
         }
-        cancelButton.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().inset(20)
+        closeButton.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().inset(20)
             make.height.equalTo(20)
         }
         seperatorView.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.width.equalToSuperview()
-            make.top.equalTo(cancelButton.snp.bottom).offset(10)
+            make.top.equalTo(closeButton.snp.bottom).offset(10)
         }
         photoButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -398,6 +432,18 @@ extension AddClothesViewController: UIPickerViewDataSource, UIPickerViewDelegate
         }
     }
 
+}
+
+extension AddClothesViewController {
+    private func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 

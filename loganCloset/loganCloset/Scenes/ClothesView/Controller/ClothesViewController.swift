@@ -228,8 +228,6 @@ final class ClothesViewController: UIViewController {
 
 extension ClothesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedcell = dataSource.itemIdentifier(for: indexPath)
-        guard let category = selectedcell?.clothesCategory else { return }
 
         if indexPath.item == 0 {
             let addClothesVC = AddClothesViewController()
@@ -244,7 +242,8 @@ extension ClothesViewController: ClothesDataProtocol {
 
     func updateClothesData(data: Clothes?) {
         guard let data else { return }
-        print(data)
+        clothesManager?.addClothes(clothes: data)
+        applySnapShot(animation: true)
     }
 
 }

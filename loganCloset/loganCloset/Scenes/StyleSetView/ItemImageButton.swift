@@ -59,6 +59,7 @@ final class ItemImageButton: UIButton {
         layer.shadowOffset = CGSize(width: 1, height: 1)
         layer.shadowOpacity = 0.1
         layer.shadowRadius = 40
+        self.imageView?.contentMode = .scaleAspectFill
         self.contentMode = .scaleAspectFit
     }
 
