@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 final class AddClothesViewController: UIViewController {
 
@@ -17,20 +18,23 @@ final class AddClothesViewController: UIViewController {
 
     // MARK: - Properties
     var delegate: ClothesDataProtocol?
-    private var addClothesScrollView: UIScrollView =  UIScrollView()
-    var contentView = UIView()
-
-    var clothesImage: UIImage?
-    var category: ClothesCategory?
-    var season: Season?
-    var itemTags: String?
-    var brandName: String?
-    var meterial: String?
+    private var clothesImage: UIImage? {
+        willSet {
+            photoButton.setImage(newValue, for: .normal)
+        }
+    }
+    private var category: ClothesCategory? = nil
+    private var season: Season? = nil
+    private var itemTags: String? = nil
+    private var brandName: String? = nil
+    private var meterial: String? = nil
 
     private let colors = MainColor.allCases
     private let materials = Material.allCases
 
     // MARK: - UI Components
+    private var addClothesScrollView =  UIScrollView()
+    private var contentView = UIView()
     private let cancelButton: UIButton = {
         let button = UIButton()
         let titlefont = UIFont.importedUIFont(name: .pretendardBold, fontSize: 18)
@@ -106,9 +110,16 @@ final class AddClothesViewController: UIViewController {
         button.backgroundColor = .black
         button.setTitle("등록하기", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.cyan, for: .selected)
+        button.setTitleColor(.cyan, for: .highlighted)
         button.titleLabel?.font = titlefont
         button.layer.cornerRadius = 8
         return button
+    }()
+    private lazy var photoPicker: PHPickerViewController = {
+        let picker = PHPickerViewController(configuration: createPHPickerConfiguration())
+        picker.delegate = self
+        return picker
     }()
 
     // MARK: - LifeCycle
@@ -133,6 +144,11 @@ final class AddClothesViewController: UIViewController {
     // MARK: - Public
 
     // MARK: - Private
+    private func createPHPickerConfiguration() -> PHPickerConfiguration {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        return configuration
+    }
     private func setupMainColorAndMaterialPickerView() {
         colorPicker.delegate = self
         colorPicker.dataSource = self
@@ -158,24 +174,23 @@ final class AddClothesViewController: UIViewController {
 
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
-        confirmButton.setTitleColor(.cyan, for: .highlighted)
     }
 
     private func setKeyboardNotification() {
         NotificationCenter.default.addObserver(
-          self,
-          selector: #selector(keyboardWillShow),
-          name: UIResponder.keyboardWillShowNotification,
-          object: nil
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
         )
 
         NotificationCenter.default.addObserver(
-          self,
-          selector: #selector(keyboardWillHide),
-          name: UIResponder.keyboardWillHideNotification,
-          object: nil
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
         )
-      }
+    }
 
     @objc
     private func cancelButtonTapped() {
@@ -192,24 +207,24 @@ final class AddClothesViewController: UIViewController {
         view.frame.origin.y = mainWindow.frame.origin.y
 
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-           let keybaordRectangle = keyboardFrame.cgRectValue
-           let keyboardHeight = keybaordRectangle.height
-           view.frame.origin.y -= keyboardHeight
-         }
+            let keybaordRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keybaordRectangle.height
+            view.frame.origin.y -= keyboardHeight
+        }
     }
 
     @objc
     private func keyboardWillHide(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-          let keybaordRectangle = keyboardFrame.cgRectValue
-          let keyboardHeight = keybaordRectangle.height
-          view.frame.origin.y += keyboardHeight
+            let keybaordRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keybaordRectangle.height
+            view.frame.origin.y += keyboardHeight
         }
     }
 
     @objc
     private func photoButtonTapped() {
-        print(#function)
+        self.present(photoPicker, animated: true)
     }
 
     @objc
@@ -272,12 +287,12 @@ final class AddClothesViewController: UIViewController {
         seperatorView.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.width.equalToSuperview()
-            make.top.equalTo(cancelButton.snp.bottom).offset(20)
+            make.top.equalTo(cancelButton.snp.bottom).offset(10)
         }
         photoButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(seperatorView.snp.bottom).offset(10)
-            make.width.height.equalTo(contentView.snp.width).inset(20)
+            make.top.equalTo(seperatorView.snp.bottom).offset(20)
+            make.width.height.equalTo(contentView.snp.width).inset(40)
         }
         categorySelectSegment.snp.makeConstraints { make in
             make.width.equalToSuperview().inset(20)
@@ -323,6 +338,22 @@ final class AddClothesViewController: UIViewController {
 
 }
 
+extension AddClothesViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        photoPicker.dismiss(animated: true)
+
+        let itemProvider = results.first?.itemProvider
+
+        if let itemProvider = itemProvider,
+           itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                DispatchQueue.main.async {
+                    self.clothesImage = image as? UIImage
+                }
+            }
+        }
+    }
+}
 
 extension AddClothesViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -368,6 +399,7 @@ extension AddClothesViewController: UIPickerViewDataSource, UIPickerViewDelegate
     }
 
 }
+
 
 #if DEBUG
 import SwiftUI

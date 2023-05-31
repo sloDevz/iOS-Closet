@@ -26,8 +26,10 @@ final class HomeViewController: UIViewController {
     }()
 
     // MARK: - UI Components
-    let latestStyleSetView = LatestStyleView(frame: .zero)
-    let latestClothesView = LatestClothesView(frame: .zero)
+    private let homeScrollView = UIScrollView()
+    private let contentView = UIView()
+    private let latestStyleSetView = LatestStyleView(frame: .zero)
+    private let latestClothesView = LatestClothesView(frame: .zero)
 
     // MARK: - LifeCycle
     init(clothesManager: ClothesManager? = nil) {

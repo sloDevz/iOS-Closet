@@ -47,7 +47,7 @@ final class PhotoButton: UIButton {
         layer.shadowOffset = CGSize(width: 1, height: 1)
         layer.shadowOpacity = 0.1
         layer.shadowRadius = 40
-        self.contentMode = .scaleAspectFit
+        self.imageView?.contentMode = .scaleAspectFill
     }
 
     
