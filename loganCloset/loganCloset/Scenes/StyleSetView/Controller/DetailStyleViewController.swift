@@ -18,6 +18,7 @@ final class DetailStyleViewController: UIViewController {
     private var styleSet: StyleSet?
     private var backgroundImage: UIImage?
     private lazy var dataSource: DataSource = configureDataSource()
+    private var shouldSwapItem = true
 
     // MARK: - UI Components
     private lazy var  styleDetailCollectionView: UICollectionView = {
@@ -172,10 +173,42 @@ final class DetailStyleViewController: UIViewController {
         dataSource.apply(snapShot)
     }
 
+    private func applySnapShotWithBodyItemsSwapping (animation: Bool) {
+        print(#function)
+        guard let styleSet else { return }
+        var snapShot = SnapShot()
+
+        let sections = StyleSetCategory.allCases
+        let items = styleSet.items
+
+        sections.forEach { section in
+            var categorizedItem = items.filter { item in
+                item.styleSetCategory == section
+            }
+            if section == .body && categorizedItem.count > 1 {
+                if shouldSwapItem {
+                    let firstBodyItem = categorizedItem[0]
+                    categorizedItem[0] = categorizedItem[1]
+                    categorizedItem[1] = firstBodyItem
+                }
+            }
+            snapShot.appendSections([section])
+            snapShot.appendItems(categorizedItem)
+
+        }
+        dataSource.apply(snapShot)
+    }
+
 }
 
 extension DetailStyleViewController: UICollectionViewDelegate {
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedSection = StyleSetCategory.allCases[indexPath.section]
+        if selectedSection == StyleSetCategory.body {
+            applySnapShotWithBodyItemsSwapping(animation: true)
+            shouldSwapItem.toggle()
+        }
+    }
 }
 
 #if DEBUG
