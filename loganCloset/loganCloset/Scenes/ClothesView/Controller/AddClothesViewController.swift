@@ -146,6 +146,10 @@ final class AddClothesViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        removeKeyboardNotification()
+    }
+
     // MARK: - Public
 
     // MARK: - Private
@@ -179,22 +183,6 @@ final class AddClothesViewController: UIViewController {
         confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
     }
 
-    private func setKeyboardNotification() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-    }
-
     @objc
     private func closeButtonTapped() {
         self.dismiss(animated: true)
@@ -217,31 +205,6 @@ final class AddClothesViewController: UIViewController {
             self.dismiss(animated: true)
         }
 
-    }
-
-    @objc
-    private func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keybaordRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keybaordRectangle.height
-
-            keyboardSapceView.snp.updateConstraints { make in
-                make.height.equalTo(keyboardHeight)
-            }
-            addClothesScrollView.setContentOffset(CGPoint(x: .zero, y: keyboardHeight), animated: true)
-        }
-    }
-
-    @objc
-    private func keyboardWillHide(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keybaordRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keybaordRectangle.height
-
-            keyboardSapceView.snp.updateConstraints { make in
-                make.height.equalTo(0)
-            }
-        }
     }
 
     @objc
@@ -403,6 +366,51 @@ extension AddClothesViewController: PHPickerViewControllerDelegate {
 }
 
 extension AddClothesViewController {
+
+    private func setKeyboardNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+
+    private func removeKeyboardNotification() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc
+    private func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keybaordRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keybaordRectangle.height
+
+            keyboardSapceView.snp.updateConstraints { make in
+                make.height.equalTo(keyboardHeight)
+            }
+            addClothesScrollView.setContentOffset(CGPoint(x: .zero, y: keyboardHeight), animated: true)
+        }
+    }
+
+    @objc
+    private func keyboardWillHide(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keybaordRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keybaordRectangle.height
+
+            keyboardSapceView.snp.updateConstraints { make in
+                make.height.equalTo(0)
+            }
+        }
+    }
 
 }
 
