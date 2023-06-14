@@ -37,6 +37,7 @@ final class AddClothesViewController: UIViewController {
     // MARK: - UI Components
     private var addClothesScrollView =  UIScrollView()
     private var contentView = UIView()
+    private var keyboardSapceView = UIView()
     private let closeButton: UIButton = {
         let button = UIButton()
         let titlefont = UIFont.importedUIFont(name: .pretendardBold, fontSize: 18)
@@ -220,13 +221,14 @@ final class AddClothesViewController: UIViewController {
 
     @objc
     private func keyboardWillShow(_ notification: Notification) {
-        guard let mainWindow = UIApplication.shared.windows.first else { return }
-        view.frame.origin.y = mainWindow.frame.origin.y
-
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keybaordRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keybaordRectangle.height
-            view.frame.origin.y -= keyboardHeight
+
+            keyboardSapceView.snp.updateConstraints { make in
+                make.height.equalTo(keyboardHeight)
+            }
+            addClothesScrollView.setContentOffset(CGPoint(x: .zero, y: keyboardHeight), animated: true)
         }
     }
 
@@ -235,7 +237,10 @@ final class AddClothesViewController: UIViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keybaordRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keybaordRectangle.height
-            view.frame.origin.y += keyboardHeight
+
+            keyboardSapceView.snp.updateConstraints { make in
+                make.height.equalTo(0)
+            }
         }
     }
 
@@ -287,7 +292,7 @@ final class AddClothesViewController: UIViewController {
     }
 
     private func setupAppearance() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
     }
 
     private func configureHierarchy() {
@@ -303,6 +308,7 @@ final class AddClothesViewController: UIViewController {
         contentView.addSubview(colorPickerTextField)
         contentView.addSubview(materialPickerTextField)
         contentView.addSubview(confirmButton)
+        contentView.addSubview(keyboardSapceView)
     }
 
     private func configureLayoutConstraint() {
@@ -312,7 +318,7 @@ final class AddClothesViewController: UIViewController {
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
-            make.bottom.equalTo(confirmButton).offset(30)
+            make.bottom.equalTo(keyboardSapceView)
         }
         closeButton.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -368,6 +374,12 @@ final class AddClothesViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(60)
         }
+        keyboardSapceView.snp.makeConstraints { make in
+            make.height.equalTo(0)
+            make.top.equalTo(confirmButton.snp.bottom)
+            make.leading.bottom.trailing.equalToSuperview()
+
+        }
     }
 
 
@@ -388,6 +400,10 @@ extension AddClothesViewController: PHPickerViewControllerDelegate {
             }
         }
     }
+}
+
+extension AddClothesViewController {
+
 }
 
 extension AddClothesViewController: UITextFieldDelegate {

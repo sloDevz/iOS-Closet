@@ -58,7 +58,6 @@ final class DetailStyleViewController: UIViewController {
         let background = UIImageView(image: backgroundImage)
         background.contentMode = .scaleAspectFill
         styleDetailCollectionView.backgroundView = background
-
     }
 
     private func setHierarchy() {
@@ -174,7 +173,6 @@ final class DetailStyleViewController: UIViewController {
     }
 
     private func applySnapShotWithBodyItemsSwapping (animation: Bool) {
-        print(#function)
         guard let styleSet else { return }
         var snapShot = SnapShot()
 
