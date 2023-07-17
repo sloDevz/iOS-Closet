@@ -39,7 +39,7 @@ final class PhotoButton: UIButton {
     // MARK: - Private
     private func setupAppearance() {
         self.backgroundColor = UIColor(white: 0.9, alpha: 1)
-        layer.borderWidth = 3
+        layer.borderWidth = 10
         layer.borderColor = UIColor.separator.cgColor
         layer.cornerRadius = 16
         layer.masksToBounds = true
@@ -50,7 +50,6 @@ final class PhotoButton: UIButton {
         self.imageView?.contentMode = .scaleAspectFill
     }
 
-    
 }
 
 #if canImport(SwiftUI) && DEBUG
@@ -63,7 +62,7 @@ struct PhotoButton_Preview: PreviewProvider {
             cell.updateButtonImage(with: UIImage(named: "Add_Clothes_image_icon"))
             return cell
         }
-        .frame(width: 400, height: 400) // 원하는 수치만큼 뷰 크기 조절 가능
+        .frame(width: 400, height: 400)
         .previewLayout(.sizeThatFits)
     }
 }
