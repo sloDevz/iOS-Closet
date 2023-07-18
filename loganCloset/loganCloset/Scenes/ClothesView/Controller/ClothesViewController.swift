@@ -14,7 +14,18 @@ final class ClothesViewController: UIViewController {
     private typealias DataSource = UICollectionViewDiffableDataSource<ClothesCategory, Clothes>
     private typealias SnapShot = NSDiffableDataSourceSnapshot<ClothesCategory, Clothes>
     private enum Constant {
+        static let titleLabelText: String = "MY CLOTHES"
+        static let titleLabelFontSize: CGFloat = 18
+
         static let headerViewElementKind: String = "section-header"
+
+        static let squareItemSize: CGFloat = 1.0
+        static let groupHeightFractionalSize: CGFloat = 0.15
+        static let headerWidthDimension: CGFloat = 1.0
+        static let headerHeightEstimatedSize: CGFloat = 20
+        static let sectionTopContentInset:CGFloat = 40.0
+        static let sectionLeadingContentInset:CGFloat = 20.0
+        static let sectionGroupSpacing:CGFloat = 20
     }
 
     // MARK: - Properties
@@ -24,10 +35,10 @@ final class ClothesViewController: UIViewController {
     // MARK: - UI Components
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "MY CLOTHES"
+        label.text = Constant.titleLabelText
         label.font = UIFont.importedUIFont(
             name: .pretendardExtraBold,
-            fontSize: 18
+            fontSize: Constant.titleLabelFontSize
         )
         label.sizeToFit()
 
@@ -84,12 +95,12 @@ final class ClothesViewController: UIViewController {
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { section, layoutEnvironment in
             let itemSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalHeight(1.0),
-                heightDimension: .fractionalHeight(1.0)
+                widthDimension: .fractionalHeight(Constant.squareItemSize),
+                heightDimension: .fractionalHeight(Constant.squareItemSize)
             )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-            let groupFractionalHeight = 0.15
+            let groupFractionalHeight = Constant.groupHeightFractionalSize
             let groupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalHeight(groupFractionalHeight),
                 heightDimension: .fractionalHeight(groupFractionalHeight))
@@ -100,8 +111,8 @@ final class ClothesViewController: UIViewController {
             )
 
             let headerSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(20)
+                widthDimension: .fractionalWidth(Constant.headerWidthDimension),
+                heightDimension: .estimated(Constant.headerHeightEstimatedSize)
             )
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: headerSize,
@@ -110,14 +121,14 @@ final class ClothesViewController: UIViewController {
             )
             let section = NSCollectionLayoutSection(group: group)
             section.contentInsets = .init(
-                top: 40,
-                leading: 20,
+                top: Constant.sectionTopContentInset,
+                leading: Constant.sectionLeadingContentInset,
                 bottom: .zero,
                 trailing: .zero
             )
             section.boundarySupplementaryItems = [sectionHeader]
             section.orthogonalScrollingBehavior = .groupPagingCentered
-            section.interGroupSpacing = 20
+            section.interGroupSpacing = Constant.sectionGroupSpacing
 
             return section
         }
@@ -178,43 +189,21 @@ final class ClothesViewController: UIViewController {
 
         var snapShot = SnapShot()
 
-        let hats = allClothes.filter({ clothes in
-            clothes.clothesCategory == .hat
-        })
-            snapShot.appendSections([ClothesCategory.hat])
-            snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + hats)
-
-        let outers = allClothes.filter({ clothes in
-            clothes.clothesCategory == .outer
-        })
-            snapShot.appendSections([ClothesCategory.outer])
-            snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + outers)
-
-        let tops = allClothes.filter({ clothes in
-            clothes.clothesCategory == .top
-        })
-            snapShot.appendSections([ClothesCategory.top])
-            snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + tops)
-
-        let bottoms = allClothes.filter({ clothes in
-            clothes.clothesCategory == .bottom
-        })
-            snapShot.appendSections([ClothesCategory.bottom])
-            snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + bottoms)
-
-        let shoes = allClothes.filter({ clothes in
-            clothes.clothesCategory == .footWaer
-        })
-            snapShot.appendSections([ClothesCategory.footWaer])
-            snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!, clothesCategory: .none, season: .all)] + shoes)
-
-        let accessories = allClothes.filter({ clothes in
-            clothes.clothesCategory == .accessory
-        })
-            snapShot.appendSections([ClothesCategory.accessory])
-            snapShot.appendItems([Clothes(itemImage: UIImage(systemName: "plus")!,clothesCategory: .none, season: .all)] + accessories)
-
-
+        let allCategories = ClothesCategory.allCases
+        allCategories.forEach { category in
+            if category != .none {
+                let itemForAddButton = Clothes(
+                    itemImage: UIImage(systemName: "plus")!,
+                    clothesCategory: .none,
+                    season: .all
+                )
+                let items = allClothes.filter { clothes in
+                    clothes.clothesCategory == category
+                }
+                snapShot.appendSections([category])
+                snapShot.appendItems([itemForAddButton] + items)
+            }
+        }
         dataSource.apply(snapShot, animatingDifferences: animation)
     }
 
@@ -226,15 +215,17 @@ final class ClothesViewController: UIViewController {
 }
 
 extension ClothesViewController: UICollectionViewDelegate {
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        if indexPath.item == 0 {
+        if indexPath.item == .zero {
             let addClothesVC = AddClothesViewController()
             addClothesVC.delegate = self
             addClothesVC.modalPresentationStyle = .fullScreen
             present(addClothesVC, animated: true)
         }
     }
+
 }
 
 extension ClothesViewController: ClothesDataProtocol {
@@ -246,4 +237,3 @@ extension ClothesViewController: ClothesDataProtocol {
     }
 
 }
-
