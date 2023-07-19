@@ -15,6 +15,27 @@ final class AddClothesViewController: UIViewController {
     enum Constants {
         static let offsetOfEachUIComponents: CGFloat = 15
         static let offsetPhotoAndOthers: CGFloat = 30
+        static let confirmButtonRadius: CGFloat = 8
+        static let confirmButtonHeight: CGFloat = 60
+
+        static let closetButtonTitle: String = "닫기"
+        static let tagTextFieldPlaceholder: String = "원하는 #Tag를 입력해주세요"
+        static let brandTextFieldPlaceholder: String = "브랜드 이름을 입력해주세요"
+        static let mainColorTextFieldPlaceholder: String = "주색상을 선택해주세요"
+        static let materialTextFieldPlaceholder: String = "소재를 선택해주세요"
+
+        static let confirmButtonTitle: String = "등록하기"
+
+        static let confirmMessageTitle: String = "아이템 등록"
+        static let confirmMessageText: String = "새로운 아이템을 등록했습니다."
+
+        static let closeButtonHeight: CGFloat = 20
+        static let seperatorHeight: CGFloat = 1
+        static let seperatorViewOffset:CGFloat = 10
+        static let seperatorAndPhotoButtonInset: CGFloat = 20
+        static let widthHeightInset: CGFloat = 40
+        static let viewSideInset: CGFloat = 20
+        static let contentTextFieldHeight: CGFloat = 40
     }
 
     // MARK: - Properties
@@ -41,7 +62,7 @@ final class AddClothesViewController: UIViewController {
     private let closeButton: UIButton = {
         let button = UIButton()
         let titlefont = UIFont.importedUIFont(name: .pretendardBold, fontSize: 18)
-        button.setTitle("닫기", for: .normal)
+        button.setTitle(Constants.closetButtonTitle, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = titlefont
         return button
@@ -58,7 +79,7 @@ final class AddClothesViewController: UIViewController {
         }
         let segmentControl = UISegmentedControl(items: categories)
 
-        segmentControl.selectedSegmentIndex = 0
+        segmentControl.selectedSegmentIndex = .zero
         return segmentControl
     }()
     private let seasonSelectSegment: UISegmentedControl = {
@@ -66,12 +87,12 @@ final class AddClothesViewController: UIViewController {
             season.rawValue
         }
         let segmentControl = UISegmentedControl(items: seasons)
-        segmentControl.selectedSegmentIndex = 0
+        segmentControl.selectedSegmentIndex = .zero
         return segmentControl
     }()
     private let tagInputTextField: UITextField = {
         let textfield = UITextField()
-        textfield.placeholder = "원하는 #Tag를 입력해주세요"
+        textfield.placeholder = Constants.tagTextFieldPlaceholder
         textfield.textAlignment = .center
         textfield.returnKeyType = .done
         textfield.backgroundColor = .systemGray5
@@ -80,7 +101,7 @@ final class AddClothesViewController: UIViewController {
     }()
     private let brandNameInputTextField: UITextField = {
         let textfield = UITextField()
-        textfield.placeholder = "브랜드 이름을 입력해주세요"
+        textfield.placeholder = Constants.brandTextFieldPlaceholder
         textfield.textAlignment = .center
         textfield.returnKeyType = .done
         textfield.backgroundColor = .systemGray5
@@ -91,7 +112,7 @@ final class AddClothesViewController: UIViewController {
     private let materialPicker = UIPickerView()
     private let colorPickerTextField: UITextField = {
         let textfield = UITextField()
-        textfield.placeholder = "주색상을 선택해주세요"
+        textfield.placeholder = Constants.mainColorTextFieldPlaceholder
         textfield.textAlignment = .center
         textfield.backgroundColor = .systemGray5
         textfield.tintColor = textfield.backgroundColor
@@ -100,7 +121,7 @@ final class AddClothesViewController: UIViewController {
     }()
     private let materialPickerTextField: UITextField = {
         let textfield = UITextField()
-        textfield.placeholder = "소재를 선택해주세요"
+        textfield.placeholder = Constants.materialTextFieldPlaceholder
         textfield.textAlignment = .center
         textfield.backgroundColor = .systemGray5
         textfield.tintColor = textfield.backgroundColor
@@ -111,12 +132,12 @@ final class AddClothesViewController: UIViewController {
         let button = UIButton()
         let titlefont = UIFont.importedUIFont(name: .pretendardBold, fontSize: 20)
         button.backgroundColor = .black
-        button.setTitle("등록하기", for: .normal)
+        button.setTitle(Constants.confirmButtonTitle, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.cyan, for: .selected)
         button.setTitleColor(.cyan, for: .highlighted)
         button.titleLabel?.font = titlefont
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = Constants.confirmButtonRadius
         return button
     }()
     private lazy var photoPicker: PHPickerViewController = {
@@ -201,7 +222,11 @@ final class AddClothesViewController: UIViewController {
 
         let newItem = Clothes(itemImage: clothesImage, clothesCategory: category, season: season, mainColor: mainColor, tags: tags, brandName: brandName, meterial: material)
         delegate?.updateClothesData(data: newItem)
-        AlertManager.presentMessageAlert(viewController: self, title: "아이템 등록", message: "새로운 아이템을 등록했습니다.") { _ in
+        AlertManager.presentMessageAlert(
+            viewController: self,
+            title: Constants.confirmButtonTitle,
+            message: Constants.confirmMessageText
+        ) { _ in
             self.dismiss(animated: true)
         }
 
@@ -285,57 +310,57 @@ final class AddClothesViewController: UIViewController {
         }
         closeButton.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalToSuperview().inset(20)
-            make.height.equalTo(20)
+            make.leading.equalToSuperview().inset(Constants.viewSideInset)
+            make.height.equalTo(Constants.closeButtonHeight)
         }
         seperatorView.snp.makeConstraints { make in
-            make.height.equalTo(1)
+            make.height.equalTo(Constants.seperatorHeight)
             make.width.equalToSuperview()
-            make.top.equalTo(closeButton.snp.bottom).offset(10)
+            make.top.equalTo(closeButton.snp.bottom).offset(Constants.seperatorViewOffset)
         }
         photoButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(seperatorView.snp.bottom).offset(20)
-            make.width.height.equalTo(contentView.snp.width).inset(40)
+            make.top.equalTo(seperatorView.snp.bottom).offset(Constants.seperatorAndPhotoButtonInset)
+            make.width.height.equalTo(contentView.snp.width).inset(Constants.widthHeightInset)
         }
         categorySelectSegment.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(20)
-            make.height.equalTo(40)
+            make.width.equalToSuperview().inset(Constants.viewSideInset)
+            make.height.equalTo(Constants.contentTextFieldHeight)
             make.top.equalTo(photoButton.snp.bottom).offset(Constants.offsetPhotoAndOthers)
             make.centerX.equalToSuperview()
         }
         seasonSelectSegment.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(20)
-            make.height.equalTo(40)
+            make.width.equalToSuperview().inset(Constants.viewSideInset)
+            make.height.equalTo(Constants.contentTextFieldHeight)
             make.top.equalTo(categorySelectSegment.snp.bottom).offset(Constants.offsetOfEachUIComponents)
             make.centerX.equalToSuperview()
         }
         tagInputTextField.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(20)
-            make.height.equalTo(40)
+            make.width.equalToSuperview().inset(Constants.viewSideInset)
+            make.height.equalTo(Constants.contentTextFieldHeight)
             make.top.equalTo(seasonSelectSegment.snp.bottom).offset(Constants.offsetOfEachUIComponents)
             make.centerX.equalToSuperview()
         }
         brandNameInputTextField.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(20)
-            make.height.equalTo(40)
+            make.width.equalToSuperview().inset(Constants.viewSideInset)
+            make.height.equalTo(Constants.contentTextFieldHeight)
             make.top.equalTo(tagInputTextField.snp.bottom).offset(Constants.offsetOfEachUIComponents)
             make.centerX.equalToSuperview()
         }
         colorPickerTextField.snp.makeConstraints { make in
-            make.height.equalTo(40)
+            make.height.equalTo(Constants.contentTextFieldHeight)
             make.top.equalTo(brandNameInputTextField.snp.bottom).offset(Constants.offsetOfEachUIComponents)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(Constants.viewSideInset)
         }
         materialPickerTextField.snp.makeConstraints { make in
-            make.height.equalTo(40)
+            make.height.equalTo(Constants.contentTextFieldHeight)
             make.top.equalTo(colorPickerTextField.snp.bottom).offset(Constants.offsetOfEachUIComponents)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(Constants.viewSideInset)
         }
         confirmButton.snp.makeConstraints { make in
             make.top.equalTo(materialPickerTextField.snp.bottom).offset(Constants.offsetOfEachUIComponents)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(60)
+            make.leading.trailing.equalToSuperview().inset(Constants.viewSideInset)
+            make.height.equalTo(Constants.confirmButtonHeight)
         }
         keyboardSapceView.snp.makeConstraints { make in
             make.height.equalTo(0)
@@ -422,6 +447,7 @@ extension AddClothesViewController: UITextFieldDelegate {
 }
 
 extension AddClothesViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -460,6 +486,7 @@ extension AddClothesViewController: UIPickerViewDataSource, UIPickerViewDelegate
 }
 
 extension AddClothesViewController {
+
     private func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -469,6 +496,7 @@ extension AddClothesViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+
 }
 
 
