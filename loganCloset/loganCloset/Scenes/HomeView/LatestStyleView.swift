@@ -17,6 +17,14 @@ final class LatestStyleView: UIView {
         static let contentContainerShadowOpacity: Float = 0.1
         static let contentContainerShadowRadius: CGFloat = 40
 
+        static let stackViewContainerHeight: CGFloat = 208
+        static let verticalStackViewInset: CGFloat = 20
+        static let stackViewSpacing: CGFloat = 8
+
+        static let borderLineHeight:CGFloat = 1
+
+        static let descriptionLabelHeight: CGFloat = 56
+
         static let styleSetLabelSkeletonText: String = "My StyleSet"
     }
     // MARK: - Properties
@@ -55,7 +63,7 @@ final class LatestStyleView: UIView {
         view.backgroundColor = UIColor(white: 0.90, alpha: 1)
         return view
     }()
-    private let descriptLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.styleSetLabelSkeletonText
         label.textColor = .black
@@ -66,7 +74,7 @@ final class LatestStyleView: UIView {
     private let styleSetHorizontalInnerStackView1: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 8
+        stackView.spacing = Constants.stackViewSpacing
         stackView.alignment = .center
         stackView.distribution = .fillEqually
         return stackView
@@ -74,7 +82,7 @@ final class LatestStyleView: UIView {
     private let styleSetHorizontalInnerStackView2: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 8
+        stackView.spacing = Constants.stackViewSpacing
         stackView.alignment = .center
         stackView.distribution = .fillEqually
         return stackView
@@ -82,7 +90,7 @@ final class LatestStyleView: UIView {
     private let styleSetVerticalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 8
+        stackView.spacing = Constants.stackViewSpacing
         stackView.alignment = .center
         stackView.distribution = .fillEqually
         return stackView
@@ -107,7 +115,7 @@ final class LatestStyleView: UIView {
         cellImages.forEach { iageView in
             iageView.image = styleSetImages?.popLast() ?? UIImage(named: ImageConstants.noneImage)
         }
-        descriptLabel.text = styleSet?.name ?? "등록된 코디가 없습니다."
+        descriptionLabel.text = styleSet?.name ?? "등록된 코디가 없습니다."
     }
     // MARK: - Private
     private func configureHierachy() {
@@ -130,7 +138,7 @@ final class LatestStyleView: UIView {
 
         contentContainer.addSubview(stackViewContainer)
         contentContainer.addSubview(borderLine)
-        contentContainer.addSubview(descriptLabel)
+        contentContainer.addSubview(descriptionLabel)
     }
 
     private func configureLayout() {
@@ -140,20 +148,20 @@ final class LatestStyleView: UIView {
         stackViewContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.width.equalToSuperview()
-            make.height.equalTo(208)
+            make.height.equalTo(Constants.stackViewContainerHeight)
         }
         styleSetVerticalStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(20)
+            make.edges.equalToSuperview().inset(Constants.verticalStackViewInset)
         }
         borderLine.snp.makeConstraints { make in
-            make.bottom.equalTo(descriptLabel.snp.top)
+            make.bottom.equalTo(descriptionLabel.snp.top)
             make.width.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(Constants.borderLineHeight)
         }
-        descriptLabel.snp.makeConstraints { make in
+        descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(stackViewContainer.snp.bottom)
             make.width.equalToSuperview()
-            make.height.equalTo(56)
+            make.height.equalTo(Constants.descriptionLabelHeight)
         }
     }
 

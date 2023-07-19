@@ -25,11 +25,12 @@ final class AddClothesViewController: UIViewController {
         static let materialTextFieldPlaceholder: String = "소재를 선택해주세요"
 
         static let confirmButtonTitle: String = "등록하기"
-
         static let confirmMessageTitle: String = "아이템 등록"
         static let confirmMessageText: String = "새로운 아이템을 등록했습니다."
+        static let confirmButtonFontSize: CGFloat = 20
 
         static let closeButtonHeight: CGFloat = 20
+        static let closeButtonFontSize: CGFloat = 18
         static let seperatorHeight: CGFloat = 1
         static let seperatorViewOffset:CGFloat = 10
         static let seperatorAndPhotoButtonInset: CGFloat = 20
@@ -61,7 +62,7 @@ final class AddClothesViewController: UIViewController {
     private var keyboardSapceView = UIView()
     private let closeButton: UIButton = {
         let button = UIButton()
-        let titlefont = UIFont.importedUIFont(name: .pretendardBold, fontSize: 18)
+        let titlefont = UIFont.importedUIFont(name: .pretendardBold, fontSize: Constants.closeButtonFontSize)
         button.setTitle(Constants.closetButtonTitle, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = titlefont
@@ -130,7 +131,7 @@ final class AddClothesViewController: UIViewController {
     }()
     private let confirmButton: UIButton = {
         let button = UIButton()
-        let titlefont = UIFont.importedUIFont(name: .pretendardBold, fontSize: 20)
+        let titlefont = UIFont.importedUIFont(name: .pretendardBold, fontSize: Constants.confirmButtonFontSize)
         button.backgroundColor = .black
         button.setTitle(Constants.confirmButtonTitle, for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -214,7 +215,7 @@ final class AddClothesViewController: UIViewController {
         setCategoryBySegment()
 
         guard let clothesImage,
-        let category else { return }
+              let category else { return }
         var tags:[String]? = nil
         if let itemTags {
             tags = itemTags.components(separatedBy: "#")
@@ -426,14 +427,9 @@ extension AddClothesViewController {
     }
 
     @objc
-    private func keyboardWillHide(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keybaordRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keybaordRectangle.height
-
-            keyboardSapceView.snp.updateConstraints { make in
-                make.height.equalTo(0)
-            }
+    private func keyboardWillHide() {
+        keyboardSapceView.snp.updateConstraints { make in
+            make.height.equalTo(0)
         }
     }
 
