@@ -11,81 +11,95 @@ import SnapKit
 final class StyleSetCell: UICollectionViewCell {
 
     // MARK: - Constants
+    enum Constants {
+        static let containerRadius: CGFloat = 8
+        static let contentContainerShadowInset: CGFloat = 1
+        static let contentContainerShadowOpacity: Float = 0.1
+        static let contentContainerShoadowRadius: CGFloat = 40
 
+        static let descriptionLabelFontSize: CGFloat = 14
+        static let descriptionLabelSkeletonText: String = "My StyleSet"
+
+        static let horizontalStackSpacing: CGFloat = 6
+        static let verticalStackSpacing: CGFloat = 16
+
+        static let stackViewContainerMultipliedHeight: CGFloat = 0.78
+        static let styleSetVerticalStackWidthInset: CGFloat = 16
+        static let styleSetVerticalStackHeightInset: CGFloat = 24
+        static let borderLineHeight: CGFloat = 1
+        static let descriptionLabelMultipliedHeight: CGFloat = 0.22
+    }
 
     // MARK: - Properties
     static let reuseidentifier = String(describing: StyleSetCell.self)
     
     // MARK: - UI Components
-    let contentContainer: UIView = {
+    private let contentContainer: UIView = {
         let view =  UIView()
         view.backgroundColor = .white
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = Constants.containerRadius
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 1, height: 1)
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowRadius = 40
+        view.layer.shadowOffset = CGSize(
+            width: Constants.contentContainerShadowInset,
+            height: Constants.contentContainerShadowInset)
+        view.layer.shadowOpacity = Constants.contentContainerShadowOpacity
+        view.layer.shadowRadius = Constants.contentContainerShoadowRadius
         return view
     }()
-    let stackViewContainer: UIView = {
+    private let stackViewContainer: UIView = {
         let view =  UIView()
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = Constants.containerRadius
         view.backgroundColor = .white
         return view
     }()
-    let itemImage1: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        return image
+    private let itemImages: [UIImageView] = {
+        var imageViews = [UIImageView]()
+        for _ in 0 ... 3 {
+            let itemImage: UIImageView = {
+                let image = UIImageView()
+                image.contentMode = .scaleAspectFit
+                return image
+            }()
+            imageViews.append(itemImage)
+        }
+        return imageViews
     }()
-    let itemImage2: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
-    let itemImage3: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
-    let itemImage4: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
-    let descriptLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "My StyleSet"
+        label.text = Constants.descriptionLabelSkeletonText
         label.textColor = .black
-        label.font = UIFont.importedUIFont(name: .pretendardBold, fontSize: 14)
+        label.font = UIFont.importedUIFont(
+            name: .pretendardBold,
+            fontSize: Constants.descriptionLabelFontSize
+        )
         label.textAlignment = .center
         return label
     }()
-    let borderLine: UIView = {
+    private let borderLine: UIView = {
         let view =  UIView()
         view.backgroundColor = UIColor(white: 0.90, alpha: 1)
         return view
     }()
-    var styleSetHorizontalInnerStackView1: UIStackView = {
+    private var styleSetHorizontalInnerStackView1: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 6
+        stackView.spacing = Constants.horizontalStackSpacing
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         return stackView
     }()
-    var styleSetHorizontalInnerStackView2: UIStackView = {
+    private var styleSetHorizontalInnerStackView2: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 6
+        stackView.spacing = Constants.horizontalStackSpacing
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         return stackView
     }()
-    var styleSetVerticalStackView: UIStackView = {
+    private var styleSetVerticalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 16
+        stackView.spacing = Constants.verticalStackSpacing
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         return stackView
@@ -104,22 +118,27 @@ final class StyleSetCell: UICollectionViewCell {
 
     // MARK: - Public
     func configureItemImage(with styleSet: StyleSet) {
-        let cellImages = [itemImage1, itemImage2, itemImage3, itemImage4]
         var styleSetImages = styleSet.items.compactMap { $0.itemImage }
         styleSetImages.reverse()
 
-        cellImages.forEach { imageView in
+        itemImages.forEach { imageView in
             imageView.image = styleSetImages.popLast() ?? UIImage(named: ImageConstants.noneImage)
         }
-        descriptLabel.text = styleSet.name
+        descriptionLabel.text = styleSet.name
     }
 
     // MARK: - Private
     private func configureHierachy() {
-        styleSetHorizontalInnerStackView1.addArrangedSubview(itemImage1)
-        styleSetHorizontalInnerStackView1.addArrangedSubview(itemImage2)
-        styleSetHorizontalInnerStackView2.addArrangedSubview(itemImage3)
-        styleSetHorizontalInnerStackView2.addArrangedSubview(itemImage4)
+        var indexCount = 0
+        itemImages.forEach { itemImage in
+            if indexCount < 2 {
+                styleSetHorizontalInnerStackView1.addArrangedSubview(itemImage)
+            } else {
+                styleSetHorizontalInnerStackView2.addArrangedSubview(itemImage)
+            }
+            indexCount += 1
+        }
+
         styleSetVerticalStackView.addArrangedSubview(styleSetHorizontalInnerStackView1)
         styleSetVerticalStackView.addArrangedSubview(styleSetHorizontalInnerStackView2)
 
@@ -128,7 +147,7 @@ final class StyleSetCell: UICollectionViewCell {
         contentView.addSubview(contentContainer)
         contentContainer.addSubview(stackViewContainer)
         contentContainer.addSubview(borderLine)
-        contentContainer.addSubview(descriptLabel)
+        contentContainer.addSubview(descriptionLabel)
     }
 
     private func configureLayout() {
@@ -137,23 +156,23 @@ final class StyleSetCell: UICollectionViewCell {
         }
         stackViewContainer.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.78)
+            make.height.equalToSuperview().multipliedBy(Constants.stackViewContainerMultipliedHeight)
         }
         styleSetVerticalStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.equalToSuperview().inset(16)
-            make.height.equalToSuperview().inset(24)
+            make.width.equalToSuperview().inset(Constants.styleSetVerticalStackWidthInset)
+            make.height.equalToSuperview().inset(Constants.styleSetVerticalStackHeightInset)
         }
         borderLine.snp.makeConstraints { make in
-            make.bottom.equalTo(descriptLabel.snp.top)
+            make.bottom.equalTo(descriptionLabel.snp.top)
             make.width.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(Constants.borderLineHeight)
         }
-        descriptLabel.snp.makeConstraints { make in
+        descriptionLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(stackViewContainer.snp.bottom)
             make.bottom.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.22)
+            make.height.equalToSuperview().multipliedBy(Constants.descriptionLabelMultipliedHeight)
         }
     }
 
