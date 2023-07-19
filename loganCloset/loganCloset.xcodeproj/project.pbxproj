@@ -36,7 +36,7 @@
 		F18D9E7D2A1F9BB600B3BFF5 /* LatestClothesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E7C2A1F9BB600B3BFF5 /* LatestClothesView.swift */; };
 		F18D9E7F2A1F9BC500B3BFF5 /* LatestStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E7E2A1F9BC500B3BFF5 /* LatestStyleView.swift */; };
 		F18D9E812A1FC13400B3BFF5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E802A1FC13400B3BFF5 /* Constants.swift */; };
-		F18D9E832A20896100B3BFF5 /* TextOnlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E822A20896100B3BFF5 /* TextOnlyView.swift */; };
+		F18D9E832A20896100B3BFF5 /* EmptyViewGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E822A20896100B3BFF5 /* EmptyViewGuide.swift */; };
 		F18D9E852A20A30F00B3BFF5 /* DetailStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E842A20A30F00B3BFF5 /* DetailStyleViewController.swift */; };
 		F18D9E892A20CB0F00B3BFF5 /* StyleItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */; };
 		F18D9E8B2A20E1BF00B3BFF5 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E8A2A20E1BF00B3BFF5 /* Preview.swift */; };
@@ -85,7 +85,7 @@
 		F18D9E7C2A1F9BB600B3BFF5 /* LatestClothesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestClothesView.swift; sourceTree = "<group>"; };
 		F18D9E7E2A1F9BC500B3BFF5 /* LatestStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestStyleView.swift; sourceTree = "<group>"; };
 		F18D9E802A1FC13400B3BFF5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		F18D9E822A20896100B3BFF5 /* TextOnlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOnlyView.swift; sourceTree = "<group>"; };
+		F18D9E822A20896100B3BFF5 /* EmptyViewGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewGuide.swift; sourceTree = "<group>"; };
 		F18D9E842A20A30F00B3BFF5 /* DetailStyleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStyleViewController.swift; sourceTree = "<group>"; };
 		F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleItemCell.swift; sourceTree = "<group>"; };
 		F18D9E8A2A20E1BF00B3BFF5 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 			children = (
 				F1831CE52A1C5B8F0050D50F /* Controller */,
 				F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */,
-				F18D9E822A20896100B3BFF5 /* TextOnlyView.swift */,
+				F18D9E822A20896100B3BFF5 /* EmptyViewGuide.swift */,
 				F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */,
 				F1DE027E2A230577007F9FF3 /* ItemImageButton.swift */,
 			);
@@ -381,7 +381,7 @@
 				F18D9E8D2A2234E100B3BFF5 /* StyleSetCategory.swift in Sources */,
 				F1DE02882A24DB51007F9FF3 /* StyleSetDataProtocol.swift in Sources */,
 				F1831CD02A1AFA120050D50F /* StyleSet.swift in Sources */,
-				F18D9E832A20896100B3BFF5 /* TextOnlyView.swift in Sources */,
+				F18D9E832A20896100B3BFF5 /* EmptyViewGuide.swift in Sources */,
 				F1DE02862A24DAE3007F9FF3 /* ClothesDataProtocol.swift in Sources */,
 				F18D9E8F2A22FC2000B3BFF5 /* AddStyleSetViewController.swift in Sources */,
 				F1188BFD2A15EA47002B0835 /* HomeViewController.swift in Sources */,

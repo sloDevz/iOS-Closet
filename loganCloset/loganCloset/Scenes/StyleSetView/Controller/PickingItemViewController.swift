@@ -27,7 +27,7 @@ final class PickingItemViewController: UIViewController {
     var selectedCellIndexPath: IndexPath?
 
     // MARK: - UI Components
-    private let emptyGuideView = TextOnlyView(text: "아이템이 없습니다. \n아이템을 등록하세요")
+    private let emptyGuideView = EmptyViewGuide(text: "아이템이 없습니다. \n아이템을 등록하세요")
 
     private let navigationBar = UINavigationBar()
 

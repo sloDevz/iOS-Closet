@@ -63,7 +63,7 @@ final class LatestStyleView: UIView {
         label.textAlignment = .center
         return label
     }()
-    private var styleSetHorizontalInnerStackView1: UIStackView = {
+    private let styleSetHorizontalInnerStackView1: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 8
@@ -71,7 +71,7 @@ final class LatestStyleView: UIView {
         stackView.distribution = .fillEqually
         return stackView
     }()
-    private var styleSetHorizontalInnerStackView2: UIStackView = {
+    private let styleSetHorizontalInnerStackView2: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 8
@@ -79,7 +79,7 @@ final class LatestStyleView: UIView {
         stackView.distribution = .fillEqually
         return stackView
     }()
-    private var styleSetVerticalStackView: UIStackView = {
+    private let styleSetVerticalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 8

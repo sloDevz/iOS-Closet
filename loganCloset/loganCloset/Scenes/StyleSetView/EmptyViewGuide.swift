@@ -8,13 +8,13 @@
 import UIKit
 import SnapKit
 
-final class TextOnlyView: UIView {
+final class EmptyViewGuide: UIView {
     // MARK: - Constants
 
     // MARK: - Properties
 
     // MARK: - UI Components
-    let emptyTextLabel: UILabel = {
+    private let emptyTextLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.importedUIFont(name: .pretendardBold, fontSize: 20)
         label.textColor = UIColor(white: 0.7, alpha: 1)

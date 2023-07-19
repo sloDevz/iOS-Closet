@@ -32,7 +32,7 @@ final class StyleSetViewController: UIViewController {
         label.font = UIFont.importedUIFont(name: .pretendardExtraBold,fontSize: 18)
         return label
     }()
-    private let emptyStyleSetGuideView = TextOnlyView(text: "등록된 세트가 없습니다")
+    private let emptyStyleSetGuideView = EmptyViewGuide(text: "등록된 세트가 없습니다")
     private lazy var addStyleButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Add_StyleSet_icon"), for: .normal)

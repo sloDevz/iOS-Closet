@@ -16,7 +16,7 @@ final class StyleItemCell: UICollectionViewCell {
     var baseClotehs: Clothes?
 
     // MARK: - UI Components
-    let selectedSign: UIImageView = {
+    private let selectedSign: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "pawprint.fill")
         imageView.tintColor = UIColor.separator
@@ -25,7 +25,7 @@ final class StyleItemCell: UICollectionViewCell {
         return imageView
     }()
 
-    let contentContainer: UIView = {
+    private let contentContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 16
@@ -36,7 +36,7 @@ final class StyleItemCell: UICollectionViewCell {
         return view
     }()
 
-    let itemImage: UIImageView = {
+    private let itemImage: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true

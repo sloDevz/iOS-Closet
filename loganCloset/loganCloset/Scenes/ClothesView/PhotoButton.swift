@@ -14,7 +14,7 @@ final class PhotoButton: UIButton {
     // MARK: - Properties
 
     // MARK: - UI Components
-    private var cameraImage = UIImage(named: "Add_Clothes_image_icon") ?? UIImage(systemName: "camera")
+    private let cameraImage = UIImage(named: "Add_Clothes_image_icon") ?? UIImage(systemName: "camera")
     // MARK: - LifeCycle
     private override init(frame: CGRect) {
         super.init(frame: frame)

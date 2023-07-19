@@ -12,7 +12,7 @@ final class ClothesItemCell: UICollectionViewCell {
 
     static let reuseidentifier = String(describing: ClothesItemCell.self)
 
-    let contentContainer: UIView = {
+    private let contentContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 8
@@ -22,25 +22,25 @@ final class ClothesItemCell: UICollectionViewCell {
         view.layer.shadowRadius = 40
         return view
     }()
-    let cameraImage: UIImageView = {
+    private let cameraImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named: "Camera")
         return imageView
     }()
-    let addItemLabel: UILabel = {
+    private let addItemLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.importedUIFont(name: .pretendardMedium, fontSize: 14.0)
         label.text = "옷 추가"
         label.textColor = UIColor(white: 0.7, alpha: 1)
         return label
     }()
-    let itemImage: UIImageView = {
+    private let itemImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    let tagLabel: UILabel = {
+    private let tagLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.importedUIFont(name: .pretendardMedium, fontSize: 12.0)
         label.textColor = UIColor(white: 0.98, alpha: 1)

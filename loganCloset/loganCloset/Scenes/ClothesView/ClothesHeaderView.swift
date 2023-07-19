@@ -13,7 +13,7 @@ final class ClothesHeaderView: UICollectionReusableView {
     //MARK: - Properties
     static let reuseableIdentifier = String(describing: ClothesHeaderView.self)
 
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.importedUIFont(name: .pretendardBold, fontSize: 18)
 
@@ -30,13 +30,18 @@ final class ClothesHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    //MARK: - Methodes
+    //MARK: - Pirvate
     private func configureTitle() {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(20)
             make.top.equalToSuperview().inset(25)
         }
+    }
+
+    // MARK: - Public
+    func setHeaderTitle(_ title: String) {
+        titleLabel.text = title
     }
 
 }

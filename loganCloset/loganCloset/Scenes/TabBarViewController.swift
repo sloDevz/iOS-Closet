@@ -11,7 +11,7 @@ import SnapKit
 final class TabBarViewController: UITabBarController {
 
     //MARK: - Properties
-    private var clothesManager = ClothesManager()
+    private let clothesManager = ClothesManager()
 
     private let clothesIcon = UIImage(
         named: "MyClothes_icon")?

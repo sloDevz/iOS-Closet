@@ -42,8 +42,6 @@ final class ClothesViewController: UIViewController {
             name: .pretendardExtraBold,
             fontSize: Constant.titleLabelFontSize
         )
-        label.sizeToFit()
-
         return label
     }()
     private lazy var filterButton: UIButton = {
@@ -159,7 +157,8 @@ final class ClothesViewController: UIViewController {
             }
 
             let sections = ClothesCategory.allCases
-            supplementaryView.titleLabel.text = sections[indexPath.section + 1].rawValue
+            let headerTitle = sections[indexPath.section + 1].rawValue
+            supplementaryView.setHeaderTitle(headerTitle)
 
             return supplementaryView
         }
