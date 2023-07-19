@@ -11,6 +11,23 @@ import SnapKit
 final class LatestClothesView: UIView {
 
     // MARK: - Constants
+    enum Constants {
+        static let contentContainerRadius:CGFloat = 8
+        static let contentContainerShadowOffset:CGFloat = 1
+        static let contentContainerShadowOpacity:Float = 0.1
+        static let contentContainerShadowRadius:CGFloat = 40
+
+        static let describeFontSize: CGFloat = 16
+
+        static let currentItemLabelSkeletonText:String = "Latest item"
+        static let emptyViewGreetingText:String = "등록된 옷이 없습니다."
+
+        static let imageContainerheight:CGFloat = 208
+        static let itemImageHeightInset:CGFloat = 16
+        static let describeLabelHeight:CGFloat = 56
+        static let borderHeight:CGFloat = 1
+
+    }
 
     // MARK: - Properties
 
@@ -18,11 +35,12 @@ final class LatestClothesView: UIView {
     let contentContainer: UIView = {
         let view =  UIView()
         view.backgroundColor = .white
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = Constants.contentContainerRadius
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 1, height: 1)
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowRadius = 40
+        let offset = Constants.contentContainerShadowOffset
+        view.layer.shadowOffset = CGSize(width: offset, height: offset)
+        view.layer.shadowOpacity = Constants.contentContainerShadowOpacity
+        view.layer.shadowRadius = Constants.contentContainerShadowRadius
         return view
     }()
     let imageContainer: UIView = {
@@ -39,11 +57,11 @@ final class LatestClothesView: UIView {
         view.backgroundColor = UIColor(white: 0.90, alpha: 1)
         return view
     }()
-    let descriptLabel: UILabel = {
+    let describeLabel: UILabel = {
         let label = UILabel()
-        label.text = "My StyleSet"
+        label.text = Constants.currentItemLabelSkeletonText
         label.textColor = .black
-        label.font = UIFont.importedUIFont(name: .pretendardBold, fontSize: 16)
+        label.font = UIFont.importedUIFont(name: .pretendardBold, fontSize: Constants.describeFontSize)
         label.textAlignment = .center
         return label
     }()
@@ -65,13 +83,13 @@ final class LatestClothesView: UIView {
         
         if clothes.isEmpty {
             itemImage.image = UIImage(named: ImageConstants.noneImage)
-            descriptLabel.text = "등록된 옷이 없습니다."
+            describeLabel.text = Constants.emptyViewGreetingText
             return
         }
 
-        let latestClothes = clothes.first
+        let latestClothes = clothes.last
         itemImage.image = latestClothes?.itemImage ?? UIImage(named: ImageConstants.noneImage)
-        descriptLabel.text = latestClothes?.brandName ?? "Latest item"
+        describeLabel.text = latestClothes?.brandName ?? Constants.currentItemLabelSkeletonText
 
     }
     // MARK: - Private
@@ -82,7 +100,7 @@ final class LatestClothesView: UIView {
 
         contentContainer.addSubview(imageContainer)
         contentContainer.addSubview(borderLine)
-        contentContainer.addSubview(descriptLabel)
+        contentContainer.addSubview(describeLabel)
     }
 
     private func configureLayout() {
@@ -92,21 +110,21 @@ final class LatestClothesView: UIView {
         imageContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.width.equalToSuperview()
-            make.height.equalTo(208)
+            make.height.equalTo(Constants.imageContainerheight)
         }
         itemImage.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.height.equalToSuperview().inset(16)
+            make.height.equalToSuperview().inset(Constants.itemImageHeightInset)
         }
         borderLine.snp.makeConstraints { make in
-            make.top.equalTo(descriptLabel).inset(2)
+            make.top.equalTo(describeLabel)
             make.width.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(Constants.borderHeight)
         }
-        descriptLabel.snp.makeConstraints { make in
+        describeLabel.snp.makeConstraints { make in
             make.top.equalTo(imageContainer.snp.bottom)
             make.width.equalToSuperview()
-            make.height.equalTo(56)
+            make.height.equalTo(Constants.describeLabelHeight)
         }
     }
 

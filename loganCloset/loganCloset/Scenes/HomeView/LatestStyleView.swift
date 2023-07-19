@@ -11,53 +11,44 @@ import SnapKit
 final class LatestStyleView: UIView {
 
     // MARK: - Constants
+    enum Constants {
+        static let contentContainerRadius: CGFloat = 8
+        static let contentContainerShadowOffset: CGFloat = 1
+        static let contentContainerShadowOpacity: Float = 0.1
+        static let contentContainerShadowRadius: CGFloat = 40
 
+        static let styleSetLabelSkeletonText: String = "My StyleSet"
+    }
     // MARK: - Properties
 
     // MARK: - UI Components
     let contentContainer: UIView = {
         let view =  UIView()
         view.backgroundColor = .white
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = Constants.contentContainerRadius
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 1, height: 1)
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowRadius = 40
+        let offset = Constants.contentContainerShadowOffset
+        view.layer.shadowOffset = CGSize(width: offset, height: offset)
+        view.layer.shadowOpacity = Constants.contentContainerShadowOpacity
+        view.layer.shadowRadius = Constants.contentContainerShadowRadius
         return view
     }()
     let stackViewContainer: UIView = {
         let view =  UIView()
         return view
     }()
-    let itemImage1: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
-    let itemImage2: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
-    let itemImage3: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
-    let itemImage4: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
-    let itemImage5: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
-    let itemImage6: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        return image
+    private lazy var cellImages: [UIImageView] = {
+        var imageViews = [UIImageView]()
+        for _ in 0...5 {
+            let itemImage1: UIImageView = {
+                let image = UIImageView()
+                image.contentMode = .scaleAspectFit
+                return image
+            }()
+            imageViews.append(itemImage1)
+        }
+
+        return imageViews
     }()
     let borderLine: UIView = {
         let view =  UIView()
@@ -66,7 +57,7 @@ final class LatestStyleView: UIView {
     }()
     let descriptLabel: UILabel = {
         let label = UILabel()
-        label.text = "My StyleSet"
+        label.text = Constants.styleSetLabelSkeletonText
         label.textColor = .black
         label.font = UIFont.importedUIFont(name: .pretendardBold, fontSize: 16)
         label.textAlignment = .center
@@ -110,7 +101,6 @@ final class LatestStyleView: UIView {
 
     // MARK: - Public
     func configureItemImage(with styleSet: StyleSet?) {
-        let cellImages = [itemImage1, itemImage2, itemImage3, itemImage4, itemImage5, itemImage6]
         var styleSetImages = styleSet?.items.compactMap { $0.itemImage }
         styleSetImages?.reverse()
 
@@ -121,12 +111,15 @@ final class LatestStyleView: UIView {
     }
     // MARK: - Private
     private func configureHierachy() {
-        styleSetHorizontalInnerStackView1.addArrangedSubview(itemImage1)
-        styleSetHorizontalInnerStackView1.addArrangedSubview(itemImage2)
-        styleSetHorizontalInnerStackView1.addArrangedSubview(itemImage3)
-        styleSetHorizontalInnerStackView2.addArrangedSubview(itemImage4)
-        styleSetHorizontalInnerStackView2.addArrangedSubview(itemImage5)
-        styleSetHorizontalInnerStackView2.addArrangedSubview(itemImage6)
+        var count = 0
+        cellImages.forEach { imageView in
+            if count < 3 {
+                styleSetHorizontalInnerStackView1.addArrangedSubview(imageView)
+            } else {
+                styleSetHorizontalInnerStackView2.addArrangedSubview(imageView)
+            }
+            count += 1
+        }
 
         styleSetVerticalStackView.addArrangedSubview(styleSetHorizontalInnerStackView1)
         styleSetVerticalStackView.addArrangedSubview(styleSetHorizontalInnerStackView2)

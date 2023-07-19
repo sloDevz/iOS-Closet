@@ -84,14 +84,15 @@ final class HomeViewController: UIViewController {
     }
 
     private func setViewLayout() {
-        guard let navigationController else { return }
         homeScrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.top.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
         contentView.snp.makeConstraints { make in
-            make.leading.top.trailing.equalToSuperview()
-            make.width.equalToSuperview()
-            make.bottom.equalTo(latestClothesView).offset(30)
+            make.leading.top.trailing.bottom.equalTo(homeScrollView.contentLayoutGuide)
+            make.width.equalTo(homeScrollView.frameLayoutGuide)
+            make.height.equalTo(view.snp.height)
+
         }
         latestStyleSetView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()

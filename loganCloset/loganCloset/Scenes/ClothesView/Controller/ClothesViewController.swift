@@ -13,10 +13,12 @@ final class ClothesViewController: UIViewController {
     // MARK: - Constant
     private typealias DataSource = UICollectionViewDiffableDataSource<ClothesCategory, Clothes>
     private typealias SnapShot = NSDiffableDataSourceSnapshot<ClothesCategory, Clothes>
+
     private enum Constant {
         static let titleLabelText: String = "MY CLOTHES"
         static let titleLabelFontSize: CGFloat = 18
 
+        static let filterIconImageName: String = "Filter"
         static let headerViewElementKind: String = "section-header"
 
         static let squareItemSize: CGFloat = 1.0
@@ -46,7 +48,7 @@ final class ClothesViewController: UIViewController {
     }()
     private lazy var filterButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "Filter"), for: .normal)
+        button.setImage(UIImage(named: Constant.filterIconImageName), for: .normal)
         button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
 
         return button
@@ -167,12 +169,14 @@ final class ClothesViewController: UIViewController {
     private func setCollectionView() {
         clothesCollectionView.backgroundColor = .systemBackground
         clothesCollectionView.delegate = self
-        clothesCollectionView.register(ClothesItemCell.self,
-                                       forCellWithReuseIdentifier: ClothesItemCell.reuseidentifier
+        clothesCollectionView.register(
+            ClothesItemCell.self,
+            forCellWithReuseIdentifier: ClothesItemCell.reuseidentifier
         )
-        clothesCollectionView.register(ClothesHeaderView.self,
-                                       forSupplementaryViewOfKind: Constant.headerViewElementKind,
-                                       withReuseIdentifier: ClothesHeaderView.reuseableIdentifier
+        clothesCollectionView.register(
+            ClothesHeaderView.self,
+            forSupplementaryViewOfKind: Constant.headerViewElementKind,
+            withReuseIdentifier: ClothesHeaderView.reuseableIdentifier
         )
     }
 
