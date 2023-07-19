@@ -32,7 +32,7 @@ final class LatestClothesView: UIView {
     // MARK: - Properties
 
     // MARK: - UI Components
-    let contentContainer: UIView = {
+    private let contentContainer: UIView = {
         let view =  UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = Constants.contentContainerRadius
@@ -43,21 +43,21 @@ final class LatestClothesView: UIView {
         view.layer.shadowRadius = Constants.contentContainerShadowRadius
         return view
     }()
-    let imageContainer: UIView = {
+    private let imageContainer: UIView = {
         let view =  UIView()
         return view
     }()
-    let itemImage: UIImageView = {
+    private let itemImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         return image
     }()
-    let borderLine: UIView = {
+    private let borderLine: UIView = {
         let view =  UIView()
         view.backgroundColor = UIColor(white: 0.90, alpha: 1)
         return view
     }()
-    let describeLabel: UILabel = {
+    private let describeLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.currentItemLabelSkeletonText
         label.textColor = .black

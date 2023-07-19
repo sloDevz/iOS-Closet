@@ -11,15 +11,24 @@ import SnapKit
 final class HomeViewController: UIViewController {
 
     // MARK: - Constants
+    enum Constants {
+        static let titleLabelFontSize: CGFloat = 18
+        static let titleLabelText: String = "MY CLOSET"
+
+        static let latestStyleSetViewTopInset: CGFloat = 24
+        static let viewSideInset: CGFloat = 20
+        static let latestClothesViewTopInset: CGFloat = 16
+        static let latestViewHeight: CGFloat = 264
+    }
 
     // MARK: - Properties
     private var clothesManager: ClothesManager?
-    private var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "MY CLOSET"
+        label.text = Constants.titleLabelText
         label.font = UIFont.importedUIFont(
             name: .pretendardExtraBold,
-            fontSize: 18
+            fontSize: Constants.titleLabelFontSize
         )
         label.sizeToFit()
         return label
@@ -96,16 +105,16 @@ final class HomeViewController: UIViewController {
         }
         latestStyleSetView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().inset(24)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(264)
+            make.top.equalToSuperview().inset(Constants.latestStyleSetViewTopInset)
+            make.leading.trailing.equalToSuperview().inset(Constants.viewSideInset)
+            make.height.equalTo(Constants.latestViewHeight)
         }
 
         latestClothesView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(latestStyleSetView.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(264)
+            make.top.equalTo(latestStyleSetView.snp.bottom).offset(Constants.latestClothesViewTopInset)
+            make.leading.trailing.equalToSuperview().inset(Constants.viewSideInset)
+            make.height.equalTo(Constants.latestViewHeight)
         }
     }
 

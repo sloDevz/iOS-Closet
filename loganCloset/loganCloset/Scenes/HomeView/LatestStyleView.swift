@@ -22,7 +22,7 @@ final class LatestStyleView: UIView {
     // MARK: - Properties
 
     // MARK: - UI Components
-    let contentContainer: UIView = {
+    private let contentContainer: UIView = {
         let view =  UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = Constants.contentContainerRadius
@@ -33,11 +33,11 @@ final class LatestStyleView: UIView {
         view.layer.shadowRadius = Constants.contentContainerShadowRadius
         return view
     }()
-    let stackViewContainer: UIView = {
+    private let stackViewContainer: UIView = {
         let view =  UIView()
         return view
     }()
-    private lazy var cellImages: [UIImageView] = {
+    private let cellImages: [UIImageView] = {
         var imageViews = [UIImageView]()
         for _ in 0...5 {
             let itemImage1: UIImageView = {
@@ -50,12 +50,12 @@ final class LatestStyleView: UIView {
 
         return imageViews
     }()
-    let borderLine: UIView = {
+    private let borderLine: UIView = {
         let view =  UIView()
         view.backgroundColor = UIColor(white: 0.90, alpha: 1)
         return view
     }()
-    let descriptLabel: UILabel = {
+    private let descriptLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.styleSetLabelSkeletonText
         label.textColor = .black
@@ -63,7 +63,7 @@ final class LatestStyleView: UIView {
         label.textAlignment = .center
         return label
     }()
-    var styleSetHorizontalInnerStackView1: UIStackView = {
+    private var styleSetHorizontalInnerStackView1: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 8
@@ -71,7 +71,7 @@ final class LatestStyleView: UIView {
         stackView.distribution = .fillEqually
         return stackView
     }()
-    var styleSetHorizontalInnerStackView2: UIStackView = {
+    private var styleSetHorizontalInnerStackView2: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 8
@@ -79,7 +79,7 @@ final class LatestStyleView: UIView {
         stackView.distribution = .fillEqually
         return stackView
     }()
-    var styleSetVerticalStackView: UIStackView = {
+    private var styleSetVerticalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 8
