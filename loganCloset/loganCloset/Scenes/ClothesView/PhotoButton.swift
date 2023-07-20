@@ -10,11 +10,19 @@ import UIKit
 final class PhotoButton: UIButton {
 
     // MARK: - Constants
-
+    enum Constants {
+        static let cameraImageName: String = "Add_Clothes_image_icon"
+        static let buttonBorderWidth: CGFloat = 10
+        static let buttonCornerRadius: CGFloat = 16
+        static let buttonShadowOffset: CGFloat = 1
+        static let buttonShadowOpacity: Float = 0.1
+        static let buttonShadowRadius: CGFloat = 40
+    }
     // MARK: - Properties
 
     // MARK: - UI Components
-    private let cameraImage = UIImage(named: "Add_Clothes_image_icon") ?? UIImage(systemName: "camera")
+    private let cameraImage = UIImage(named: Constants.cameraImageName) ?? UIImage(systemName: "camera")
+
     // MARK: - LifeCycle
     private override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,14 +47,16 @@ final class PhotoButton: UIButton {
     // MARK: - Private
     private func setupAppearance() {
         self.backgroundColor = UIColor(white: 0.9, alpha: 1)
-        layer.borderWidth = 10
+        layer.borderWidth = Constants.buttonBorderWidth
         layer.borderColor = UIColor.separator.cgColor
-        layer.cornerRadius = 16
+        layer.cornerRadius = Constants.buttonCornerRadius
         layer.masksToBounds = true
         layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 1, height: 1)
-        layer.shadowOpacity = 0.1
-        layer.shadowRadius = 40
+        layer.shadowOffset = CGSize(
+            width: Constants.buttonShadowOffset,
+            height: Constants.buttonShadowOffset)
+        layer.shadowOpacity = Constants.buttonShadowOpacity
+        layer.shadowRadius = Constants.buttonShadowRadius
         self.imageView?.contentMode = .scaleAspectFill
     }
 
