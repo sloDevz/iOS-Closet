@@ -10,13 +10,22 @@ import SnapKit
 
 final class ClothesHeaderView: UICollectionReusableView {
 
+    // MARK: - Constants
+    enum Constants {
+        static let titleLabelFontSize: CGFloat = 18
+        static let titleLabelLeadingInset: CGFloat = 20
+        static let titleLabelTopInset: CGFloat = 25
+    }
+    
     //MARK: - Properties
     static let reuseableIdentifier = String(describing: ClothesHeaderView.self)
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.importedUIFont(name: .pretendardBold, fontSize: 18)
-
+        label.font = UIFont.importedUIFont(
+            name: .pretendardBold,
+            fontSize: Constants.titleLabelFontSize
+        )
         return label
     }()
 
@@ -34,8 +43,8 @@ final class ClothesHeaderView: UICollectionReusableView {
     private func configureTitle() {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(20)
-            make.top.equalToSuperview().inset(25)
+            make.leading.equalToSuperview().inset(Constants.titleLabelLeadingInset)
+            make.top.equalToSuperview().inset(Constants.titleLabelTopInset)
         }
     }
 
