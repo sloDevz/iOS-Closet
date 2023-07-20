@@ -23,9 +23,11 @@ final class LatestStyleView: UIView {
 
         static let borderLineHeight:CGFloat = 1
 
+        static let descriptionLabelFontSize: CGFloat = 16
         static let descriptionLabelHeight: CGFloat = 56
 
         static let styleSetLabelSkeletonText: String = "My StyleSet"
+        static let emptyViewGreetingText:String = "등록된 코디가 없습니다."
     }
     // MARK: - Properties
 
@@ -67,7 +69,9 @@ final class LatestStyleView: UIView {
         let label = UILabel()
         label.text = Constants.styleSetLabelSkeletonText
         label.textColor = .black
-        label.font = UIFont.importedUIFont(name: .pretendardBold, fontSize: 16)
+        label.font = UIFont.importedUIFont(
+            name: .pretendardBold,
+            fontSize: Constants.descriptionLabelFontSize)
         label.textAlignment = .center
         return label
     }()
@@ -115,7 +119,7 @@ final class LatestStyleView: UIView {
         cellImages.forEach { iageView in
             iageView.image = styleSetImages?.popLast() ?? UIImage(named: ImageConstants.noneImage)
         }
-        descriptionLabel.text = styleSet?.name ?? "등록된 코디가 없습니다."
+        descriptionLabel.text = styleSet?.name ?? Constants.emptyViewGreetingText
     }
     // MARK: - Private
     private func configureHierachy() {
