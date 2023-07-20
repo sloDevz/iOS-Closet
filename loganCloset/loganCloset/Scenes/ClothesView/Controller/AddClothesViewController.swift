@@ -230,7 +230,6 @@ final class AddClothesViewController: UIViewController {
         ) { _ in
             self.dismiss(animated: true)
         }
-
     }
 
     @objc

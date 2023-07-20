@@ -10,31 +10,46 @@ import SnapKit
 
 final class TabBarViewController: UITabBarController {
 
-    //MARK: - Properties
+    // MARK: - Constants
+    enum Constants {
+        static let myClothesIconImageName: String = "MyClothes_icon"
+        static let clothesSelectedIconImageName: String = "MyClothes_icon_selected"
+        static let homeIconImageName: String = "Home_icons"
+        static let homeSelectedIconImageName: String = "Home_icons_Selected"
+        static let styleIconImageName: String = "Styleset_icon"
+        static let styleSelectedIconImageName: String = "Styleset_icon_selected_OpenDoor"
+
+        static let clothesTabTitle = "옷"
+        static let homeTabTitle = "홈"
+        static let styleTabTitle = "스타일"
+
+        static let startingTabIndex: Int = 1
+    }
+    // MARK: - Properties
     private let clothesManager = ClothesManager()
 
     private let clothesIcon = UIImage(
-        named: "MyClothes_icon")?
+        named: Constants.myClothesIconImageName)?
         .withRenderingMode(.alwaysOriginal
         )
     private let clothesSelectedIcon = UIImage(
-        named: "MyClothes_icon_selected")?
+        named: Constants.clothesSelectedIconImageName)?
         .withRenderingMode(.alwaysOriginal
         )
     private let homeIcon = UIImage(
-        named: "Home_icons")?
+        named: Constants.homeIconImageName)?
         .withRenderingMode(.alwaysOriginal
         )
     private let homeSelectedIcon = UIImage(
-        named: "Home_icons_Selected")?
+        named: Constants.homeSelectedIconImageName)?
         .withRenderingMode(.alwaysOriginal
         )
     private let styleIcon = UIImage(
-        named: "Styleset_icon")?
+        named: Constants.styleIconImageName)?
         .withRenderingMode(.alwaysOriginal
         )
     private let styleSelectedIcon = UIImage(
-        named: "Styleset_icon_selected_OpenDoor")?
+        named: Constants.styleSelectedIconImageName)?
         .withRenderingMode(.alwaysOriginal
         )
 
@@ -62,22 +77,22 @@ final class TabBarViewController: UITabBarController {
         styleSetViewController.isNavigationBarHidden = false
 
         clothesViewController.tabBarItem = UITabBarItem(
-            title: "옷",
+            title: Constants.clothesTabTitle,
             image: clothesIcon,
             selectedImage: clothesSelectedIcon
         )
         homeViewController.tabBarItem = UITabBarItem(
-            title: "홈",
+            title: Constants.homeTabTitle,
             image: homeIcon,
             selectedImage: homeSelectedIcon
         )
         styleSetViewController.tabBarItem = UITabBarItem(
-            title: "스타일",
+            title: Constants.styleTabTitle,
             image: styleIcon,
             selectedImage: styleSelectedIcon
         )
         setViewControllers([clothesViewController, homeViewController, styleSetViewController], animated: false)
-        self.selectedIndex = 1
+        self.selectedIndex = Constants.startingTabIndex
     }
 
 }
