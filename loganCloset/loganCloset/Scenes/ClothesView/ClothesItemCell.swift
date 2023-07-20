@@ -72,7 +72,7 @@ final class ClothesItemCell: UICollectionViewCell {
             fontSize: Constant.tagLabelFontSize)
         label.textColor = UIColor(white: 0.98, alpha: 1)
         label.layer.shadowColor = UIColor.black.cgColor
-        label.layer.shadowOffset = CGSize(width: 1, height: 1)
+        label.layer.shadowOffset = CGSize(width:Constant.shadowOffset, height: Constant.shadowOffset)
         label.layer.shadowOpacity = Constant.tagShadowOpacity
         label.layer.shadowRadius = Constant.tagShadowRadius
         return label

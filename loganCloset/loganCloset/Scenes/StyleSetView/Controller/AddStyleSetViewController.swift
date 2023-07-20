@@ -18,7 +18,39 @@ final class AddStyleSetViewController: UIViewController {
         static let addHeadButtonTopInset: CGFloat = 100
         static let clothesItemsOffset: CGFloat = 10
         static let accessoryHStackBottomInset: CGFloat = 50
+        static let topItemAddButtonHStackViewSpacing: CGFloat = 15
+        static let accessoryAddButtonHStackViewSpacing: CGFloat = 10
+
+        static let navigationBarbuttonItemDoneTitle: String = "완료"
+
+        static let backgroundSelectingButtonIconName: String = "backgroundIcon"
+        static let backgroundSelectingButtonNilIconName: String = "person.and.background.dotted"
+
+        static let alertActionTitle:String = "확인"
+
+        static let selectBackgroundButtonLeadingInset: CGFloat = 20
+        static let selectBackgroundButtonWidthHeight: CGFloat = 50
+        static let buttonWidthHeightMulitiplyForClothes: CGFloat = 0.2
+        static let buttonWidthHeightMulitiplyForAccessory: CGFloat = 0.1
+        static let accessoryAddButtonHStackViewBottomInset: CGFloat = 25.0
+
+        static let alertTitleForSelectedItemsIsEmpty: String = "아이템이 없어요"
+        static let alertMessageForSelectedItemsIsEmpty: String = "StyleSet을 구성할 아이템들을 등록해주세요"
+        static let alertTitleForSettingStyleSetName: String = "Style Set 이름"
+        static let alertMessageForSettingStyleSetName: String = "Style Set에 어울리는 이름을 정해주세요"
+
+        static let placeholderForSetStyleName: String = "Style set 이름을 입력하세요"
+        static let alertConfirmButtonText: String = "등록"
+
+        static let completedRegestedStyleSetAlertTitle: String = "Style set 등록"
+        static let completedRegestedStyleSetAlertMessage: String = "새로운 Style set이 등록되었습니다."
+
+        static let inputErrorAlertTitle: String = "입력오류"
+        static let inputErrorAlertMessage: String = "잘못된 입력입니다. 올바른 이름을 입력하세요"
+
+        static let cancelActionAlertButtonTitle: String = "취소"
     }
+
     // MARK: - Properties
     var delegate: StyleSetDataProtocol?
     var clotehsManager: ClothesManager?
@@ -81,7 +113,7 @@ final class AddStyleSetViewController: UIViewController {
     private let topItemAddButtonHStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 15
+        stackView.spacing = Constant.topItemAddButtonHStackViewSpacing
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         return stackView
@@ -89,7 +121,7 @@ final class AddStyleSetViewController: UIViewController {
     private let accessoryAddButtonHStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 10
+        stackView.spacing = Constant.accessoryAddButtonHStackViewSpacing
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         return stackView
@@ -112,14 +144,16 @@ final class AddStyleSetViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    // MARK: - Public
 
     // MARK: - Private
     private func setupUI() {
         view.backgroundColor = .systemBackground
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneButtonTapped))
-
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: Constant.navigationBarbuttonItemDoneTitle,
+            style: .done,
+            target: self,
+            action: #selector(doneButtonTapped)
+        )
         clothesitemButtons.forEach { button in
             button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
         }
@@ -127,14 +161,14 @@ final class AddStyleSetViewController: UIViewController {
             button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
         }
 
-        selectBackgroundbutton.setImage(UIImage(named: "backgroundIcon") ?? UIImage(systemName: "person.and.background.dotted"), for: .normal)
+        selectBackgroundbutton.setImage(UIImage(named: Constant.backgroundSelectingButtonIconName) ?? UIImage(systemName: Constant.backgroundSelectingButtonNilIconName), for: .normal)
         selectBackgroundbutton.addTarget(self, action: #selector(selectBackgroundbuttonTapped), for: .touchUpInside)
     }
 
     private func presentMessageAlert(title: String?, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
-        let action = UIAlertAction(title: "확인", style: .default,handler: handler)
+        let action = UIAlertAction(title: Constant.alertActionTitle, style: .default,handler: handler)
 
         alertController.addAction(action)
 
@@ -164,8 +198,8 @@ final class AddStyleSetViewController: UIViewController {
 
         selectBackgroundbutton.snp.makeConstraints { make in
             make.bottom.equalTo(footwearAddButton.snp.bottom)
-            make.leading.equalTo(footwearAddButton.snp.trailing).offset(20)
-            make.width.height.equalTo(50)
+            make.leading.equalTo(footwearAddButton.snp.trailing).offset(Constant.selectBackgroundButtonLeadingInset)
+            make.width.height.equalTo(Constant.selectBackgroundButtonWidthHeight)
         }
 
         clothesButtonContainer.snp.makeConstraints { make in
@@ -173,33 +207,33 @@ final class AddStyleSetViewController: UIViewController {
         }
 
         headAddButton.snp.makeConstraints { make in
-            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(0.2)
+            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(Constant.buttonWidthHeightMulitiplyForClothes)
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
         }
         topAddButton.snp.makeConstraints { make in
-            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(0.2)
+            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(Constant.buttonWidthHeightMulitiplyForClothes)
         }
         topItemAddButtonHStackView.snp.makeConstraints { make in
             make.top.equalTo(headAddButton.snp.bottom).offset(Constant.clothesItemsOffset)
             make.centerX.equalToSuperview()
         }
         bottomAddButton.snp.makeConstraints { make in
-            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(0.2)
+            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(Constant.buttonWidthHeightMulitiplyForClothes)
             make.top.equalTo(topItemAddButtonHStackView.snp.bottom).offset(Constant.clothesItemsOffset)
             make.centerX.equalToSuperview()
         }
         footwearAddButton.snp.makeConstraints { make in
-            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(0.2)
+            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(Constant.buttonWidthHeightMulitiplyForClothes)
             make.top.equalTo(bottomAddButton.snp.bottom).offset(Constant.clothesItemsOffset)
             make.centerX.equalToSuperview()
         }
 
         accessoryAddButtons.first?.snp.makeConstraints({ make in
-            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(0.1)
+            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(Constant.buttonWidthHeightMulitiplyForAccessory)
         })
         accessoryAddButtonHStackView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(tabbarHeight + 25.0)
+            make.bottom.equalToSuperview().inset(tabbarHeight + Constant.accessoryAddButtonHStackViewBottomInset)
             make.centerX.equalToSuperview()
         }
     }
@@ -227,44 +261,59 @@ final class AddStyleSetViewController: UIViewController {
         let allSelectedItems = selectedClothesItems + selectedAccessoies
 
         if allSelectedItems.isEmpty {
-            presentMessageAlert(title: "아이템이 없어요", message: "StyleSet을 구성할 아이템들을 등록해주세요")
+            presentMessageAlert(
+                title: Constant.alertTitleForSelectedItemsIsEmpty,
+                message: Constant.alertMessageForSelectedItemsIsEmpty
+            )
             return
         }
 
         let alertController = UIAlertController(
-            title: "Style Set 이름",
-            message: "Style Set에 어울리는 이름을 정해주세요",
-            preferredStyle: .alert)
+            title: Constant.alertTitleForSettingStyleSetName,
+            message: Constant.alertMessageForSettingStyleSetName,
+            preferredStyle: .alert
+        )
 
         alertController.addTextField { textField in
-            textField.placeholder = "Style set 이름을 입력하세요"
+            textField.placeholder = Constant.placeholderForSetStyleName
         }
 
-        let doneAction = UIAlertAction(title: "등록", style: .default) { _ in
+        let doneAction = UIAlertAction(
+            title: Constant.alertConfirmButtonText,
+            style: .default) { _ in
             let inputedSetTitle = alertController.textFields?.first?.text
 
             if let styleSetTitle = inputedSetTitle?.trimmingCharacters(in: .whitespacesAndNewlines), !styleSetTitle.isEmpty {
-                var newStyleSet = StyleSet(name: styleSetTitle, items: allSelectedItems, genDate: Date())
+                var newStyleSet = StyleSet(
+                    name: styleSetTitle,
+                    items: allSelectedItems,
+                    genDate: Date()
+                )
                 newStyleSet.backgroundImage = self.selectedBackground
                 self.delegate?.updateStyleSetData(data: newStyleSet)
-                self.presentMessageAlert(title: "Style set 등록", message: "새로운 Style set이 등록되었습니다.") { _ in
+                self.presentMessageAlert(
+                    title: Constant.completedRegestedStyleSetAlertTitle,
+                    message: Constant.completedRegestedStyleSetAlertMessage) { _ in
                     self.navigationController?.popViewController(animated: true)
                 }
             }
 
-            self.presentMessageAlert(title: "입력오류", message: "잘못된 입력입니다. 올바른 이름을 입력하세요") { _ in
+                self.presentMessageAlert(
+                    title: Constant.inputErrorAlertTitle,
+                    message: Constant.inputErrorAlertMessage ) { _ in
                 self.present(alertController, animated: true)
             }
 
         }
 
-        let cancelAntion = UIAlertAction(title: "취소", style: .cancel) { _ in
+        let cancelAction = UIAlertAction(
+            title: Constant.cancelActionAlertButtonTitle,
+            style: .cancel) { _ in
             return
         }
 
         alertController.addAction(doneAction)
-        alertController.addAction(cancelAntion)
-
+        alertController.addAction(cancelAction)
 
         present(alertController, animated: true)
 
