@@ -13,11 +13,28 @@ final class StyleSetViewController: UIViewController {
     enum Section {
         case main
     }
-
+    // MARK: - Constants
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, StyleSet>
     private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, StyleSet>
 
-    //MARK: - Properties
+    enum Constants {
+        static let titleLabelText: String = "MY STYLE"
+        static let titleLabelFontSize: CGFloat = 18
+        static let emptyViewGreetingText:String = "등록된 코디가 없습니다."
+        static let addStyleButtonImageName: String = "Add_StyleSet_icon"
+
+        static let itemFractionalwidth: CGFloat = 0.5
+        static let itemFractionalHeight: CGFloat = 1
+        static let itemLeadingTrailingInset: CGFloat = 4
+
+        static let groupFractionalWidth: CGFloat = 1
+        static let groupFractionalWidthForHeight: CGFloat = 0.75
+
+        static let groupTopInset: CGFloat = 16
+        static let groupLeadingTrailingInset: CGFloat = 20
+    }
+
+    // MARK: - Properties
     private var clothesManager: ClothesManager?
     private lazy var dataSource: DataSource = configureDataSource()
     private lazy var myStyleCollectionView: UICollectionView = {
@@ -25,22 +42,27 @@ final class StyleSetViewController: UIViewController {
         return collectionView
     }()
 
-    //MARK: - UI Components
+    // MARK: - UI Components
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "MY STYLE"
-        label.font = UIFont.importedUIFont(name: .pretendardExtraBold,fontSize: 18)
+        label.text = Constants.titleLabelText
+        label.font = UIFont.importedUIFont(
+            name: .pretendardExtraBold,
+            fontSize: Constants.titleLabelFontSize
+        )
         return label
     }()
-    private let emptyStyleSetGuideView = EmptyViewGuide(text: "등록된 세트가 없습니다")
+    private let emptyStyleSetGuideView = EmptyViewGuide(text: Constants.emptyViewGreetingText)
     private lazy var addStyleButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "Add_StyleSet_icon"), for: .normal)
+        button.setImage(UIImage(
+            named: Constants.addStyleButtonImageName),for: .normal
+        )
         button.addTarget(self, action: #selector(addStyleButtonTapped), for: .touchUpInside)
         return button
     }()
 
-    //MARK: - LifeCycle
+    // MARK: - LifeCycle
     init(clothesManager: ClothesManager? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.clothesManager = clothesManager
@@ -59,7 +81,7 @@ final class StyleSetViewController: UIViewController {
         applySnapShot(animation: false)
     }
 
-    //MARK: - Methodes
+    // MARK: - Methodes
     private func setViewAppearance() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -94,14 +116,32 @@ final class StyleSetViewController: UIViewController {
 
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { section, layoutEnvironment in
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
+            let itemSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(Constants.itemFractionalwidth),
+                heightDimension: .fractionalHeight(Constants.itemFractionalHeight)
+            )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = .init(top: 0, leading: 4, bottom: 0, trailing: 4)
+            item.contentInsets = .init(
+                top: .zero,
+                leading: Constants.itemLeadingTrailingInset,
+                bottom: .zero,
+                trailing: Constants.itemLeadingTrailingInset
+            )
 
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.75))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item, item])
-            group.contentInsets = .init(top: 16, leading: 20, bottom: 0, trailing: 20)
-
+            let groupSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(Constants.groupFractionalWidth),
+                heightDimension: .fractionalWidth(Constants.groupFractionalWidthForHeight)
+            )
+            let group = NSCollectionLayoutGroup.horizontal(
+                layoutSize: groupSize,
+                subitems: [item, item]
+            )
+            group.contentInsets = .init(
+                top: Constants.groupTopInset,
+                leading: Constants.groupLeadingTrailingInset,
+                bottom: .zero,
+                trailing: Constants.groupLeadingTrailingInset
+            )
             let section = NSCollectionLayoutSection(group: group)
             return section
         }
