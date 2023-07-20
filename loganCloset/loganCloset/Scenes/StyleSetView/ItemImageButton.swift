@@ -10,6 +10,18 @@ import UIKit
 final class ItemImageButton: UIButton {
 
     // MARK: - Constants
+    enum Constants {
+        static let hangerImageName: String = "hanger_icon"
+        static let hangerImageNilName: String = "tshirt"
+        static let accessoryImageName: String = "accessory_Icon"
+        static let accessoryImageNilName: String = "eyeglasses"
+
+        static let ItemImageButtonBorderWidth: CGFloat = 3
+        static let ItemImageButtonCornerRadius: CGFloat = 16
+        static let ItemImageButtonShadowOffset: CGFloat = 1
+        static let ItemImageButtonShadowOpacity: Float = 0.1
+        static let ItemImageButtonShadowRadius: CGFloat = 40
+    }
 
     // MARK: - Properties
     var category: ClothesCategory? = nil
@@ -51,14 +63,15 @@ final class ItemImageButton: UIButton {
     // MARK: - Private
     private func setupAppearance() {
         self.backgroundColor = UIColor(white: 0.9, alpha: 1)
-        layer.borderWidth = 3
+        layer.borderWidth = Constants.ItemImageButtonBorderWidth
         layer.borderColor = UIColor.separator.cgColor
-        layer.cornerRadius = 16
+        layer.cornerRadius = Constants.ItemImageButtonCornerRadius
         layer.masksToBounds = true
         layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 1, height: 1)
-        layer.shadowOpacity = 0.1
-        layer.shadowRadius = 40
+        let offset = Constants.ItemImageButtonShadowOffset
+        layer.shadowOffset = CGSize(width: offset, height: offset)
+        layer.shadowOpacity = Constants.ItemImageButtonShadowOpacity
+        layer.shadowRadius = Constants.ItemImageButtonShadowRadius
         self.imageView?.contentMode = .scaleAspectFill
         self.contentMode = .scaleAspectFit
     }

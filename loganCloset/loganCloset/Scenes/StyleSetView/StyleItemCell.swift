@@ -10,6 +10,15 @@ import SnapKit
 
 final class StyleItemCell: UICollectionViewCell {
     // MARK: - Constants
+    enum Constants {
+        static let selectedSignImageName: String = "pawprint.fill"
+        static let contentContainerCornerRadius: CGFloat = 16
+        static let contentContainerShadowOffset: CGFloat = 1
+        static let contentContainerShadowOpacity: Float = 0.1
+        static let contentContainerShadowRadius: CGFloat = 40
+
+        static let selectedSignEdgeInset: CGFloat = 20
+    }
 
     // MARK: - Properties
     static let reuseidentifier = String(describing: StyleItemCell.self)
@@ -18,7 +27,7 @@ final class StyleItemCell: UICollectionViewCell {
     // MARK: - UI Components
     private let selectedSign: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "pawprint.fill")
+        imageView.image = UIImage(systemName: Constants.selectedSignImageName)
         imageView.tintColor = UIColor.separator
         imageView.contentMode = .scaleAspectFit
         imageView.isHidden = true
@@ -28,17 +37,18 @@ final class StyleItemCell: UICollectionViewCell {
     private let contentContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .white
-        view.layer.cornerRadius = 16
+        view.layer.cornerRadius = Constants.contentContainerCornerRadius
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 1, height: 1)
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowRadius = 40
+        let offset = Constants.contentContainerShadowOffset
+        view.layer.shadowOffset = CGSize(width: offset, height: offset)
+        view.layer.shadowOpacity = Constants.contentContainerShadowOpacity
+        view.layer.shadowRadius = Constants.contentContainerShadowRadius
         return view
     }()
 
     private let itemImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = 16
+        imageView.layer.cornerRadius = Constants.contentContainerCornerRadius
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -76,7 +86,7 @@ final class StyleItemCell: UICollectionViewCell {
     private func configureLayout() {
         selectedSign.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.edges.equalToSuperview().inset(20)
+            make.edges.equalToSuperview().inset(Constants.selectedSignEdgeInset)
         }
         contentContainer.snp.makeConstraints { make in
             make.edges.equalToSuperview()
