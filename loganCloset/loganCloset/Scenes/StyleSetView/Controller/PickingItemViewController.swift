@@ -18,6 +18,24 @@ final class PickingItemViewController: UIViewController {
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, Clothes>
     private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, Clothes>
 
+    enum Constants {
+        static let emptyViewGreetingText:String = "아이템이 없습니다. \n아이템을 등록하세요"
+        static let closeButtonTitle: String = "닫기"
+        static let doneButtonTitle: String = "선택"
+
+        static let itemWidthDimensionWidth: CGFloat = 1/3
+        static let itemHeightDimensionHeight: CGFloat = 1
+        static let itemContentInset: CGFloat = 8
+
+        static let groupWidthDimensionWidth: CGFloat = 1
+        static let groupHeightDimensionWidth: CGFloat = 1/3
+
+        static let SelectStateCellCornerRadius: CGFloat = 16
+        static let selectedCellBorderWidth: CGFloat = 5
+        static let selectionStateTransformScaleXY: CGFloat = 1.2
+        static let selectionStateAnimateDuration: CGFloat = 0.1
+    }
+
     // MARK: - Properties
     var delegate: ClothesDataProtocol?
     var category: ClothesCategory?
@@ -27,15 +45,12 @@ final class PickingItemViewController: UIViewController {
     var selectedCellIndexPath: IndexPath?
 
     // MARK: - UI Components
-    private let emptyGuideView = EmptyViewGuide(text: "아이템이 없습니다. \n아이템을 등록하세요")
-
+    private let emptyGuideView = EmptyViewGuide(text: Constants.emptyViewGreetingText)
     private let navigationBar = UINavigationBar()
-
-
 
     private lazy var closeButton: UIBarButtonItem = {
        let button  = UIBarButtonItem()
-        button.title = "닫기"
+        button.title = Constants.closeButtonTitle
         button.style = .plain
         button.target = self
         button.action = #selector(closeButtonTapped)
@@ -43,7 +58,7 @@ final class PickingItemViewController: UIViewController {
     }()
     private lazy var doneButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
-        button.title = "선택"
+        button.title = Constants.doneButtonTitle
         button.style = .done
         button.target = self
         button.action = #selector(doneButtonTapped)
@@ -63,8 +78,6 @@ final class PickingItemViewController: UIViewController {
         setupUILayout()
         setCollectionView()
         applySnapShot(animation: false)
-
-
     }
 
     init(category: ClothesCategory? = nil, clothesManager: ClothesManager) {
@@ -76,7 +89,6 @@ final class PickingItemViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    // MARK: - Public
 
     // MARK: - Private
     private func setNaviBar() {
@@ -122,17 +134,17 @@ final class PickingItemViewController: UIViewController {
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { section, layoutEnvironment in
             let itemSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1/3),
-                heightDimension: .fractionalHeight(1.0)
+                widthDimension: .fractionalWidth(Constants.itemWidthDimensionWidth),
+                heightDimension: .fractionalHeight(Constants.itemHeightDimensionHeight)
             )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            let inset = CGFloat(8)
+            let inset = CGFloat(Constants.itemContentInset)
             item.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
 
             let groupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalWidth(1/3))
-
+                widthDimension: .fractionalWidth(Constants.groupWidthDimensionWidth),
+                heightDimension: .fractionalWidth(Constants.groupHeightDimensionWidth)
+            )
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item, item, item])
 
             let section = NSCollectionLayoutSection(group: group)
@@ -192,28 +204,26 @@ extension PickingItemViewController: UICollectionViewDelegate {
         if let selectedCellIndexPath,
            let preSelectedCell = collectionView.cellForItem(at: selectedCellIndexPath) as? StyleItemCell {
             preSelectedCell.toggleSelectiedSign()
-            preSelectedCell.layer.cornerRadius = 16
-            preSelectedCell.layer.borderWidth = 0
+            preSelectedCell.layer.cornerRadius = Constants.SelectStateCellCornerRadius
+            preSelectedCell.layer.borderWidth = .zero
             preSelectedCell.layer.borderColor = UIColor.clear.cgColor
-            UIView.animate(withDuration: 0.1) {
+            UIView.animate(withDuration: Constants.selectionStateAnimateDuration) {
                 preSelectedCell.transform = CGAffineTransform.identity
-
             }
         }
-
         if selectedCellIndexPath == indexPath {
             selectedItem = nil
             selectedCellIndexPath = nil
             return
         }
-
         if let selectedCell = collectionView.cellForItem(at: indexPath) as? StyleItemCell {
             selectedCell.toggleSelectiedSign()
-            selectedCell.layer.cornerRadius = 16
-            selectedCell.layer.borderWidth = 5
+            selectedCell.layer.cornerRadius = Constants.SelectStateCellCornerRadius
+            selectedCell.layer.borderWidth = Constants.selectedCellBorderWidth
             selectedCell.layer.borderColor = UIColor.separator.cgColor
-            UIView.animate(withDuration: 0.1) {
-                selectedCell.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            UIView.animate(withDuration: Constants.selectionStateAnimateDuration) {
+                let scaleXY = Constants.selectionStateTransformScaleXY
+                selectedCell.transform = CGAffineTransform(scaleX: scaleXY, y: scaleXY)
             }
             selectedCellIndexPath = indexPath
         }
