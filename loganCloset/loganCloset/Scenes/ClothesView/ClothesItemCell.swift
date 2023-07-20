@@ -10,28 +10,53 @@ import SnapKit
 
 final class ClothesItemCell: UICollectionViewCell {
 
+    // MARK: - Constants
     static let reuseidentifier = String(describing: ClothesItemCell.self)
 
+    enum Constant {
+        static let contentContainerCornerRadius: CGFloat = 8
+        static let shadowOffset: CGFloat = 1
+        static let shadowOpacity: Float = 0.1
+        static let shadowRadius: CGFloat = 40
+
+        static let cameraImageName: String = "Camera"
+        static let addIconLabelFontSize: CGFloat = 14
+        static let addIconLabelTitle: String = "옷 추가"
+
+        static let tagLabelFontSize: CGFloat = 11
+        static let tagShadowOpacity: Float = 0.5
+        static let tagShadowRadius: CGFloat = 2
+
+        static let itemIamgeEdgeInset: CGFloat = 16
+        static let tagLabelLeadingTrailingBottomInset: CGFloat = 15
+    }
+
+    // MARK: - Properties
+
+    // MARK: - UI Components
     private let contentContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .white
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = Constant.contentContainerCornerRadius
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 1, height: 1)
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowRadius = 40
+        let offset = Constant.shadowOffset
+        view.layer.shadowOffset = CGSize(width: offset, height: offset)
+        view.layer.shadowOpacity = Constant.shadowOpacity
+        view.layer.shadowRadius = Constant.shadowRadius
         return view
     }()
     private let cameraImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "Camera")
+        imageView.image = UIImage(named: Constant.cameraImageName)
         return imageView
     }()
     private let addItemLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.importedUIFont(name: .pretendardMedium, fontSize: 14.0)
-        label.text = "옷 추가"
+        label.font = UIFont.importedUIFont(
+            name: .pretendardMedium,
+            fontSize: Constant.addIconLabelFontSize)
+        label.text = Constant.addIconLabelTitle
         label.textColor = UIColor(white: 0.7, alpha: 1)
         return label
     }()
@@ -42,15 +67,18 @@ final class ClothesItemCell: UICollectionViewCell {
     }()
     private let tagLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.importedUIFont(name: .pretendardMedium, fontSize: 12.0)
+        label.font = UIFont.importedUIFont(
+            name: .pretendardMedium,
+            fontSize: Constant.tagLabelFontSize)
         label.textColor = UIColor(white: 0.98, alpha: 1)
         label.layer.shadowColor = UIColor.black.cgColor
         label.layer.shadowOffset = CGSize(width: 1, height: 1)
-        label.layer.shadowOpacity = 0.5
-        label.layer.shadowRadius = 2
+        label.layer.shadowOpacity = Constant.tagShadowOpacity
+        label.layer.shadowRadius = Constant.tagShadowRadius
         return label
     }()
-
+    
+    // MARK: - LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureHierachy()
@@ -61,6 +89,16 @@ final class ClothesItemCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Public
+    func configureContent(with item: Clothes) {
+        setAppearanceFor(contenteMode: false)
+        guard item.clothesCategory != .none else { return }
+        setAppearanceFor(contenteMode: true)
+        itemImage.image = item.itemImage
+        tagLabel.text = "#tag here"//item.tags?.joined()
+    }
+
+    // MARK: - Private
     private func configureHierachy() {
         contentView.addSubview(contentContainer)
         contentContainer.addSubview(cameraImage)
@@ -82,10 +120,10 @@ final class ClothesItemCell: UICollectionViewCell {
             make.top.equalTo(contentContainer.snp.centerY).offset(contentContainer.frame.height/20)
         }
         itemImage.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(16)
+            make.edges.equalToSuperview().inset(Constant.itemIamgeEdgeInset)
         }
         tagLabel.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview().inset(15)
+            make.leading.trailing.bottom.equalToSuperview().inset(Constant.tagLabelLeadingTrailingBottomInset)
         }
     }
 
@@ -94,14 +132,6 @@ final class ClothesItemCell: UICollectionViewCell {
         addItemLabel.isHidden = contenteMode
         itemImage.isHidden = !contenteMode
         tagLabel.isHidden = !contenteMode
-    }
-
-    func configureContent(with item: Clothes) {
-        setAppearanceFor(contenteMode: false)
-        guard item.clothesCategory != .none else { return }
-        setAppearanceFor(contenteMode: true)
-        itemImage.image = item.itemImage
-        tagLabel.text = "#Tag"//item.tags?.joined()
     }
 
 }
