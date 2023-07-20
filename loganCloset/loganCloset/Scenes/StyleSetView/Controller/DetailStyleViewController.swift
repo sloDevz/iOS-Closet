@@ -14,6 +14,21 @@ final class DetailStyleViewController: UIViewController {
     private typealias DataSource = UICollectionViewDiffableDataSource<StyleSetCategory, Clothes>
     private typealias SnapShot = NSDiffableDataSourceSnapshot<StyleSetCategory, Clothes>
 
+    enum Constants {
+        static let itemFractionalWidthHeight: CGFloat = 1
+        static let contentInsetForClothes: CGFloat = 2
+
+        static let groupWidthSizeForWidthHeightDimension: CGFloat = 1/3
+        static let sectionEdgeInset: CGFloat = 2
+
+        static let itemWidthDimensionForAccessory: CGFloat = 1/4
+        static let itemHeightDimensionForAccessory: CGFloat = 1
+        static let contentInsetForAccessory: CGFloat = 8
+
+        static let groupWidthDimension: CGFloat = 1
+        static let groupHeightDimension: CGFloat = 1/4
+    }
+
     // MARK: - Properties
     private var styleSet: StyleSet?
     private var backgroundImage: UIImage?
@@ -78,42 +93,49 @@ final class DetailStyleViewController: UIViewController {
     }
 
     private func generateLayoutForClothes() -> NSCollectionLayoutSection {
-        let inset = CGFloat(2)
+        let inset = Constants.contentInsetForClothes
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
+            widthDimension: .fractionalWidth(Constants.itemFractionalWidthHeight),
+            heightDimension: .fractionalHeight(Constants.itemFractionalWidthHeight)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
-
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1/3),
-            heightDimension: .fractionalWidth(1/3)
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: inset,
+            leading: inset,
+            bottom: inset,
+            trailing: inset
         )
-
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(Constants.groupWidthSizeForWidthHeightDimension),
+            heightDimension: .fractionalWidth(Constants.groupWidthSizeForWidthHeightDimension)
+        )
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
             subitems: [item]
         )
-
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: inset,
+            leading: inset,
+            bottom: inset,
+            trailing: inset
+        )
         section.orthogonalScrollingBehavior = .groupPagingCentered
         return section
     }
 
     private func generateLayoutForAccessory() -> NSCollectionLayoutSection {
-        let inset = CGFloat(8)
+        let inset = Constants.contentInsetForAccessory
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1/4),
-            heightDimension: .fractionalHeight(1.0)
+            widthDimension: .fractionalWidth(Constants.itemWidthDimensionForAccessory),
+            heightDimension: .fractionalHeight(Constants.itemHeightDimensionForAccessory)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
 
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalWidth(1/4)
+            widthDimension: .fractionalWidth(Constants.groupWidthDimension),
+            heightDimension: .fractionalWidth(Constants.groupHeightDimension)
         )
 
         let group = NSCollectionLayoutGroup.horizontal(
@@ -167,7 +189,6 @@ final class DetailStyleViewController: UIViewController {
             }
             snapShot.appendSections([section])
             snapShot.appendItems(categorizedItem)
-
         }
         dataSource.apply(snapShot)
     }
@@ -192,7 +213,6 @@ final class DetailStyleViewController: UIViewController {
             }
             snapShot.appendSections([section])
             snapShot.appendItems(categorizedItem)
-
         }
         dataSource.apply(snapShot)
     }
