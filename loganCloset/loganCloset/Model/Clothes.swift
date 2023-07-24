@@ -57,43 +57,4 @@ struct Clothes: Hashable {
         self.meterial = meterial
     }
 
-
-}
-
-extension Clothes: Sequence {
-
-    typealias Iterator = AnyIterator<Any>
-
-    func makeIterator() -> AnyIterator<Any> {
-
-        var index = 0
-
-        return AnyIterator {
-            defer { index += 1 }
-
-            switch index {
-            case 0:
-                return itemID
-            case 1:
-                return createdDate
-            case 2:
-                return itemImage
-            case 3:
-                return clothesCategory
-            case 4:
-                return season
-            case 5:
-                return Optional(mainColor)
-            case 6:
-                return Optional(tags)
-            case 7:
-                return Optional(brandName)
-            case 8:
-                return Optional(meterial)
-            default:
-                return nil
-            }
-        }
-    }
-
 }
