@@ -55,7 +55,6 @@ final class AddStyleSetViewController: UIViewController {
     var delegate: StyleSetDataProtocol?
     var clotehsManager: ClothesManager?
     var currentSelectedItemButton: ItemImageButton?
-    var generatedStyleSet: [Clothes]?
     var selectedBackground: UIImage?
     private lazy var photoPicker: PHPickerViewController = {
         let picker = PHPickerViewController(configuration: createPHPickerConfiguration())
@@ -135,7 +134,7 @@ final class AddStyleSetViewController: UIViewController {
         configureLayoutConstraint()
     }
 
-    init(clotheManager: ClothesManager){
+    init(clotheManager: ClothesManager) {
         super.init(nibName: nil, bundle: nil)
         clotehsManager = clotheManager
     }

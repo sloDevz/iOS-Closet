@@ -60,7 +60,7 @@ final class ClothesManager {
         Clothes(itemImage: UIImage(named: "Pants3")!, clothesCategory: .bottom, season: .all, mainColor: .red, tags: nil, brandName: nil, meterial: nil),
         Clothes(itemImage: UIImage(named: "Shirts1")!, clothesCategory: .top, season: .all, mainColor: .white, tags: nil, brandName: nil, meterial: nil),
         Clothes(itemImage: UIImage(named: "Shirts2")!, clothesCategory: .top, season: .all, mainColor: .blue, tags: nil, brandName: nil, meterial: nil),
-        Clothes(itemImage:  UIImage(named: "shoes")!, clothesCategory: .footWaer, season: .all, mainColor: .white, tags: nil, brandName: nil, meterial: nil),
+        Clothes(itemImage: UIImage(named: "shoes")!, clothesCategory: .footWaer, season: .all, mainColor: .white, tags: nil, brandName: nil, meterial: nil),
         Clothes(itemImage: UIImage(named: "ShortPant")!, clothesCategory: .bottom, season: .all, mainColor: .gray, tags: nil, brandName: nil, meterial: nil),
         Clothes(itemImage: UIImage(named: "Socks")!, clothesCategory: .footWaer, season: .all, mainColor: .white, tags: nil, brandName: nil, meterial: nil),
         Clothes(itemImage: UIImage(named: "TShirts1")!, clothesCategory: .top, season: .all, mainColor: .white, tags: nil, brandName: nil, meterial: nil),
