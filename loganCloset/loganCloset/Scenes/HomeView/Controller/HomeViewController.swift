@@ -55,9 +55,13 @@ final class HomeViewController: UIViewController {
         setViewAppearance()
         setNavigationBarItems()
 
-        configureView()
+        updateLatestViews()
         configureHierachy()
         setViewLayout()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        updateLatestViews()
     }
 
     // MARK: - Public
@@ -84,8 +88,8 @@ final class HomeViewController: UIViewController {
         contentView.addSubview(latestClothesView)
     }
 
-    private func configureView() {
-        let latestStyle = clothesManager?.fetchStyleSets().first
+    private func updateLatestViews() {
+        let latestStyle = clothesManager?.fetchStyleSets().last
         latestStyleSetView.configureItemImage(with: latestStyle)
 
         let myClothes = clothesManager?.fetchCloset()
