@@ -119,13 +119,25 @@ final class ClothesViewController: UIViewController {
                 elementKind: Constant.headerViewElementKind,
                 alignment: .top
             )
+
+            let sectionIndex = section
+
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = .init(
-                top: Constant.sectionTopContentInset,
-                leading: Constant.sectionLeadingContentInset,
-                bottom: .zero,
-                trailing: .zero
-            )
+            if sectionIndex == 5 {
+                section.contentInsets = .init(
+                    top: Constant.sectionTopContentInset,
+                    leading: Constant.sectionLeadingContentInset,
+                    bottom: 20,
+                    trailing: .zero
+                )
+            } else {
+                section.contentInsets = .init(
+                    top: Constant.sectionTopContentInset,
+                    leading: Constant.sectionLeadingContentInset,
+                    bottom: .zero,
+                    trailing: .zero
+                )
+            }
             section.boundarySupplementaryItems = [sectionHeader]
             section.orthogonalScrollingBehavior = .groupPagingCentered
             section.interGroupSpacing = Constant.sectionGroupSpacing
