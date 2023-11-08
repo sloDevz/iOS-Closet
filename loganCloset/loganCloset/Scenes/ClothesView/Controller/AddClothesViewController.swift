@@ -211,6 +211,7 @@ final class AddClothesViewController: UIViewController {
     }
     @objc
     private func confirmButtonTapped() {
+        print(#function)
         setSeasonBySegment()
         setCategoryBySegment()
 
@@ -285,6 +286,7 @@ final class AddClothesViewController: UIViewController {
 
     private func configureHierarchy() {
         view.addSubview(addClothesScrollView)
+        view.addSubview(confirmButton)
         addClothesScrollView.addSubview(contentView)
         contentView.addSubview(closeButton)
         contentView.addSubview(seperatorView)
@@ -295,13 +297,19 @@ final class AddClothesViewController: UIViewController {
         contentView.addSubview(brandNameInputTextField)
         contentView.addSubview(colorPickerTextField)
         contentView.addSubview(materialPickerTextField)
-        contentView.addSubview(confirmButton)
         contentView.addSubview(keyboardSapceView)
     }
 
     private func configureLayoutConstraint() {
+        confirmButton.snp.makeConstraints { make in
+            make.height.equalTo(Constants.confirmButtonHeight)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview().inset(Constants.viewSideInset)
+        }
         addClothesScrollView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide )
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(confirmButton.snp.top)
         }
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -357,14 +365,9 @@ final class AddClothesViewController: UIViewController {
             make.top.equalTo(colorPickerTextField.snp.bottom).offset(Constants.offsetOfEachUIComponents)
             make.leading.trailing.equalToSuperview().inset(Constants.viewSideInset)
         }
-        confirmButton.snp.makeConstraints { make in
-            make.top.equalTo(materialPickerTextField.snp.bottom).offset(Constants.offsetOfEachUIComponents)
-            make.leading.trailing.equalToSuperview().inset(Constants.viewSideInset)
-            make.height.equalTo(Constants.confirmButtonHeight)
-        }
         keyboardSapceView.snp.makeConstraints { make in
-            make.height.equalTo(0)
-            make.top.equalTo(confirmButton.snp.bottom)
+            make.height.equalTo(Constants.offsetOfEachUIComponents)
+            make.top.equalTo(materialPickerTextField.snp.bottom)
             make.leading.bottom.trailing.equalToSuperview()
 
         }
@@ -416,7 +419,7 @@ extension AddClothesViewController {
     private func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keybaordRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keybaordRectangle.height
+            let keyboardHeight = keybaordRectangle.height - Constants.confirmButtonHeight
 
             keyboardSapceView.snp.updateConstraints { make in
                 make.height.equalTo(keyboardHeight)
@@ -428,7 +431,7 @@ extension AddClothesViewController {
     @objc
     private func keyboardWillHide() {
         keyboardSapceView.snp.updateConstraints { make in
-            make.height.equalTo(0)
+            make.height.equalTo(Constants.offsetOfEachUIComponents)
         }
     }
 
