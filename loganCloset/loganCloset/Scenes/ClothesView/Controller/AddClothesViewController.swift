@@ -211,7 +211,6 @@ final class AddClothesViewController: UIViewController {
     }
     @objc
     private func confirmButtonTapped() {
-        print(#function)
         setSeasonBySegment()
         setCategoryBySegment()
 
@@ -285,11 +284,11 @@ final class AddClothesViewController: UIViewController {
     }
 
     private func configureHierarchy() {
+        view.addSubview(closeButton)
+        view.addSubview(seperatorView)
         view.addSubview(addClothesScrollView)
         view.addSubview(confirmButton)
         addClothesScrollView.addSubview(contentView)
-        contentView.addSubview(closeButton)
-        contentView.addSubview(seperatorView)
         contentView.addSubview(photoButton)
         contentView.addSubview(categorySelectSegment)
         contentView.addSubview(seasonSelectSegment)
@@ -301,34 +300,35 @@ final class AddClothesViewController: UIViewController {
     }
 
     private func configureLayoutConstraint() {
-        confirmButton.snp.makeConstraints { make in
-            make.height.equalTo(Constants.confirmButtonHeight)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.equalToSuperview().inset(Constants.viewSideInset)
+        closeButton.snp.makeConstraints { make in
+            make.height.equalTo(Constants.closeButtonHeight)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.equalToSuperview().inset(Constants.viewSideInset)
+        }
+        seperatorView.snp.makeConstraints { make in
+            make.height.equalTo(Constants.seperatorHeight)
+            make.width.equalToSuperview()
+            make.top.equalTo(closeButton.snp.bottom).offset(Constants.seperatorViewOffset)
+            make.centerX.equalToSuperview()
         }
         addClothesScrollView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide )
+            make.top.equalTo(seperatorView.snp.bottom )
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(confirmButton.snp.top)
+        }
+        confirmButton.snp.makeConstraints { make in
+            make.height.equalTo(Constants.confirmButtonHeight)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constants.offsetOfEachUIComponents)
+            make.leading.trailing.equalToSuperview().inset(Constants.viewSideInset)
         }
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
             make.bottom.equalTo(keyboardSapceView)
         }
-        closeButton.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview().inset(Constants.viewSideInset)
-            make.height.equalTo(Constants.closeButtonHeight)
-        }
-        seperatorView.snp.makeConstraints { make in
-            make.height.equalTo(Constants.seperatorHeight)
-            make.width.equalToSuperview()
-            make.top.equalTo(closeButton.snp.bottom).offset(Constants.seperatorViewOffset)
-        }
         photoButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(seperatorView.snp.bottom).offset(Constants.seperatorAndPhotoButtonInset)
+            make.top.equalToSuperview().offset(Constants.seperatorAndPhotoButtonInset)
             make.width.height.equalTo(contentView.snp.width).inset(Constants.widthHeightInset)
         }
         categorySelectSegment.snp.makeConstraints { make in
@@ -433,6 +433,7 @@ extension AddClothesViewController {
         keyboardSapceView.snp.updateConstraints { make in
             make.height.equalTo(Constants.offsetOfEachUIComponents)
         }
+        addClothesScrollView.setContentOffset(CGPoint(x: .zero, y: 0), animated: true)
     }
 
 }
