@@ -92,7 +92,7 @@ final class HomeViewController: UIViewController {
         let latestStyle = clothesManager?.fetchStyleSets().last
         latestStyleSetView.configureItemImage(with: latestStyle)
 
-        let myClothes = clothesManager?.fetchCloset()
+        let myClothes = clothesManager?.fetchAllCloset()
         latestClothesView.configureItemImage(with: myClothes)
     }
 

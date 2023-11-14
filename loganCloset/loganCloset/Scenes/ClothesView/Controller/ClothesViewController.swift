@@ -200,7 +200,6 @@ final class ClothesViewController: UIViewController {
 
     private func applySnapShot(animation: Bool) {
         guard let clothesManager else { return }
-        let allClothes = clothesManager.fetchCloset()
 
         var snapShot = SnapShot()
 
@@ -212,9 +211,7 @@ final class ClothesViewController: UIViewController {
                     clothesCategory: .none,
                     season: .all
                 )
-                let items = allClothes.filter { clothes in
-                    clothes.clothesCategory == category
-                }
+                guard let items = clothesManager.fetchCloset(of: category) else { return }
                 snapShot.appendSections([category])
                 snapShot.appendItems([itemForAddButton] + items)
             }

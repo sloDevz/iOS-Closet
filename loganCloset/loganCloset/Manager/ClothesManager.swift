@@ -26,8 +26,15 @@ final class ClothesManager {
     }
 
     // MARK: - Public
-    func fetchCloset() -> [Clothes] {
+    func fetchAllCloset() -> [Clothes] {
         return closet
+    }
+
+    func fetchCloset(of category: ClothesCategory) -> [Clothes]? {
+        let clothes = closet.filter { clothe in
+            clothe.clothesCategory == category
+        }
+        return clothes
     }
 
     func fetchStyleSets() -> [StyleSet] {

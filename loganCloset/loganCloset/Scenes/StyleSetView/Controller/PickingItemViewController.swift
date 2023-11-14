@@ -166,7 +166,7 @@ final class PickingItemViewController: UIViewController {
     private func applySnapShot(animation: Bool) {
 
         guard let category,
-              let closet = clothesManager?.fetchCloset() else { return }
+              let closet = clothesManager?.fetchAllCloset() else { return }
 
         let filteredItems = closet.filter { item in
             item.clothesCategory == category
