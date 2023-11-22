@@ -32,6 +32,8 @@ final class ClothesViewController: UIViewController {
 
     // MARK: - Properties
     private var clothesManager: ClothesManager?
+    private var itemCategories: [ClothesCategory] = []
+    private var categorizedItems: [ClothesCategory:[Clothes]] = [:]
     private lazy var dataSource: DataSource = configureDataSource()
 
     // MARK: - UI Components
@@ -69,6 +71,7 @@ final class ClothesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareForItemsData()
         setViewAppearance()
         setNavigationBarItems()
         setCollectionView()
@@ -78,6 +81,24 @@ final class ClothesViewController: UIViewController {
     }
 
     // MARK: - Private
+    private func prepareForItemsData() {
+        guard let clothesManager else { return }
+        var categories = ClothesCategory.allCases
+        categories.removeFirst()
+        itemCategories = categories
+
+        let items = clothesManager.fetchAllCloset()
+        items.forEach { item in
+            let category = item.clothesCategory
+            if var catItems = categorizedItems[category] {
+                catItems.append(item)
+                categorizedItems[category] = catItems
+            } else {
+                categorizedItems[category] = [item]
+            }
+        }
+    }
+
     private func setViewAppearance() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -139,7 +160,7 @@ final class ClothesViewController: UIViewController {
                 )
             }
             section.boundarySupplementaryItems = [sectionHeader]
-            section.orthogonalScrollingBehavior = .groupPagingCentered
+            section.orthogonalScrollingBehavior = .groupPaging
             section.interGroupSpacing = Constant.sectionGroupSpacing
 
             return section
@@ -199,22 +220,16 @@ final class ClothesViewController: UIViewController {
     }
 
     private func applySnapShot(animation: Bool) {
-        guard let clothesManager else { return }
-
         var snapShot = SnapShot()
-
-        let allCategories = ClothesCategory.allCases
-        allCategories.forEach { category in
-            if category != .none {
-                let itemForAddButton = Clothes(
-                    itemImage: UIImage(systemName: "plus")!,
-                    clothesCategory: .none,
-                    season: .all
-                )
-                guard let items = clothesManager.fetchCloset(of: category) else { return }
-                snapShot.appendSections([category])
-                snapShot.appendItems([itemForAddButton] + items)
-            }
+        itemCategories.forEach { category in
+            let itemForAddButton = Clothes(
+                itemImage: UIImage(systemName: "plus")!,
+                clothesCategory: .none,
+                season: .all
+            )
+            guard let items = categorizedItems[category] else { return }
+            snapShot.appendSections([category])
+            snapShot.appendItems([itemForAddButton] + items)
         }
         dataSource.apply(snapShot, animatingDifferences: animation)
     }
@@ -235,6 +250,12 @@ extension ClothesViewController: UICollectionViewDelegate {
             addClothesVC.delegate = self
             addClothesVC.modalPresentationStyle = .fullScreen
             present(addClothesVC, animated: true)
+        } else {
+            let section = indexPath.section
+            let itemIndex = indexPath.item - 1
+            let selectedCategory = itemCategories[section]
+            guard let items = categorizedItems[selectedCategory] else { return }
+            let selectedItem = items[itemIndex]
         }
     }
 
