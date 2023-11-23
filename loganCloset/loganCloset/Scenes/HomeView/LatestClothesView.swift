@@ -78,20 +78,17 @@ final class LatestClothesView: UIView {
     }
 
     // MARK: - Public
-    func configureItemImage(with clothes: [Clothes]?) {
-        guard let clothes else { return }
-        
-        if clothes.isEmpty {
+    func configureItemImage(with clothes: Clothes?) {
+        if let latestClothes = clothes {
+            itemImage.image = latestClothes.itemImage 
+            describeLabel.text = latestClothes.brandName ?? Constants.currentItemLabelSkeletonText
+        }
+        else  {
             itemImage.image = UIImage(named: ImageConstants.noneImage)
             describeLabel.text = Constants.emptyViewGreetingText
-            return
         }
-
-        let latestClothes = clothes.last
-        itemImage.image = latestClothes?.itemImage ?? UIImage(named: ImageConstants.noneImage)
-        describeLabel.text = latestClothes?.brandName ?? Constants.currentItemLabelSkeletonText
-
     }
+    
     // MARK: - Private
     private func configureHierachy() {
         addSubview(contentContainer)

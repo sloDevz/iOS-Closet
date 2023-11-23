@@ -12,12 +12,12 @@ final class ClothesManager {
     // MARK: - Constants
 
     // MARK: - Properties
-    private var closet: [Clothes] = []
+    private var closet: [ClothesCategory:[Clothes]] = [:]
     private var styleSets: [StyleSet] = []
 
     // MARK: - LifeCycle
     init() {
-        self.closet = closet + dummyCloset
+        self.appendDummyData()
         self.styleSets = styleSets + dummyStyleSets
     }
 
@@ -26,15 +26,12 @@ final class ClothesManager {
     }
 
     // MARK: - Public
-    func fetchAllCloset() -> [Clothes] {
+    func fetchAllCloset() -> [ClothesCategory:[Clothes]] {
         return closet
     }
 
     func fetchCloset(of category: ClothesCategory) -> [Clothes]? {
-        let clothes = closet.filter { clothe in
-            clothe.clothesCategory == category
-        }
-        return clothes
+        return closet[category]
     }
 
     func fetchStyleSets() -> [StyleSet] {
@@ -48,7 +45,31 @@ final class ClothesManager {
 
     func addClothes(clothes: Clothes?) {
         guard let clothes else { return }
-        closet.append(clothes)
+        let category = clothes.clothesCategory
+        if closet[category] != nil {
+            closet[category]?.append(clothes)
+        } else {
+            closet[category] = [clothes]
+        }
+    }
+
+    func fetchLatestItem() -> Clothes? {
+        let itemGroups = fetchAllCloset().values
+        var items = itemGroups.flatMap{ $0 }
+        items.sort { rhs, lhs in
+            rhs.createdDate > lhs.createdDate
+        }
+        return items.last
+    }
+
+    func fetchLatestStyleSet() -> StyleSet? {
+        return styleSets.last
+    }
+
+    private func appendDummyData() {
+        dummyCloset.forEach { item in
+            addClothes(clothes: item)
+        }
     }
 
     // MARK: - Private

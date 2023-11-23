@@ -49,7 +49,7 @@ final class PickingItemViewController: UIViewController {
     private let navigationBar = UINavigationBar()
 
     private lazy var closeButton: UIBarButtonItem = {
-       let button  = UIBarButtonItem()
+        let button  = UIBarButtonItem()
         button.title = Constants.closeButtonTitle
         button.style = .plain
         button.target = self
@@ -166,9 +166,10 @@ final class PickingItemViewController: UIViewController {
     private func applySnapShot(animation: Bool) {
 
         guard let category,
-              let closet = clothesManager?.fetchAllCloset() else { return }
+              let closet = clothesManager?.fetchAllCloset(),
+              let selectedCategoryItems = closet[category] else { return }
 
-        let filteredItems = closet.filter { item in
+        let filteredItems = selectedCategoryItems.filter { item in
             item.clothesCategory == category
         }
 
@@ -229,7 +230,7 @@ extension PickingItemViewController: UICollectionViewDelegate {
         }
         selectedItem = item
     }
-    
+
 }
 
 

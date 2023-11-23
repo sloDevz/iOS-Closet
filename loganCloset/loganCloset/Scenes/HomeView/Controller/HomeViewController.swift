@@ -89,10 +89,10 @@ final class HomeViewController: UIViewController {
     }
 
     private func updateLatestViews() {
-        let latestStyle = clothesManager?.fetchStyleSets().last
+        let latestStyle = clothesManager?.fetchLatestStyleSet()
         latestStyleSetView.configureItemImage(with: latestStyle)
 
-        let myClothes = clothesManager?.fetchAllCloset()
+        let myClothes = clothesManager?.fetchLatestItem()
         latestClothesView.configureItemImage(with: myClothes)
     }
 
