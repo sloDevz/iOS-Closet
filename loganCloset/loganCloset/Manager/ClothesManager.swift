@@ -57,7 +57,7 @@ final class ClothesManager {
         let itemGroups = fetchAllCloset().values
         var items = itemGroups.flatMap{ $0 }
         items.sort { rhs, lhs in
-            rhs.createdDate > lhs.createdDate
+            rhs.createdDate < lhs.createdDate
         }
         return items.last
     }
