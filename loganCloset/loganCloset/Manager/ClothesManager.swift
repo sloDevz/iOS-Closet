@@ -54,11 +54,7 @@ final class ClothesManager {
     }
 
     func fetchLatestItem() -> Clothes? {
-        let itemGroups = fetchAllCloset().values
-        var items = itemGroups.flatMap{ $0 }
-        items.sort { rhs, lhs in
-            rhs.createdDate < lhs.createdDate
-        }
+        let items = fetchOrderedItems()
         return items.last
     }
 
@@ -66,18 +62,21 @@ final class ClothesManager {
         return styleSets.last
     }
 
+    // MARK: - Private
     private func appendDummyData() {
         dummyCloset.forEach { item in
             addClothes(clothes: item)
         }
     }
 
-    // MARK: - Private
-
-
-
-
-
+    private func fetchOrderedItems() -> [Clothes] {
+        let itemGroups = fetchAllCloset().values
+        var items = itemGroups.flatMap{ $0 }
+        items.sort { rhs, lhs in
+            rhs.createdDate < lhs.createdDate
+        }
+        return items
+    }
 
     // MARK: - MockData
     private let dummyCloset:[Clothes] = [
