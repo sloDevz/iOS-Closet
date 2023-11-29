@@ -242,6 +242,12 @@ extension ClothesViewController: UICollectionViewDelegate {
             let selectedCategory = itemCategories[section]
             guard let items = clothesManager.fetchCloset(of: selectedCategory) else { return }
             let selectedItem = items[itemIndex]
+
+            let itemDetailVC = ClothesDetailViewController(
+                selectedItem: selectedItem,
+                clothesManager: clothesManager
+            )
+            navigationController?.pushViewController(itemDetailVC, animated: true)
         }
     }
 
