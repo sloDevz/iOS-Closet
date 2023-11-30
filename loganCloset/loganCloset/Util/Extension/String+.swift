@@ -8,16 +8,18 @@
 import Foundation
 
 extension String {
-    
+
     func transformIntoTag() -> [String]? {
-        let unSpacedText = self.replacingOccurrences(of: " ", with: "")
-        let separatedText = unSpacedText.components(separatedBy: "#")
-        if !separatedText.isEmpty {
-            let tags = separatedText.map { "#" + $0 }
-            return tags
-        } else {
-            return nil
-        }
+        guard !self.isEmpty else { return nil }
+        let separatedText = self.components(separatedBy: "#")
+        guard !separatedText.isEmpty else { return nil }
+        let trimedTags = separatedText.map { text in
+            let spacelessText = text.replacingOccurrences(of: " ", with: "")
+            return "#" + spacelessText
+        }.filter { $0.count > 1 }
+        guard !trimedTags.isEmpty else { return nil }
+        let tags = Array(Set(trimedTags))
+        return tags
     }
 
 

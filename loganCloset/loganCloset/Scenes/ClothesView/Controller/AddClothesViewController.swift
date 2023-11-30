@@ -48,7 +48,7 @@ final class AddClothesViewController: UIViewController {
     }
     private var category: ClothesCategory? = nil
     private var season: Season = .all
-    private var itemTags: String? = nil
+    private var itemTags: [String]? = nil
     private var brandName: String? = nil
     private var material: Material? = nil
     private var mainColor: MainColor? = nil
@@ -216,12 +216,8 @@ final class AddClothesViewController: UIViewController {
 
         guard let clothesImage,
               let category else { return }
-        var tags:[String]? = nil
-        if let itemTags {
-            tags = itemTags.components(separatedBy: "#")
-        }
 
-        let newItem = Clothes(itemImage: clothesImage, clothesCategory: category, season: season, mainColor: mainColor, tags: tags, brandName: brandName, meterial: material)
+        let newItem = Clothes(itemImage: clothesImage, clothesCategory: category, season: season, mainColor: mainColor, tags: itemTags, brandName: brandName, meterial: material)
         delegate?.updateClothesData(data: newItem)
         AlertManager.presentMessageAlert(
             viewController: self,
@@ -451,7 +447,7 @@ extension AddClothesViewController: UITextFieldDelegate {
         switch textField {
         case tagInputTextField:
             if !typedText.isEmpty {
-                itemTags = typedText
+                itemTags = typedText.transformIntoTag()
             } else {
                 itemTags = nil
             }

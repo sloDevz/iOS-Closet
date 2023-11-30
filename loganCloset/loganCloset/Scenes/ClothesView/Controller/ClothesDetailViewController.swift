@@ -87,8 +87,8 @@ final class ClothesDetailViewController: UIViewController {
     }
     private func setUIComponents() {
         guard let selectedItem else { return }
-        let tags = selectedItem.tags?.map{"#\($0)"}.joined(separator: " ")
-        
+        let tags = selectedItem.tags?.joined(separator: " ")
+
         itemImage.image = selectedItem.itemImage
         categoryInfoLabelView.changeText(to: selectedItem.clothesCategory.rawValue)
         seasonInfoLabelView.changeText(to: selectedItem.season.rawValue)
