@@ -50,7 +50,7 @@ final class AddClothesViewController: UIViewController {
     private var season: Season = .all
     private var itemTags: String? = nil
     private var brandName: String? = nil
-    private var material: String? = nil
+    private var material: Material? = nil
     private var mainColor: MainColor? = nil
 
     private let colors = MainColor.allCases
@@ -443,6 +443,29 @@ extension AddClothesViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        let typedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        switch textField {
+        case tagInputTextField:
+            if !typedText.isEmpty {
+                itemTags = typedText
+            } else {
+                itemTags = nil
+            }
+        case brandNameInputTextField:
+            if !typedText.isEmpty {
+                brandName = typedText
+            } else {
+                brandName = nil
+            }
+        default:
+            return
+        }
+    }
+
 }
 
 extension AddClothesViewController: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -473,11 +496,13 @@ extension AddClothesViewController: UIPickerViewDataSource, UIPickerViewDelegate
         if pickerView == colorPicker {
             let selectedColor = colors[row]
             colorPickerTextField.text = selectedColor.rawValue
+            mainColor = selectedColor
             colorPickerTextField.resignFirstResponder()
 
         } else if pickerView == materialPicker {
             let selectedMaterial = materials[row]
             materialPickerTextField.text = selectedMaterial.rawValue
+            material = selectedMaterial
             materialPickerTextField.resignFirstResponder()
         }
     }

@@ -95,7 +95,7 @@ final class ClothesDetailViewController: UIViewController {
         tagInfoLabelView.changeText(to: tags ?? "-")
         brandInfoLabelView.changeText(to: selectedItem.brandName ?? "-")
         colorInfoLabelView.changeText(to: selectedItem.mainColor?.rawValue ?? "-")
-        materialInfoLabelView.changeText(to: selectedItem.meterial ?? "-")
+        materialInfoLabelView.changeText(to: selectedItem.meterial?.rawValue ?? "-")
     }
 
 }

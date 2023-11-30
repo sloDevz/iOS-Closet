@@ -18,7 +18,7 @@ struct Clothes: Hashable {
     let mainColor: MainColor?
     let tags: [String]?
     let brandName: String?
-    let meterial: String?
+    let meterial: Material?
 
     var styleSetCategory: StyleSetCategory? {
         switch clothesCategory {
@@ -46,7 +46,7 @@ struct Clothes: Hashable {
         mainColor: MainColor? = nil,
         tags: [String]? = nil,
         brandName: String? = nil,
-        meterial: String? = nil)
+        meterial: Material? = nil)
     {
         self.itemImage = itemImage
         self.clothesCategory = clothesCategory
