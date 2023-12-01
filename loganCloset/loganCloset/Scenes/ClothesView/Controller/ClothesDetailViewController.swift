@@ -17,10 +17,27 @@ final class ClothesDetailViewController: UIViewController {
     // MARK: - UI Components
     private var scrollView = UIScrollView()
     private var contentView = UIView()
-    private var itemImage = UIImageView()
+    private let contentContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 16
+        view.layer.shadowColor = UIColor.black.cgColor
+        let offset = 1
+        view.layer.shadowOffset = CGSize(width: offset, height: offset)
+        view.layer.shadowOpacity = 0.1
+        view.layer.shadowRadius = 40
+        return view
+    }()
+    private var itemImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 16
+        imageView.clipsToBounds = true
+        return imageView
+    }()
     private var infoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 5
         stackView.distribution = .fillProportionally
         stackView.alignment = .fill
         return stackView
@@ -58,7 +75,8 @@ final class ClothesDetailViewController: UIViewController {
     private func configureHierarchy() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(itemImage)
+        contentContainer.addSubview(itemImage)
+        contentView.addSubview(contentContainer)
         contentView.addSubview(infoStackView)
         infoStackView.addArrangedSubview(categoryInfoLabelView)
         infoStackView.addArrangedSubview(seasonInfoLabelView)
@@ -76,13 +94,16 @@ final class ClothesDetailViewController: UIViewController {
             make.bottom.equalTo(infoStackView).offset(50)
             make.width.equalTo(view.snp.width)
         }
+        contentContainer.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview().inset(48)
+            make.height.equalTo(view.snp.width).inset(48)
+        }
         itemImage.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(24)
-            make.height.equalTo(view.snp.width).inset(24)
+            make.edges.equalToSuperview()
         }
         infoStackView.snp.makeConstraints { make in
-            make.top.equalTo(itemImage.snp.bottom).offset(15)
-            make.leading.trailing.equalToSuperview().inset(24)
+            make.top.equalTo(contentContainer.snp.bottom).offset(30)
+            make.leading.trailing.equalToSuperview().inset(48)
         }
     }
     private func setUIComponents() {

@@ -80,7 +80,7 @@ final class ClothesManager {
 
     // MARK: - MockData
     private let dummyCloset:[Clothes] = [
-        Clothes(itemImage: UIImage(named: "Hats")!, clothesCategory: .hat, season: .all, mainColor: .green, tags: ["hello"], brandName: "Nike", meterial: nil),
+        Clothes(itemImage: UIImage(named: "Hats")!, clothesCategory: .hat, season: .all, mainColor: .green, tags: ["#greenFav."], brandName: "Nike", meterial: nil),
         Clothes(itemImage: UIImage(named: "Pants1")!, clothesCategory: .bottom, season: .all, mainColor: .brown, tags: nil, brandName: nil, meterial: nil),
         Clothes(itemImage: UIImage(named: "Outer")!, clothesCategory: .outer, season: .all, mainColor: .white, tags: nil, brandName: nil, meterial: nil),
         Clothes(itemImage: UIImage(named: "Pants2")!, clothesCategory: .bottom, season: .all, mainColor: .white, tags: nil, brandName: nil, meterial: nil),

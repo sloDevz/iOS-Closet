@@ -95,7 +95,7 @@ final class ClothesItemCell: UICollectionViewCell {
         guard item.clothesCategory != .none else { return }
         setAppearanceFor(contenteMode: true)
         itemImage.image = item.itemImage
-        tagLabel.text = "#tag here"//item.tags?.joined()
+        tagLabel.text = item.tags?.joined()
     }
 
     // MARK: - Private
