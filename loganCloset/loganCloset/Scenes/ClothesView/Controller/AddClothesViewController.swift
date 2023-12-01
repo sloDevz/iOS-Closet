@@ -41,6 +41,7 @@ final class AddClothesViewController: UIViewController {
 
     // MARK: - Properties
     var delegate: ClothesDataProtocol?
+    var firstSelectedindex: Int?
     private var clothesImage: UIImage? {
         willSet {
             photoButton.setImage(newValue, for: .normal)
@@ -203,6 +204,7 @@ final class AddClothesViewController: UIViewController {
 
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
+        categorySelectSegment.selectedSegmentIndex = firstSelectedindex ?? .zero
     }
 
     @objc

@@ -232,6 +232,7 @@ extension ClothesViewController: UICollectionViewDelegate {
 
         if indexPath.item == .zero {
             let addClothesVC = AddClothesViewController()
+            addClothesVC.firstSelectedindex = indexPath.section
             addClothesVC.delegate = self
             addClothesVC.modalPresentationStyle = .fullScreen
             present(addClothesVC, animated: true)

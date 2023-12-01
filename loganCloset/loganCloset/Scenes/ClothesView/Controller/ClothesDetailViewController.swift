@@ -30,6 +30,7 @@ final class ClothesDetailViewController: UIViewController {
     }()
     private var itemImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 16
         imageView.clipsToBounds = true
         return imageView

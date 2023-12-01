@@ -62,7 +62,7 @@ final class ClothesItemCell: UICollectionViewCell {
     }()
     private let itemImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     private let tagLabel: UILabel = {
