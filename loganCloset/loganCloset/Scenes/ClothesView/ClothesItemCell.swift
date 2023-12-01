@@ -27,7 +27,7 @@ final class ClothesItemCell: UICollectionViewCell {
         static let tagShadowOpacity: Float = 0.5
         static let tagShadowRadius: CGFloat = 2
 
-        static let itemIamgeEdgeInset: CGFloat = 16
+        static let itemIamgeEdgeInset: CGFloat = 4
         static let tagLabelLeadingTrailingBottomInset: CGFloat = 15
     }
 
@@ -62,6 +62,8 @@ final class ClothesItemCell: UICollectionViewCell {
     }()
     private let itemImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 5
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()

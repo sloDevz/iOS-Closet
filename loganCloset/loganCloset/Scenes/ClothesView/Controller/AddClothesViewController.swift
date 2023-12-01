@@ -29,12 +29,12 @@ final class AddClothesViewController: UIViewController {
         static let confirmMessageText: String = "새로운 아이템을 등록했습니다."
         static let confirmButtonFontSize: CGFloat = 20
 
-        static let closeButtonHeight: CGFloat = 20
+        static let closeButtonHeight: CGFloat = 40
         static let closeButtonFontSize: CGFloat = 18
         static let seperatorHeight: CGFloat = 1
         static let seperatorViewOffset:CGFloat = 10
-        static let seperatorAndPhotoButtonInset: CGFloat = 20
-        static let widthHeightInset: CGFloat = 40
+        static let seperatorAndPhotoButtonInset: CGFloat = 40
+        static let widthHeightInset: CGFloat = 70
         static let viewSideInset: CGFloat = 20
         static let contentTextFieldHeight: CGFloat = 40
     }
@@ -63,7 +63,7 @@ final class AddClothesViewController: UIViewController {
     private var keyboardSapceView = UIView()
     private let closeButton: UIButton = {
         let button = UIButton()
-        let titlefont = UIFont.importedUIFont(name: .pretendardBold, fontSize: Constants.closeButtonFontSize)
+        let titlefont = UIFont.importedUIFont(name: .pretendardSemiBold, fontSize: Constants.closeButtonFontSize)
         button.setTitle(Constants.closetButtonTitle, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = titlefont

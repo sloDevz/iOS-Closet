@@ -12,7 +12,7 @@ final class PhotoButton: UIButton {
     // MARK: - Constants
     enum Constants {
         static let cameraImageName: String = "Add_Clothes_image_icon"
-        static let buttonBorderWidth: CGFloat = 10
+        static let buttonBorderWidth: CGFloat = 4
         static let buttonCornerRadius: CGFloat = 16
         static let buttonShadowOffset: CGFloat = 1
         static let buttonShadowOpacity: Float = 0.1
