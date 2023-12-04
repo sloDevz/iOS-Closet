@@ -79,6 +79,7 @@ final class StyleSetViewController: UIViewController {
         setCollectionView()
         configureCollectionViewLayoutConstraint()
         applySnapShot(animation: false)
+        navigationItem.backButtonTitle = "돌아가기"
     }
 
     // MARK: - Methodes

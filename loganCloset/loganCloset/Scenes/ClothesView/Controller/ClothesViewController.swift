@@ -79,7 +79,7 @@ final class ClothesViewController: UIViewController {
         setCollectionView()
         configureCollectionViewLayoutConstraint()
         applySnapShot(animation: false)
-
+        navigationItem.backButtonTitle = "돌아가기"
     }
 
     // MARK: - Private

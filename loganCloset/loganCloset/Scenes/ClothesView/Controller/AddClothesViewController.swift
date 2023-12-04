@@ -32,10 +32,11 @@ final class AddClothesViewController: UIViewController {
         static let closeButtonHeight: CGFloat = 40
         static let closeButtonFontSize: CGFloat = 18
         static let seperatorHeight: CGFloat = 1
-        static let seperatorViewOffset:CGFloat = 10
+        static let seperatorViewOffset:CGFloat = 4
         static let seperatorAndPhotoButtonInset: CGFloat = 40
         static let widthHeightInset: CGFloat = 70
         static let viewSideInset: CGFloat = 20
+        static let buttonSideInset: CGFloat = 12
         static let contentTextFieldHeight: CGFloat = 40
     }
 
@@ -63,7 +64,7 @@ final class AddClothesViewController: UIViewController {
     private var keyboardSapceView = UIView()
     private let closeButton: UIButton = {
         let button = UIButton()
-        let titlefont = UIFont.importedUIFont(name: .pretendardSemiBold, fontSize: Constants.closeButtonFontSize)
+        let titlefont = UIFont.importedUIFont(name: .pretendardRegular, fontSize: Constants.closeButtonFontSize)
         button.setTitle(Constants.closetButtonTitle, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = titlefont
@@ -301,12 +302,12 @@ final class AddClothesViewController: UIViewController {
         closeButton.snp.makeConstraints { make in
             make.height.equalTo(Constants.closeButtonHeight)
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.equalToSuperview().inset(Constants.viewSideInset)
+            make.leading.equalToSuperview().inset(Constants.buttonSideInset)
         }
         seperatorView.snp.makeConstraints { make in
             make.height.equalTo(Constants.seperatorHeight)
             make.width.equalToSuperview()
-            make.top.equalTo(closeButton.snp.bottom).offset(Constants.seperatorViewOffset)
+            make.top.equalTo(closeButton.snp.bottom)//.offset(Constants.seperatorViewOffset)
             make.centerX.equalToSuperview()
         }
         addClothesScrollView.snp.makeConstraints { make in
@@ -317,7 +318,7 @@ final class AddClothesViewController: UIViewController {
         confirmButton.snp.makeConstraints { make in
             make.height.equalTo(Constants.confirmButtonHeight)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constants.offsetOfEachUIComponents)
-            make.leading.trailing.equalToSuperview().inset(Constants.viewSideInset)
+            make.leading.trailing.equalToSuperview().inset(Constants.buttonSideInset)
         }
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

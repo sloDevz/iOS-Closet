@@ -110,7 +110,7 @@ final class ClothesDetailViewController: UIViewController {
     private func setUIComponents() {
         guard let selectedItem else { return }
         let tags = selectedItem.tags?.joined(separator: " ")
-
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(editButtonTapped))
         itemImage.image = selectedItem.itemImage
         categoryInfoLabelView.changeText(to: selectedItem.clothesCategory.rawValue)
         seasonInfoLabelView.changeText(to: selectedItem.season.rawValue)
@@ -118,6 +118,11 @@ final class ClothesDetailViewController: UIViewController {
         brandInfoLabelView.changeText(to: selectedItem.brandName ?? "-")
         colorInfoLabelView.changeText(to: selectedItem.mainColor?.rawValue ?? "-")
         materialInfoLabelView.changeText(to: selectedItem.meterial?.rawValue ?? "-")
+    }
+    
+    @objc
+    private func editButtonTapped() {
+        print(#function)
     }
 
 }
