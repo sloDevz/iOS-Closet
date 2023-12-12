@@ -92,11 +92,12 @@ final class ClothesDetailViewController: UIViewController {
         }
         contentView.snp.makeConstraints { make in
             make.top.leading.bottom.equalToSuperview()
-            make.bottom.equalTo(infoStackView).offset(50)
+            make.bottom.equalTo(infoStackView).offset(30)
             make.width.equalTo(view.snp.width)
         }
         contentContainer.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(48)
+            make.top.equalToSuperview().inset(30)
+            make.leading.trailing.equalToSuperview().inset(48)
             make.height.equalTo(view.snp.width).inset(48)
         }
         itemImage.snp.makeConstraints { make in
@@ -122,7 +123,7 @@ final class ClothesDetailViewController: UIViewController {
     
     @objc
     private func editButtonTapped() {
-        print(#function)
+        
     }
 
 }

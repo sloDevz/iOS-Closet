@@ -9,8 +9,8 @@ import UIKit
 
 struct Clothes: Hashable {
 
-    let itemID: UUID = UUID()
-    let createdDate: Date = Date()
+    let itemID: UUID
+    let createdDate: Date
 
     let itemImage: UIImage
     let clothesCategory: ClothesCategory
@@ -48,6 +48,29 @@ struct Clothes: Hashable {
         brandName: String? = nil,
         meterial: Material? = nil)
     {
+        self.itemID = UUID()
+        self.createdDate = Date()
+        self.itemImage = itemImage
+        self.clothesCategory = clothesCategory
+        self.season = season
+        self.mainColor = mainColor
+        self.tags = tags
+        self.brandName = brandName
+        self.meterial = meterial
+    }
+
+    init(
+        from item: Clothes,
+        itemImage: UIImage,
+        clothesCategory: ClothesCategory,
+        season: Season,
+        mainColor: MainColor? = nil,
+        tags: [String]? = nil,
+        brandName: String? = nil,
+        meterial: Material? = nil)
+    {
+        self.itemID = item.itemID
+        self.createdDate = item.createdDate
         self.itemImage = itemImage
         self.clothesCategory = clothesCategory
         self.season = season

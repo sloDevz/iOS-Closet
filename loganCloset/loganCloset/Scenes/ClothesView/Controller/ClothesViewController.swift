@@ -79,7 +79,10 @@ final class ClothesViewController: UIViewController {
         setCollectionView()
         configureCollectionViewLayoutConstraint()
         applySnapShot(animation: false)
-        navigationItem.backButtonTitle = "돌아가기"
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        applySnapShot(animation: false)
     }
 
     // MARK: - Private
@@ -95,6 +98,8 @@ final class ClothesViewController: UIViewController {
     private func setNavigationBarItems() {
         navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: filterButton)
+        navigationItem.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = .black
     }
 
     private func createLayout() -> UICollectionViewLayout {

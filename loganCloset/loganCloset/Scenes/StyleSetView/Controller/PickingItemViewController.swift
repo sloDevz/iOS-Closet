@@ -164,21 +164,17 @@ final class PickingItemViewController: UIViewController {
     }
 
     private func applySnapShot(animation: Bool) {
-
         guard let category,
-              let closet = clothesManager?.fetchAllCloset(),
-              let selectedCategoryItems = closet[category] else { return }
-
-        let filteredItems = selectedCategoryItems.filter { item in
-            item.clothesCategory == category
-        }
-
-        filteredItems.isEmpty ? (emptyGuideView.isHidden = false) : (emptyGuideView.isHidden = true)
+              let selectedCategoryItems = clothesManager?.fetchCloset(of: category)
+        else {
+                  emptyGuideView.isHidden = false
+                  return
+              }
+        emptyGuideView.isHidden = true
 
         var snapShot = SnapShot()
-
         snapShot.appendSections([Section.main])
-        snapShot.appendItems(filteredItems)
+        snapShot.appendItems(selectedCategoryItems)
 
         dataSource.apply(snapShot, animatingDifferences: animation)
     }
