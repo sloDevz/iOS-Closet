@@ -12,7 +12,7 @@ final class ClothesDetailViewController: UIViewController, ClothesDataProtocol {
     // MARK: - Constants
 
     // MARK: - Properties
-    private var selectedItem: Clothes?
+    private var selectedItem: Clothes
     private var clothesManager: ClothesManager?
     // MARK: - UI Components
     private var scrollView = UIScrollView()
@@ -52,9 +52,9 @@ final class ClothesDetailViewController: UIViewController, ClothesDataProtocol {
 
     // MARK: - LifeCycle
     init(selectedItem: Clothes, clothesManager: ClothesManager) {
-        super.init(nibName: nil, bundle: nil)
         self.selectedItem = selectedItem
         self.clothesManager = clothesManager
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
@@ -109,9 +109,12 @@ final class ClothesDetailViewController: UIViewController, ClothesDataProtocol {
         }
     }
     private func setUIComponents() {
-        guard let selectedItem else { return }
-        let tags = selectedItem.tags?.joined(separator: " ")
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(editButtonTapped))
+        setItemInfoUIComponents()
+    }
+
+    private func setItemInfoUIComponents() {
+        let tags = selectedItem.tags?.joined(separator: " ")
         itemImage.image = selectedItem.itemImage
         categoryInfoLabelView.changeText(to: selectedItem.clothesCategory.rawValue)
         seasonInfoLabelView.changeText(to: selectedItem.season.rawValue)
@@ -120,11 +123,9 @@ final class ClothesDetailViewController: UIViewController, ClothesDataProtocol {
         colorInfoLabelView.changeText(to: selectedItem.mainColor?.rawValue ?? "-")
         materialInfoLabelView.changeText(to: selectedItem.material?.rawValue ?? "-")
     }
-    
+
     @objc
     private func editButtonTapped() {
-        guard let selectedItem else { return }
-
         let addClothesVC = AddClothesViewController(eiditFrom: selectedItem)
         addClothesVC.delegate = self
         addClothesVC.modalPresentationStyle = .fullScreen
@@ -135,7 +136,10 @@ final class ClothesDetailViewController: UIViewController, ClothesDataProtocol {
 
 extension ClothesDetailViewController {
     func updateClothesData(data: Clothes?) {
-        print(#function)
+        guard let data else { return }
+        clothesManager?.replaceClothes(selectedItem, with: data)
+        selectedItem = data
+        setItemInfoUIComponents()
     }
 }
 

@@ -53,6 +53,28 @@ final class ClothesManager {
         }
     }
 
+    func replaceClothes(_ oldItem: Clothes, with newItem: Clothes) {
+        if newItem.clothesCategory == oldItem.clothesCategory {
+            guard let items = closet[newItem.clothesCategory] else { return }
+            let editedItems: [Clothes] = items.map { oldItem in
+                guard oldItem.itemID == newItem.itemID else { return oldItem }
+                if oldItem != newItem {
+                    return newItem
+                } else {
+                    return oldItem
+                }
+            }
+            closet[newItem.clothesCategory] = editedItems
+        } else {
+            guard var oldCatItems = closet[oldItem.clothesCategory] else { return }
+            let index = oldCatItems.firstIndex(of: oldItem) ?? 0
+            oldCatItems.remove(at: Int(index))
+            closet[oldItem.clothesCategory] = oldCatItems
+            addClothes(clothes: newItem)
+
+        }
+    }
+
     func fetchLatestItem() -> Clothes? {
         let items = fetchOrderedItems()
         return items.last
