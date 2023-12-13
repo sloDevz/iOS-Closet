@@ -42,7 +42,7 @@ final class AddClothesViewController: UIViewController {
 
     // MARK: - Properties
     var delegate: ClothesDataProtocol?
-    var itemBefore: Clothes? = nil
+    var itemForEdit: Clothes? = nil
     var selectedCategoryIndex: Int?
     private var clothesImage: UIImage? = nil {
         willSet {
@@ -170,7 +170,7 @@ final class AddClothesViewController: UIViewController {
     init(eiditFrom item: Clothes) {
         super.init(nibName: nil, bundle: nil)
 
-        self.itemBefore = item
+        self.itemForEdit = item
         self.clothesImage = item.itemImage
         self.photoButton.setImage(item.itemImage, for: .normal)
         self.category = item.clothesCategory
@@ -185,6 +185,7 @@ final class AddClothesViewController: UIViewController {
         self.brandNameInputTextField.text = item.brandName
         self.colorPickerTextField.text = item.mainColor?.rawValue
         self.materialPickerTextField.text = item.material?.rawValue
+        self.confirmButton.setTitle("수정하기", for: .normal)
 
     }
 
@@ -244,14 +245,24 @@ final class AddClothesViewController: UIViewController {
             AlertManager.presentMessageAlert(viewController: self, title: "등록실패", message: "등록하기 위해선 사진이 꼭 필요해요")
             return
         }
-        let generatedItem = Clothes(from: itemBefore, itemImage: clothesImage, clothesCategory: category, season: season, mainColor: mainColor, tags: itemTags, brandName: brandName, material: material)
+        let generatedItem = Clothes(from: itemForEdit, itemImage: clothesImage, clothesCategory: category, season: season, mainColor: mainColor, tags: itemTags, brandName: brandName, material: material)
         delegate?.updateClothesData(data: generatedItem)
-        AlertManager.presentMessageAlert(
-            viewController: self,
-            title: Constants.confirmButtonTitle,
-            message: Constants.confirmMessageText
-        ) { _ in
-            self.dismiss(animated: true)
+        if let itemForEdit {
+            AlertManager.presentMessageAlert(
+                viewController: self,
+                title: "수정완료",
+                message: "수정했습니다."
+            ) { _ in
+                self.dismiss(animated: true)
+            }
+        } else {
+            AlertManager.presentMessageAlert(
+                viewController: self,
+                title: Constants.confirmButtonTitle,
+                message: Constants.confirmMessageText
+            ) { _ in
+                self.dismiss(animated: true)
+            }
         }
     }
 
