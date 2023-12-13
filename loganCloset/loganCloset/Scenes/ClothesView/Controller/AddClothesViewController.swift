@@ -49,7 +49,7 @@ final class AddClothesViewController: UIViewController {
             photoButton.setImage(newValue, for: .normal)
         }
     }
-    private var category: ClothesCategory? = nil
+    private var category: ClothesCategory = .hat
     private var season: Season = .all
     private var itemTags: [String]? = nil
     private var brandName: String? = nil
@@ -239,10 +239,13 @@ final class AddClothesViewController: UIViewController {
         setSeasonBySegment()
         setCategoryBySegment()
 
-        guard let clothesImage,
-              let category else { return }
-        let newItem = Clothes(from: itemBefore, itemImage: clothesImage, clothesCategory: category, season: season, mainColor: mainColor, tags: itemTags, brandName: brandName, material: material)
-        delegate?.updateClothesData(data: newItem)
+        guard let clothesImage
+        else {
+            AlertManager.presentMessageAlert(viewController: self, title: "등록실패", message: "등록하기 위해선 사진이 꼭 필요해요")
+            return
+        }
+        let generatedItem = Clothes(from: itemBefore, itemImage: clothesImage, clothesCategory: category, season: season, mainColor: mainColor, tags: itemTags, brandName: brandName, material: material)
+        delegate?.updateClothesData(data: generatedItem)
         AlertManager.presentMessageAlert(
             viewController: self,
             title: Constants.confirmButtonTitle,
