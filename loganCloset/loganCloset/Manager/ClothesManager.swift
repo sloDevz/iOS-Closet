@@ -43,7 +43,7 @@ final class ClothesManager {
         styleSets.append(styleSet)
     }
 
-    func addClothes(clothes: Clothes?) {
+    func add(clothes: Clothes?) {
         guard let clothes else { return }
         let category = clothes.clothesCategory
         if closet[category] != nil {
@@ -66,13 +66,16 @@ final class ClothesManager {
             }
             closet[newItem.clothesCategory] = editedItems
         } else {
-            guard var oldCatItems = closet[oldItem.clothesCategory] else { return }
-            let index = oldCatItems.firstIndex(of: oldItem) ?? 0
-            oldCatItems.remove(at: Int(index))
-            closet[oldItem.clothesCategory] = oldCatItems
-            addClothes(clothes: newItem)
-
+            delete(clothes: oldItem)
+            add(clothes: newItem)
         }
+    }
+
+    func delete(clothes: Clothes) {
+        guard var items = closet[clothes.clothesCategory],
+              let index = items.firstIndex(of: clothes) else { return }
+        items.remove(at: Int(index))
+        closet[clothes.clothesCategory] = items
     }
 
     func fetchLatestItem() -> Clothes? {
@@ -87,7 +90,7 @@ final class ClothesManager {
     // MARK: - Private
     private func appendDummyData() {
         dummyCloset.forEach { item in
-            addClothes(clothes: item)
+            add(clothes: item)
         }
     }
 

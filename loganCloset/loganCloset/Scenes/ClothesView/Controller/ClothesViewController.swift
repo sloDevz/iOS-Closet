@@ -262,7 +262,7 @@ extension ClothesViewController: ClothesDataProtocol {
 
     func updateClothesData(data: Clothes?) {
         guard let data else { return }
-        clothesManager?.addClothes(clothes: data)
+        clothesManager?.add(clothes: data)
         applySnapShot(animation: true)
     }
 
