@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ClothesDetailViewController: UIViewController {
+final class ClothesDetailViewController: UIViewController, ClothesDataProtocol {
     // MARK: - Constants
 
     // MARK: - Properties
@@ -118,12 +118,24 @@ final class ClothesDetailViewController: UIViewController {
         tagInfoLabelView.changeText(to: tags ?? "-")
         brandInfoLabelView.changeText(to: selectedItem.brandName ?? "-")
         colorInfoLabelView.changeText(to: selectedItem.mainColor?.rawValue ?? "-")
-        materialInfoLabelView.changeText(to: selectedItem.meterial?.rawValue ?? "-")
+        materialInfoLabelView.changeText(to: selectedItem.material?.rawValue ?? "-")
     }
     
     @objc
     private func editButtonTapped() {
-        
+        guard let selectedItem else { return }
+
+        let addClothesVC = AddClothesViewController(eiditFrom: selectedItem)
+        addClothesVC.delegate = self
+        addClothesVC.modalPresentationStyle = .fullScreen
+        present(addClothesVC, animated: true)
     }
 
 }
+
+extension ClothesDetailViewController {
+    func updateClothesData(data: Clothes?) {
+        print(#function)
+    }
+}
+

@@ -42,8 +42,9 @@ final class AddClothesViewController: UIViewController {
 
     // MARK: - Properties
     var delegate: ClothesDataProtocol?
-    var firstSelectedindex: Int?
-    private var clothesImage: UIImage? {
+    var itemBefore: Clothes? = nil
+    var selectedCategoryIndex: Int?
+    private var clothesImage: UIImage? = nil {
         willSet {
             photoButton.setImage(newValue, for: .normal)
         }
@@ -166,6 +167,27 @@ final class AddClothesViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    init(eiditFrom item: Clothes) {
+        super.init(nibName: nil, bundle: nil)
+
+        self.itemBefore = item
+        self.clothesImage = item.itemImage
+        self.photoButton.setImage(item.itemImage, for: .normal)
+        self.category = item.clothesCategory
+        self.season = item.season
+        self.itemTags = item.tags
+        self.brandName = item.brandName
+        self.material = item.material
+        self.mainColor = item.mainColor
+        self.selectedCategoryIndex = item.clothesCategory.index
+        self.seasonSelectSegment.selectedSegmentIndex = item.season.index
+        self.tagInputTextField.text = item.tags?.joined(separator: " ")
+        self.brandNameInputTextField.text = item.brandName
+        self.colorPickerTextField.text = item.mainColor?.rawValue
+        self.materialPickerTextField.text = item.material?.rawValue
+
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -205,7 +227,7 @@ final class AddClothesViewController: UIViewController {
 
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
-        categorySelectSegment.selectedSegmentIndex = firstSelectedindex ?? .zero
+        categorySelectSegment.selectedSegmentIndex = selectedCategoryIndex ?? .zero
     }
 
     @objc
@@ -219,8 +241,7 @@ final class AddClothesViewController: UIViewController {
 
         guard let clothesImage,
               let category else { return }
-
-        let newItem = Clothes(itemImage: clothesImage, clothesCategory: category, season: season, mainColor: mainColor, tags: itemTags, brandName: brandName, meterial: material)
+        let newItem = Clothes(from: itemBefore, itemImage: clothesImage, clothesCategory: category, season: season, mainColor: mainColor, tags: itemTags, brandName: brandName, material: material)
         delegate?.updateClothesData(data: newItem)
         AlertManager.presentMessageAlert(
             viewController: self,
@@ -419,7 +440,6 @@ extension AddClothesViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keybaordRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keybaordRectangle.height - Constants.confirmButtonHeight
-
             keyboardSapceView.snp.updateConstraints { make in
                 make.height.equalTo(keyboardHeight)
             }

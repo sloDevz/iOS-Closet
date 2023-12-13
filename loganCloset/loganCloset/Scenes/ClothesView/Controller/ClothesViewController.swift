@@ -237,7 +237,7 @@ extension ClothesViewController: UICollectionViewDelegate {
 
         if indexPath.item == .zero {
             let addClothesVC = AddClothesViewController()
-            addClothesVC.firstSelectedindex = indexPath.section
+            addClothesVC.selectedCategoryIndex = indexPath.section
             addClothesVC.delegate = self
             addClothesVC.modalPresentationStyle = .fullScreen
             present(addClothesVC, animated: true)
@@ -248,7 +248,6 @@ extension ClothesViewController: UICollectionViewDelegate {
             let selectedCategory = itemCategories[section]
             guard let items = clothesManager.fetchCloset(of: selectedCategory) else { return }
             let selectedItem = items[itemIndex]
-
             let itemDetailVC = ClothesDetailViewController(
                 selectedItem: selectedItem,
                 clothesManager: clothesManager

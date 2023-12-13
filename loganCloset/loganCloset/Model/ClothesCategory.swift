@@ -17,4 +17,10 @@ enum ClothesCategory: String, CaseIterable {
     case footWaer = "신발"
     case accessory = "악세서리"
     
+    var index: Int {
+        var categories = Self.allCases
+        categories.removeFirst()
+        guard let index = categories.firstIndex(of: self) else { return 0 }
+        return Int(index)
+    }
 }

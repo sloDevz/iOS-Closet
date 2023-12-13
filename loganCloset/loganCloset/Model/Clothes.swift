@@ -18,7 +18,7 @@ struct Clothes: Hashable {
     let mainColor: MainColor?
     let tags: [String]?
     let brandName: String?
-    let meterial: Material?
+    let material: Material?
 
     var styleSetCategory: StyleSetCategory? {
         switch clothesCategory {
@@ -40,44 +40,36 @@ struct Clothes: Hashable {
     }
 
     init(
+        from item: Clothes? = nil,
         itemImage: UIImage,
         clothesCategory: ClothesCategory,
         season: Season,
         mainColor: MainColor? = nil,
         tags: [String]? = nil,
         brandName: String? = nil,
-        meterial: Material? = nil)
+        material: Material? = nil
+    )
     {
-        self.itemID = UUID()
-        self.createdDate = Date()
-        self.itemImage = itemImage
-        self.clothesCategory = clothesCategory
-        self.season = season
-        self.mainColor = mainColor
-        self.tags = tags
-        self.brandName = brandName
-        self.meterial = meterial
+        if let item {
+            self.itemID = item.itemID
+            self.createdDate = item.createdDate
+            self.itemImage = itemImage
+            self.clothesCategory = clothesCategory
+            self.season = season
+            self.mainColor = mainColor
+            self.tags = tags
+            self.brandName = brandName
+            self.material = material
+        } else {
+            self.itemID = UUID()
+            self.createdDate = Date()
+            self.itemImage = itemImage
+            self.clothesCategory = clothesCategory
+            self.season = season
+            self.mainColor = mainColor
+            self.tags = tags
+            self.brandName = brandName
+            self.material = material
+        }
     }
-
-    init(
-        from item: Clothes,
-        itemImage: UIImage,
-        clothesCategory: ClothesCategory,
-        season: Season,
-        mainColor: MainColor? = nil,
-        tags: [String]? = nil,
-        brandName: String? = nil,
-        meterial: Material? = nil)
-    {
-        self.itemID = item.itemID
-        self.createdDate = item.createdDate
-        self.itemImage = itemImage
-        self.clothesCategory = clothesCategory
-        self.season = season
-        self.mainColor = mainColor
-        self.tags = tags
-        self.brandName = brandName
-        self.meterial = meterial
-    }
-
 }

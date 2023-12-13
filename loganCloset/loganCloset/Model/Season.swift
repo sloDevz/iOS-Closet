@@ -15,4 +15,9 @@ enum Season: String, CaseIterable {
     case fall = "가을"
     case winter = "겨울"
     
+    var index: Int {
+        let seasons = Self.allCases
+        guard let index = seasons.firstIndex(of: self) else { return 0 }
+        return Int(index)
+    }
 }
