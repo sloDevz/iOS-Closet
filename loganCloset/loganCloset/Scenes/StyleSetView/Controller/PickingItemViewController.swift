@@ -187,7 +187,7 @@ final class PickingItemViewController: UIViewController {
     @objc
     private func doneButtonTapped() {
         guard let selectedItem else { return }
-        delegate?.updateClothesData(data: selectedItem)
+        delegate?.updateClothesData(data: selectedItem, flag: false)
         dismiss(animated: true)
     }
 

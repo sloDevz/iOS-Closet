@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ClothesDataProtocol {
-    func updateClothesData(data: Clothes?)
+    func updateClothesData(data: Clothes?, flag: Bool)
 }

@@ -353,7 +353,7 @@ final class AddStyleSetViewController: UIViewController {
 
 extension AddStyleSetViewController: ClothesDataProtocol {
 
-    func updateClothesData(data: Clothes?) {
+    func updateClothesData(data: Clothes?, flag: Bool) {
         guard let data else { return }
         currentSelectedItemButton?.updateItemData(with: data)
         currentSelectedItemButton = nil

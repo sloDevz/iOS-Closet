@@ -135,11 +135,16 @@ final class ClothesDetailViewController: UIViewController, ClothesDataProtocol {
 }
 
 extension ClothesDetailViewController {
-    func updateClothesData(data: Clothes?) {
+    func updateClothesData(data: Clothes?, flag: Bool) {
         guard let data else { return }
-        clothesManager?.replaceClothes(selectedItem, with: data)
-        selectedItem = data
-        setItemInfoUIComponents()
+        if flag {
+            clothesManager?.delete(clothes: data)
+            navigationController?.popViewController(animated: true)
+        } else {
+            clothesManager?.replaceClothes(selectedItem, with: data)
+            selectedItem = data
+            setItemInfoUIComponents()
+        }
     }
 }
 

@@ -8,15 +8,16 @@
 import UIKit
 
 final class AlertManager {
-    static func popAlertWithConfirmAndCancel(viewController: UIViewController, title: String, message: String, placeholder: String,doneTitle: String, canelTitle: String, complition: @escaping (UIAlertAction) -> ()) {
+    static func popAlertWithConfirmAndCancel(viewController: UIViewController, title: String, message: String, placeholder: String? = nil, doneTitle: String, canelTitle: String, complition: @escaping (UIAlertAction) -> ()) {
         let alertController = UIAlertController(
             title: title,
             message: message,
             preferredStyle: .alert
         )
-
-        alertController.addTextField { texField in
-            texField.placeholder = placeholder
+        if let placeholder {
+            alertController.addTextField { texField in
+                texField.placeholder = placeholder
+            }
         }
 
         let doneAction = UIAlertAction(title: doneTitle, style: .default,handler: complition)

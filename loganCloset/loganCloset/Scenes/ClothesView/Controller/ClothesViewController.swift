@@ -260,7 +260,7 @@ extension ClothesViewController: UICollectionViewDelegate {
 
 extension ClothesViewController: ClothesDataProtocol {
 
-    func updateClothesData(data: Clothes?) {
+    func updateClothesData(data: Clothes?, flag: Bool) {
         guard let data else { return }
         clothesManager?.add(clothes: data)
         applySnapShot(animation: true)

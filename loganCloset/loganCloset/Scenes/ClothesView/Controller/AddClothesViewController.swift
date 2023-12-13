@@ -144,6 +144,19 @@ final class AddClothesViewController: UIViewController {
         button.layer.cornerRadius = Constants.confirmButtonRadius
         return button
     }()
+    private let deleteButton: UIButton = {
+        let button = UIButton()
+        let titlefont = UIFont.importedUIFont(name: .pretendardLight, fontSize: Constants.confirmButtonFontSize)
+        button.backgroundColor = .clear
+        button.setTitle("제거하기", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        button.setTitleColor(.cyan, for: .selected)
+        button.setTitleColor(.cyan, for: .highlighted)
+        button.titleLabel?.font = titlefont
+        button.layer.cornerRadius = Constants.confirmButtonRadius
+        button.isHidden = true
+        return button
+    }()
     private lazy var photoPicker: PHPickerViewController = {
         let picker = PHPickerViewController(configuration: createPHPickerConfiguration())
         picker.delegate = self
@@ -186,6 +199,7 @@ final class AddClothesViewController: UIViewController {
         self.colorPickerTextField.text = item.mainColor?.rawValue
         self.materialPickerTextField.text = item.material?.rawValue
         self.confirmButton.setTitle("수정하기", for: .normal)
+        self.deleteButton.isHidden = false
 
     }
 
@@ -228,6 +242,7 @@ final class AddClothesViewController: UIViewController {
 
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
+        deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         categorySelectSegment.selectedSegmentIndex = selectedCategoryIndex ?? .zero
     }
 
@@ -246,8 +261,8 @@ final class AddClothesViewController: UIViewController {
             return
         }
         let generatedItem = Clothes(from: itemForEdit, itemImage: clothesImage, clothesCategory: category, season: season, mainColor: mainColor, tags: itemTags, brandName: brandName, material: material)
-        delegate?.updateClothesData(data: generatedItem)
-        if let itemForEdit {
+        delegate?.updateClothesData(data: generatedItem, flag: false)
+        if itemForEdit != nil {
             AlertManager.presentMessageAlert(
                 viewController: self,
                 title: "수정완료",
@@ -261,6 +276,17 @@ final class AddClothesViewController: UIViewController {
                 title: Constants.confirmButtonTitle,
                 message: Constants.confirmMessageText
             ) { _ in
+                self.dismiss(animated: true)
+            }
+        }
+    }
+
+    @objc
+    private func deleteButtonTapped() {
+        AlertManager.popAlertWithConfirmAndCancel(viewController: self, title: "삭제하기", message: "정말로 삭제하시겠습니까?", doneTitle: "삭제하기", canelTitle: "취소") { [ weak self ] _ in
+            guard let self = self else { return }
+            delegate?.updateClothesData(data: itemForEdit, flag: true)
+            AlertManager.presentMessageAlert(viewController: self, title: "삭제완료", message: "아이템을 삭제했습니다") { _ in
                 self.dismiss(animated: true)
             }
         }
@@ -331,6 +357,7 @@ final class AddClothesViewController: UIViewController {
         contentView.addSubview(colorPickerTextField)
         contentView.addSubview(materialPickerTextField)
         contentView.addSubview(keyboardSapceView)
+        contentView.addSubview(deleteButton)
     }
 
     private func configureLayoutConstraint() {
@@ -400,10 +427,18 @@ final class AddClothesViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(Constants.viewSideInset)
         }
         keyboardSapceView.snp.makeConstraints { make in
-            make.height.equalTo(Constants.offsetOfEachUIComponents)
+            if itemForEdit != nil {
+                make.height.equalTo(Constants.offsetOfEachUIComponents*2 + Constants.contentTextFieldHeight)
+            } else {
+                make.height.equalTo(Constants.offsetOfEachUIComponents)
+            }
             make.top.equalTo(materialPickerTextField.snp.bottom)
             make.leading.bottom.trailing.equalToSuperview()
 
+        }
+        deleteButton.snp.makeConstraints { make in
+            make.bottom.equalTo(keyboardSapceView.snp.bottom).inset(Constants.offsetOfEachUIComponents)
+            make.centerX.equalToSuperview()
         }
     }
 
@@ -464,7 +499,11 @@ extension AddClothesViewController {
     @objc
     private func keyboardWillHide() {
         keyboardSapceView.snp.updateConstraints { make in
-            make.height.equalTo(Constants.offsetOfEachUIComponents)
+            if itemForEdit != nil {
+                make.height.equalTo(Constants.offsetOfEachUIComponents*2 + Constants.contentTextFieldHeight)
+            } else {
+                make.height.equalTo(Constants.offsetOfEachUIComponents)
+            }
         }
         addClothesScrollView.setContentOffset(CGPoint(x: .zero, y: 0), animated: true)
     }
