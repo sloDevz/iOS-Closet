@@ -50,7 +50,7 @@
 		F1DE02812A235525007F9FF3 /* PickingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE02802A235525007F9FF3 /* PickingItemViewController.swift */; };
 		F1DE02862A24DAE3007F9FF3 /* ClothesDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE02852A24DAE3007F9FF3 /* ClothesDataProtocol.swift */; };
 		F1DE02882A24DB51007F9FF3 /* StyleSetDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE02872A24DB51007F9FF3 /* StyleSetDataProtocol.swift */; };
-		F1DE028A2A25C724007F9FF3 /* AddClothesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE02892A25C724007F9FF3 /* AddClothesViewController.swift */; };
+		F1DE028A2A25C724007F9FF3 /* EditClothesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE02892A25C724007F9FF3 /* EditClothesViewController.swift */; };
 		F1DE028C2A25D232007F9FF3 /* PhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE028B2A25D232007F9FF3 /* PhotoButton.swift */; };
 		F1DE028E2A2629FE007F9FF3 /* MainColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE028D2A2629FE007F9FF3 /* MainColor.swift */; };
 		F1DE02902A262D64007F9FF3 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE028F2A262D63007F9FF3 /* Material.swift */; };
@@ -102,7 +102,7 @@
 		F1DE02802A235525007F9FF3 /* PickingItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickingItemViewController.swift; sourceTree = "<group>"; };
 		F1DE02852A24DAE3007F9FF3 /* ClothesDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesDataProtocol.swift; sourceTree = "<group>"; };
 		F1DE02872A24DB51007F9FF3 /* StyleSetDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetDataProtocol.swift; sourceTree = "<group>"; };
-		F1DE02892A25C724007F9FF3 /* AddClothesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClothesViewController.swift; sourceTree = "<group>"; };
+		F1DE02892A25C724007F9FF3 /* EditClothesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClothesViewController.swift; sourceTree = "<group>"; };
 		F1DE028B2A25D232007F9FF3 /* PhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoButton.swift; sourceTree = "<group>"; };
 		F1DE028D2A2629FE007F9FF3 /* MainColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainColor.swift; sourceTree = "<group>"; };
 		F1DE028F2A262D63007F9FF3 /* Material.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
@@ -262,7 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				F1831CDB2A1B59C10050D50F /* ClothesViewController.swift */,
-				F1DE02892A25C724007F9FF3 /* AddClothesViewController.swift */,
+				F1DE02892A25C724007F9FF3 /* EditClothesViewController.swift */,
 				F18BD8932B0F607B00B72A8E /* ClothesDetailViewController.swift */,
 			);
 			path = Controller;
@@ -327,7 +327,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					F1188BF42A15EA47002B0835 = {
 						CreatedOnToolsVersion = 14.3;
@@ -400,7 +400,7 @@
 				F1831CEE2A1D237F0050D50F /* ClothesHeaderView.swift in Sources */,
 				F18BD8942B0F607B00B72A8E /* ClothesDetailViewController.swift in Sources */,
 				F1188BF92A15EA47002B0835 /* AppDelegate.swift in Sources */,
-				F1DE028A2A25C724007F9FF3 /* AddClothesViewController.swift in Sources */,
+				F1DE028A2A25C724007F9FF3 /* EditClothesViewController.swift in Sources */,
 				F18D9E8B2A20E1BF00B3BFF5 /* Preview.swift in Sources */,
 				F1831CCD2A1A5E9C0050D50F /* UIFont+.swift in Sources */,
 				F1188C122A16090A002B0835 /* Clothes.swift in Sources */,
@@ -438,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -499,6 +500,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

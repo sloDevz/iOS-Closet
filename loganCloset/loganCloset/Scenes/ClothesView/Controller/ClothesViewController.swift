@@ -236,7 +236,7 @@ extension ClothesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         if indexPath.item == .zero {
-            let addClothesVC = AddClothesViewController()
+            let addClothesVC = EditClothesViewController()
             addClothesVC.selectedCategoryIndex = indexPath.section
             addClothesVC.delegate = self
             addClothesVC.modalPresentationStyle = .fullScreen

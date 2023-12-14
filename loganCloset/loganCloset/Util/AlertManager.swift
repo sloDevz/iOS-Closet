@@ -29,7 +29,7 @@ final class AlertManager {
         viewController.present(alertController, animated: true)
     }
 
-    static func presentMessageAlert(viewController: UIViewController, title: String?, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
+    static func presentMessageAlert(viewController: UIViewController, title: String?, message: String?, handler: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         let action = UIAlertAction(title: "확인", style: .default,handler: handler)

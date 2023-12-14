@@ -126,7 +126,7 @@ final class ClothesDetailViewController: UIViewController, ClothesDataProtocol {
 
     @objc
     private func editButtonTapped() {
-        let addClothesVC = AddClothesViewController(eiditFrom: selectedItem)
+        let addClothesVC = EditClothesViewController(eiditFrom: selectedItem)
         addClothesVC.delegate = self
         addClothesVC.modalPresentationStyle = .fullScreen
         present(addClothesVC, animated: true)

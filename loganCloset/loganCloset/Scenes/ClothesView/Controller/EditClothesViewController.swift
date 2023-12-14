@@ -1,5 +1,5 @@
 //
-//  AddClothesViewController.swift
+//  EditClothesViewController.swift
 //  loganCloset
 //
 //  Created by DONGWOOK SEO on 2023/05/30.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import PhotosUI
 
-final class AddClothesViewController: UIViewController {
+final class EditClothesViewController: UIViewController {
 
     // MARK: - Constants
     enum Constants {
@@ -148,7 +148,7 @@ final class AddClothesViewController: UIViewController {
         let button = UIButton()
         let titlefont = UIFont.importedUIFont(name: .pretendardLight, fontSize: Constants.confirmButtonFontSize)
         button.backgroundColor = .clear
-        button.setTitle("제거하기", for: .normal)
+        button.setTitle("삭제하기", for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.setTitleColor(.cyan, for: .selected)
         button.setTitleColor(.cyan, for: .highlighted)
@@ -266,7 +266,7 @@ final class AddClothesViewController: UIViewController {
             AlertManager.presentMessageAlert(
                 viewController: self,
                 title: "수정완료",
-                message: "수정했습니다."
+                message: nil
             ) { _ in
                 self.dismiss(animated: true)
             }
@@ -283,10 +283,10 @@ final class AddClothesViewController: UIViewController {
 
     @objc
     private func deleteButtonTapped() {
-        AlertManager.popAlertWithConfirmAndCancel(viewController: self, title: "삭제하기", message: "정말로 삭제하시겠습니까?", doneTitle: "삭제하기", canelTitle: "취소") { [ weak self ] _ in
+        AlertManager.popAlertWithConfirmAndCancel(viewController: self, title: "정말로 삭제하시겠습니까?", message: "주의:삭제된 옷은 복구되지 않습니다", doneTitle: "삭제하기", canelTitle: "취소") { [ weak self ] _ in
             guard let self = self else { return }
             delegate?.updateClothesData(data: itemForEdit, flag: true)
-            AlertManager.presentMessageAlert(viewController: self, title: "삭제완료", message: "아이템을 삭제했습니다") { _ in
+            AlertManager.presentMessageAlert(viewController: self, title: "삭제했습니다.", message: nil) { _ in
                 self.dismiss(animated: true)
             }
         }
@@ -445,7 +445,7 @@ final class AddClothesViewController: UIViewController {
 
 }
 
-extension AddClothesViewController: PHPickerViewControllerDelegate {
+extension EditClothesViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         photoPicker.dismiss(animated: true)
 
@@ -462,7 +462,7 @@ extension AddClothesViewController: PHPickerViewControllerDelegate {
     }
 }
 
-extension AddClothesViewController {
+extension EditClothesViewController {
 
     private func setKeyboardNotification() {
         NotificationCenter.default.addObserver(
@@ -510,7 +510,7 @@ extension AddClothesViewController {
 
 }
 
-extension AddClothesViewController: UITextFieldDelegate {
+extension EditClothesViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -540,7 +540,7 @@ extension AddClothesViewController: UITextFieldDelegate {
 
 }
 
-extension AddClothesViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+extension EditClothesViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -581,7 +581,7 @@ extension AddClothesViewController: UIPickerViewDataSource, UIPickerViewDelegate
 
 }
 
-extension AddClothesViewController {
+extension EditClothesViewController {
 
     private func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -601,7 +601,7 @@ import SwiftUI
 struct ViewControllerName_Previews: PreviewProvider {
     static var previews: some View { Container().edgesIgnoringSafeArea(.all) }
     struct Container: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController { return AddClothesViewController() }
+        func makeUIViewController(context: Context) -> UIViewController { return EditClothesViewController() }
         func updateUIViewController(_ uiViewController: UIViewController,context: Context) { }
     }
 }
