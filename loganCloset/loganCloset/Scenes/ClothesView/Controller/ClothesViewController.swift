@@ -32,7 +32,6 @@ final class ClothesViewController: UIViewController {
 
     // MARK: - Properties
     private var clothesManager: ClothesManager?
-    private var itemCategories: [ClothesCategory] = []
     private lazy var dataSource: DataSource = configureDataSource()
 
     // MARK: - UI Components
@@ -62,10 +61,6 @@ final class ClothesViewController: UIViewController {
     init(clothesManager: ClothesManager? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.clothesManager = clothesManager
-
-        var categories = ClothesCategory.allCases
-        categories.removeFirst()
-        self.itemCategories = categories
     }
 
     required init?(coder: NSCoder) {
@@ -170,7 +165,6 @@ final class ClothesViewController: UIViewController {
             collectionView: UICollectionView,
             kind: String,
             indexPath: IndexPath) -> UICollectionReusableView? in
-
             guard let supplementaryView = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind, withReuseIdentifier: ClothesHeaderView.reuseableIdentifier,
                 for: indexPath) as? ClothesHeaderView else
@@ -178,8 +172,8 @@ final class ClothesViewController: UIViewController {
                 fatalError("Cannot create header view")
             }
 
-            let sections = ClothesCategory.allCases
-            let headerTitle = sections[indexPath.section + 1].rawValue
+            let sections = ClothesCategory.categories
+            let headerTitle = sections[indexPath.section].rawValue
             supplementaryView.setHeaderTitle(headerTitle)
 
             return supplementaryView
@@ -211,15 +205,19 @@ final class ClothesViewController: UIViewController {
     private func applySnapShot(animation: Bool) {
         guard let clothesManager else { return }
         var snapShot = SnapShot()
-        itemCategories.forEach { category in
+        let categories = ClothesCategory.categories
+        categories.forEach { category in
             let itemForAddButton = Clothes(
                 itemImage: UIImage(systemName: "plus")!,
                 clothesCategory: .none,
                 season: .all
             )
-            guard let items = clothesManager.fetchCloset(of: category) else { return }
+            var categoryItems: [Clothes] = []
+            if let items = clothesManager.fetchCloset(of: category){
+                categoryItems = items
+            }
             snapShot.appendSections([category])
-            snapShot.appendItems([itemForAddButton] + items)
+            snapShot.appendItems([itemForAddButton] + categoryItems)
         }
         dataSource.apply(snapShot, animatingDifferences: animation)
     }
@@ -243,9 +241,10 @@ extension ClothesViewController: UICollectionViewDelegate {
             present(addClothesVC, animated: true)
         } else {
             guard let clothesManager else { return }
+            let categories = ClothesCategory.categories
             let section = indexPath.section
             let itemIndex = indexPath.item - 1
-            let selectedCategory = itemCategories[section]
+            let selectedCategory = categories[section]
             guard let items = clothesManager.fetchCloset(of: selectedCategory) else { return }
             let selectedItem = items[itemIndex]
             let itemDetailVC = ClothesDetailViewController(
