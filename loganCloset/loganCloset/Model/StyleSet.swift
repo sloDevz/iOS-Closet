@@ -9,11 +9,10 @@ import UIKit
 
 struct StyleSet: Hashable {
 
+    let identifier = UUID()
     let name: String
     let items: [Clothes]
     let genDate: Date
-    let identifier = UUID()
-    var backgroundImage: UIImage? = nil
 
     func StyleSetItem(of parts: StyleSetCategory) -> [Clothes]? {
         let styleItems = items.filter { item in

@@ -31,7 +31,6 @@ final class DetailStyleViewController: UIViewController {
 
     // MARK: - Properties
     private var styleSet: StyleSet?
-    private var backgroundImage: UIImage?
     private lazy var dataSource: DataSource = configureDataSource()
     private var shouldSwapItem = true
 
@@ -56,7 +55,6 @@ final class DetailStyleViewController: UIViewController {
     init(styleSet: StyleSet? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.styleSet = styleSet
-        self.backgroundImage = styleSet?.backgroundImage
     }
 
     required init?(coder: NSCoder) {
@@ -68,11 +66,6 @@ final class DetailStyleViewController: UIViewController {
     // MARK: - Private
     private func setupUI() {
         view.backgroundColor = .systemBackground
-
-        guard let backgroundImage  else { return }
-        let background = UIImageView(image: backgroundImage)
-        background.contentMode = .scaleAspectFill
-        styleDetailCollectionView.backgroundView = background
     }
 
     private func setHierarchy() {

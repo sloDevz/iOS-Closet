@@ -22,14 +22,8 @@ final class AddStyleSetViewController: UIViewController {
         static let accessoryAddButtonHStackViewSpacing: CGFloat = 10
 
         static let navigationBarbuttonItemDoneTitle: String = "완료"
-
-        static let backgroundSelectingButtonIconName: String = "backgroundIcon"
-        static let backgroundSelectingButtonNilIconName: String = "person.and.background.dotted"
-
         static let alertActionTitle:String = "확인"
 
-        static let selectBackgroundButtonLeadingInset: CGFloat = 20
-        static let selectBackgroundButtonWidthHeight: CGFloat = 50
         static let buttonWidthHeightMulitiplyForClothes: CGFloat = 0.2
         static let buttonWidthHeightMulitiplyForAccessory: CGFloat = 0.1
         static let accessoryAddButtonHStackViewBottomInset: CGFloat = 25.0
@@ -55,16 +49,8 @@ final class AddStyleSetViewController: UIViewController {
     var delegate: StyleSetDataProtocol?
     var clotehsManager: ClothesManager?
     var currentSelectedItemButton: ItemImageButton?
-    var selectedBackground: UIImage?
-    private lazy var photoPicker: PHPickerViewController = {
-        let picker = PHPickerViewController(configuration: createPHPickerConfiguration())
-        picker.delegate = self
-        return picker
-    }()
 
     // MARK: - UI Components
-    private let selectBackgroundbutton = UIButton()
-
     lazy var clothesButtonContainer: UIView = {
         let view = UIView()
         return view
@@ -159,9 +145,6 @@ final class AddStyleSetViewController: UIViewController {
         accessoryAddButtons.forEach { button in
             button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
         }
-
-        selectBackgroundbutton.setImage(UIImage(named: Constant.backgroundSelectingButtonIconName) ?? UIImage(systemName: Constant.backgroundSelectingButtonNilIconName), for: .normal)
-        selectBackgroundbutton.addTarget(self, action: #selector(selectBackgroundbuttonTapped), for: .touchUpInside)
     }
 
     private func presentMessageAlert(title: String?, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
@@ -182,7 +165,6 @@ final class AddStyleSetViewController: UIViewController {
             accessoryAddButtonHStackView.addArrangedSubview(button)
         }
 
-        view.addSubview(selectBackgroundbutton)
         view.addSubview(clothesButtonContainer)
         clothesButtonContainer.addSubview(headAddButton)
         clothesButtonContainer.addSubview(topItemAddButtonHStackView)
@@ -194,12 +176,6 @@ final class AddStyleSetViewController: UIViewController {
     private func configureLayoutConstraint() {
         let tabbarHeight = tabBarController?.tabBar.frame.height ?? 50
         let containerInset = view.frame.height/8
-
-        selectBackgroundbutton.snp.makeConstraints { make in
-            make.bottom.equalTo(footwearAddButton.snp.bottom)
-            make.leading.equalTo(footwearAddButton.snp.trailing).offset(Constant.selectBackgroundButtonLeadingInset)
-            make.width.height.equalTo(Constant.selectBackgroundButtonWidthHeight)
-        }
 
         clothesButtonContainer.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(containerInset)
@@ -244,11 +220,6 @@ final class AddStyleSetViewController: UIViewController {
     }
 
     @objc
-    private func selectBackgroundbuttonTapped() {
-        self.present(photoPicker, animated: true)
-    }
-
-    @objc
     private func doneButtonTapped() {
 
         let selectedClothesItems = clothesitemButtons.compactMap { button in
@@ -283,12 +254,11 @@ final class AddStyleSetViewController: UIViewController {
             let inputedSetTitle = alertController.textFields?.first?.text
 
             if let styleSetTitle = inputedSetTitle?.trimmingCharacters(in: .whitespacesAndNewlines), !styleSetTitle.isEmpty {
-                var newStyleSet = StyleSet(
+                let newStyleSet = StyleSet(
                     name: styleSetTitle,
                     items: allSelectedItems,
                     genDate: Date()
                 )
-                newStyleSet.backgroundImage = self.selectedBackground
                 self.delegate?.updateStyleSetData(data: newStyleSet)
                 self.presentMessageAlert(
                     title: Constant.completedRegestedStyleSetAlertTitle,
@@ -359,23 +329,6 @@ extension AddStyleSetViewController: ClothesDataProtocol {
         currentSelectedItemButton = nil
     }
 
-}
-
-extension AddStyleSetViewController: PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        photoPicker.dismiss(animated: true)
-
-        let itemProvider = results.first?.itemProvider
-
-        if let itemProvider = itemProvider,
-           itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
-                DispatchQueue.main.async {
-                    self.selectedBackground = image as? UIImage
-                }
-            }
-        }
-    }
 }
 
 #if DEBUG
