@@ -38,7 +38,7 @@
 		F18D9E7F2A1F9BC500B3BFF5 /* LatestStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E7E2A1F9BC500B3BFF5 /* LatestStyleView.swift */; };
 		F18D9E812A1FC13400B3BFF5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E802A1FC13400B3BFF5 /* Constants.swift */; };
 		F18D9E832A20896100B3BFF5 /* EmptyViewGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E822A20896100B3BFF5 /* EmptyViewGuide.swift */; };
-		F18D9E852A20A30F00B3BFF5 /* DetailStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E842A20A30F00B3BFF5 /* DetailStyleViewController.swift */; };
+		F18D9E852A20A30F00B3BFF5 /* StyleSetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E842A20A30F00B3BFF5 /* StyleSetDetailViewController.swift */; };
 		F18D9E892A20CB0F00B3BFF5 /* StyleItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */; };
 		F18D9E8B2A20E1BF00B3BFF5 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E8A2A20E1BF00B3BFF5 /* Preview.swift */; };
 		F18D9E8D2A2234E100B3BFF5 /* StyleSetCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E8C2A2234E100B3BFF5 /* StyleSetCategory.swift */; };
@@ -90,7 +90,7 @@
 		F18D9E7E2A1F9BC500B3BFF5 /* LatestStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestStyleView.swift; sourceTree = "<group>"; };
 		F18D9E802A1FC13400B3BFF5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F18D9E822A20896100B3BFF5 /* EmptyViewGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewGuide.swift; sourceTree = "<group>"; };
-		F18D9E842A20A30F00B3BFF5 /* DetailStyleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStyleViewController.swift; sourceTree = "<group>"; };
+		F18D9E842A20A30F00B3BFF5 /* StyleSetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetDetailViewController.swift; sourceTree = "<group>"; };
 		F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleItemCell.swift; sourceTree = "<group>"; };
 		F18D9E8A2A20E1BF00B3BFF5 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		F18D9E8C2A2234E100B3BFF5 /* StyleSetCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetCategory.swift; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				F1831CDD2A1B59FC0050D50F /* StyleSetViewController.swift */,
-				F18D9E842A20A30F00B3BFF5 /* DetailStyleViewController.swift */,
+				F18D9E842A20A30F00B3BFF5 /* StyleSetDetailViewController.swift */,
 				F18D9E8E2A22FC2000B3BFF5 /* AddStyleSetViewController.swift */,
 				F1DE02802A235525007F9FF3 /* PickingItemViewController.swift */,
 			);
@@ -415,7 +415,7 @@
 				F1188BFB2A15EA47002B0835 /* SceneDelegate.swift in Sources */,
 				F1831CDE2A1B59FC0050D50F /* StyleSetViewController.swift in Sources */,
 				F1DE028E2A2629FE007F9FF3 /* MainColor.swift in Sources */,
-				F18D9E852A20A30F00B3BFF5 /* DetailStyleViewController.swift in Sources */,
+				F18D9E852A20A30F00B3BFF5 /* StyleSetDetailViewController.swift in Sources */,
 				F18D9E812A1FC13400B3BFF5 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

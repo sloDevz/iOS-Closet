@@ -195,7 +195,7 @@ extension StyleSetViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let styleSet = dataSource.itemIdentifier(for: indexPath) else { return }
         navigationController?.pushViewController(
-            DetailStyleViewController(styleSet: styleSet),
+            StyleSetDetailViewController(styleSet: styleSet),
             animated: true
         )
     }

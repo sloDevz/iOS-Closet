@@ -1,5 +1,5 @@
 //
-//  DetailStyleViewController.swift
+//  StyleSetDetailViewController.swift
 //  loganCloset
 //
 //  Created by DONGWOOK SEO on 2023/05/26.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class DetailStyleViewController: UIViewController {
+final class StyleSetDetailViewController: UIViewController {
 
     // MARK: - Constants
     private typealias DataSource = UICollectionViewDiffableDataSource<StyleSetCategory, Clothes>
@@ -212,7 +212,7 @@ final class DetailStyleViewController: UIViewController {
 
 }
 
-extension DetailStyleViewController: UICollectionViewDelegate {
+extension StyleSetDetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedSection = StyleSetCategory.allCases[indexPath.section]
         if selectedSection == StyleSetCategory.body {
@@ -228,7 +228,7 @@ struct DetailStyleViewController_Previews: PreviewProvider {
     static var previews: some View { Container().edgesIgnoringSafeArea(.all) }
     struct Container: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            return DetailStyleViewController(
+            return StyleSetDetailViewController(
                 styleSet: ClothesManager().fetchStyleSets()[0]
             )
         }
