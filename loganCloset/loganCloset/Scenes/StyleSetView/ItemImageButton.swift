@@ -11,8 +11,12 @@ final class ItemImageButton: UIButton {
 
     // MARK: - Constants
     enum Constants {
-        static let hangerImageName: String = "hanger_icon"
-        static let hangerImageNilName: String = "tshirt"
+        static let hatIconName: String = "HatIcon"
+        static let tshirtsIconName: String = "TshirtsIcon"
+        static let outerIconName: String = "OuterIcon"
+        static let bottomIconName: String = "BottomIcon"
+        static let shoesIconName: String = "ShoesIcon"
+        static let iconNilName: String = "tshirt"
         static let accessoryImageName: String = "accessory_Icon"
         static let accessoryImageNilName: String = "eyeglasses"
 
@@ -28,7 +32,12 @@ final class ItemImageButton: UIButton {
     var clothes: Clothes?
 
     // MARK: - UI Components
-    private var hangerImage = UIImage(named: "hanger_icon") ?? UIImage(systemName: "tshirt")
+    private var iconNillIamge = UIImage(systemName: "tshirt")
+    private var hatIconImage = UIImage(named: "HatIcon")
+    private var tshirtsIconImage = UIImage(named: "TshirtsIcon")
+    private var outerIconImage = UIImage(named: "OuterIcon")
+    private var bottomIconImage = UIImage(named: "BottomIcon")
+    private var shoesIconImage = UIImage(named: "ShoesIcon")
     private var accessoryImage = UIImage(named: "accessory_Icon") ?? UIImage(systemName: "eyeglasses")
 
     // MARK: - LifeCycle
@@ -45,10 +54,20 @@ final class ItemImageButton: UIButton {
         self.init(frame: .zero)
         self.category = buttonFor
         switch buttonFor {
+        case.hat:
+            self.setImage(hatIconImage, for: .normal)
+        case.top:
+            self.setImage(tshirtsIconImage, for: .normal)
+        case.outer:
+            self.setImage(outerIconImage, for: .normal)
+        case.bottom:
+            self.setImage(bottomIconImage, for: .normal)
+        case .footWaer:
+            self.setImage(shoesIconImage, for: .normal)
         case .accessory:
             self.setImage(accessoryImage, for: .normal)
-        default:
-            self.setImage(hangerImage, for: .normal)
+        case .none:
+            self.setImage(iconNillIamge, for: .normal)
         }
 
     }
