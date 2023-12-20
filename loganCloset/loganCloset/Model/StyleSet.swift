@@ -10,9 +10,8 @@ import UIKit
 struct StyleSet: Hashable {
 
     let identifier = UUID()
-    let name: String
-    let items: [Clothes]
-    let genDate: Date
+    let name: String //필요
+    let items: [Clothes] //UUID만 필요
 
     func StyleSetItem(of parts: StyleSetCategory) -> [Clothes]? {
         let styleItems = items.filter { item in

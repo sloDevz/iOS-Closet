@@ -33,7 +33,7 @@ final class ItemImageButton: UIButton {
 
     // MARK: - UI Components
     private var iconNillIamge = UIImage(systemName: "tshirt")
-    private var hatIconImage = UIImage(named: "HatIcon")
+    private var hatIconImage = UIImage(named: "HeadIcon")
     private var tshirtsIconImage = UIImage(named: "TshirtsIcon")
     private var outerIconImage = UIImage(named: "OuterIcon")
     private var bottomIconImage = UIImage(named: "BottomIcon")
