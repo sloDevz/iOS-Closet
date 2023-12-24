@@ -141,30 +141,30 @@ final class ClothesManager {
                 dummyCloset[10],
                 dummyCloset[4],
                 dummyCloset[7]
-            ],
-            genDate: Date()),
+            ]
+            ),
         StyleSet(
             name: "물놀이 갈 때 입을 옷",
             items: [
                 dummyCloset[11],
                 dummyCloset[1],
                 dummyCloset[9]
-            ],
-            genDate: Date()),
+            ]
+            ),
         StyleSet(
             name: "헬스장 코디",
             items: [
                 dummyCloset[5],
                 dummyCloset[3],
                 dummyCloset[7]
-            ],
-            genDate: Date()),
+            ]
+            ),
         StyleSet(
             name: "필승 면접박살 코디",
             items: [
                 dummyCloset[9]
-            ],
-            genDate: Date())
+            ]
+            )
     ]
 
 }

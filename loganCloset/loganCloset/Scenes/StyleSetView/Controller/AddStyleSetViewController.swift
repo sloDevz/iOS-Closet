@@ -256,8 +256,7 @@ final class AddStyleSetViewController: UIViewController {
             if let styleSetTitle = inputedSetTitle?.trimmingCharacters(in: .whitespacesAndNewlines), !styleSetTitle.isEmpty {
                 let newStyleSet = StyleSet(
                     name: styleSetTitle,
-                    items: allSelectedItems,
-                    genDate: Date()
+                    items: allSelectedItems
                 )
                 self.delegate?.updateStyleSetData(data: newStyleSet)
                 self.presentMessageAlert(
