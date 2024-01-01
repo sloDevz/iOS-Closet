@@ -79,7 +79,6 @@ final class StyleSetViewController: UIViewController {
         setCollectionView()
         configureCollectionViewLayoutConstraint()
         applySnapShot(animation: false)
-        navigationItem.backButtonTitle = "돌아가기"
     }
 
     // MARK: - Methodes
@@ -96,6 +95,8 @@ final class StyleSetViewController: UIViewController {
     private func setNavigationBarItems() {
         navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: addStyleButton)
+        navigationItem.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = .black
     }
 
     private func setCollectionView() {
