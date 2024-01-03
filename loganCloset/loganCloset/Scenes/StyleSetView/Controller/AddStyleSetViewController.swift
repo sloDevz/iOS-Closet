@@ -89,7 +89,7 @@ final class AddStyleSetViewController: UIViewController {
 
         return buttons
     }()
-    lazy var clothesitemButtons: [ItemImageButton] = [
+    lazy var clothesItemButtons: [ItemImageButton] = [
         headAddButton,
         outerAddButton,
         topAddButton,
@@ -140,7 +140,7 @@ final class AddStyleSetViewController: UIViewController {
             target: self,
             action: #selector(doneButtonTapped)
         )
-        clothesitemButtons.forEach { button in
+        clothesItemButtons.forEach { button in
             button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
         }
         accessoryAddButtons.forEach { button in
@@ -223,7 +223,7 @@ final class AddStyleSetViewController: UIViewController {
     @objc
     private func doneButtonTapped() {
 
-        let selectedClothesItems = clothesitemButtons.compactMap { button in
+        let selectedClothesItems = clothesItemButtons.compactMap { button in
             button.clothes
         }
         let selectedAccessoies = accessoryAddButtons.compactMap { button in
