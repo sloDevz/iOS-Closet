@@ -24,12 +24,6 @@ final class ItemImageButton: UIButton {
 
     // MARK: - UI Components
     private var iconNillIamge = UIImage(systemName: "tshirt")
-    private var hatIconImage = UIImage.headIcon
-    private var tshirtsIconImage = UIImage.tshirtsIcon
-    private var outerIconImage : UIImage = .outerIcon
-    private var bottomIconImage : UIImage = .bottomIcon
-    private var shoesIconImage : UIImage = .shoesIcon
-    private var accessoryImage : UIImage = .accessoryIcon
 
     // MARK: - LifeCycle
     private override init(frame: CGRect) {
@@ -46,17 +40,17 @@ final class ItemImageButton: UIButton {
         self.category = buttonFor
         switch buttonFor {
         case.hat:
-            self.setImage(hatIconImage, for: .normal)
+            self.setImage(.headIcon, for: .normal)
         case.top:
-            self.setImage(tshirtsIconImage, for: .normal)
+            self.setImage(.tshirtsIcon, for: .normal)
         case.outer:
-            self.setImage(outerIconImage, for: .normal)
+            self.setImage(.outerIcon, for: .normal)
         case.bottom:
-            self.setImage(bottomIconImage, for: .normal)
+            self.setImage(.bottomIcon, for: .normal)
         case .footWaer:
-            self.setImage(shoesIconImage, for: .normal)
+            self.setImage(.shoesIcon, for: .normal)
         case .accessory:
-            self.setImage(accessoryImage, for: .normal)
+            self.setImage(.accessoryIcon, for: .normal)
         case .none:
             self.setImage(iconNillIamge, for: .normal)
         }
