@@ -109,7 +109,7 @@ final class ClothesDetailViewController: UIViewController, ClothesDataProtocol {
         }
     }
     private func setUIComponents() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(editButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(editButtonTapped))
         setItemInfoUIComponents()
     }
 

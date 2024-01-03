@@ -66,6 +66,8 @@ final class StyleSetDetailViewController: UIViewController {
     // MARK: - Private
     private func setupUI() {
         view.backgroundColor = .systemBackground
+        let editButton = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(editButtonTapped))
+        navigationItem.rightBarButtonItem = editButton
     }
 
     private func setHierarchy() {
@@ -208,6 +210,11 @@ final class StyleSetDetailViewController: UIViewController {
             snapShot.appendItems(categorizedItem)
         }
         dataSource.apply(snapShot)
+    }
+
+    @objc
+    func editButtonTapped() {
+        print(#function)
     }
 
 }
