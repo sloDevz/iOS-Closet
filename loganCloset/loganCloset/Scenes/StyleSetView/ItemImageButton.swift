@@ -11,15 +11,6 @@ final class ItemImageButton: UIButton {
 
     // MARK: - Constants
     enum Constants {
-        static let hatIconName: String = "HatIcon"
-        static let tshirtsIconName: String = "TshirtsIcon"
-        static let outerIconName: String = "OuterIcon"
-        static let bottomIconName: String = "BottomIcon"
-        static let shoesIconName: String = "ShoesIcon"
-        static let iconNilName: String = "tshirt"
-        static let accessoryImageName: String = "accessory_Icon"
-        static let accessoryImageNilName: String = "eyeglasses"
-
         static let ItemImageButtonBorderWidth: CGFloat = 3
         static let ItemImageButtonCornerRadius: CGFloat = 16
         static let ItemImageButtonShadowOffset: CGFloat = 1
@@ -33,12 +24,12 @@ final class ItemImageButton: UIButton {
 
     // MARK: - UI Components
     private var iconNillIamge = UIImage(systemName: "tshirt")
-    private var hatIconImage = UIImage(named: "HeadIcon")
-    private var tshirtsIconImage = UIImage(named: "TshirtsIcon")
-    private var outerIconImage = UIImage(named: "OuterIcon")
-    private var bottomIconImage = UIImage(named: "BottomIcon")
-    private var shoesIconImage = UIImage(named: "ShoesIcon")
-    private var accessoryImage = UIImage(named: "accessory_Icon") ?? UIImage(systemName: "eyeglasses")
+    private var hatIconImage = UIImage.headIcon
+    private var tshirtsIconImage = UIImage.tshirtsIcon
+    private var outerIconImage : UIImage = .outerIcon
+    private var bottomIconImage : UIImage = .bottomIcon
+    private var shoesIconImage : UIImage = .shoesIcon
+    private var accessoryImage : UIImage = .accessoryIcon
 
     // MARK: - LifeCycle
     private override init(frame: CGRect) {
