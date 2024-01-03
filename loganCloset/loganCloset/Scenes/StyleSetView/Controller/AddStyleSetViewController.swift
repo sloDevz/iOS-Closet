@@ -46,6 +46,7 @@ final class AddStyleSetViewController: UIViewController {
     }
 
     // MARK: - Properties
+    var selectedStyleSet: StyleSet?
     var delegate: StyleSetDataProtocol?
     var clotehsManager: ClothesManager?
     var currentSelectedItemButton: ItemImageButton?
@@ -312,8 +313,8 @@ final class AddStyleSetViewController: UIViewController {
         guard let category = sender.category,
               let clotehsManager else { return }
         currentSelectedItemButton = sender
-        let ItemPickingVC = PickingItemViewController(category: category,
-                                                      clothesManager: clotehsManager)
+        let items = clotehsManager.fetchCloset(of: category)
+        let ItemPickingVC = PickingItemViewController(items: items)
         ItemPickingVC.delegate = self
         self.present(ItemPickingVC, animated: true)
     }

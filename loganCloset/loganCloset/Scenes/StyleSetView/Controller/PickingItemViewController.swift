@@ -38,8 +38,7 @@ final class PickingItemViewController: UIViewController {
 
     // MARK: - Properties
     var delegate: ClothesDataProtocol?
-    var category: ClothesCategory?
-    var clothesManager: ClothesManager?
+    var items: [Clothes]?
     private lazy var dataSource: DataSource = configureDataSource()
     var selectedItem: Clothes?
     var selectedCellIndexPath: IndexPath?
@@ -80,10 +79,9 @@ final class PickingItemViewController: UIViewController {
         applySnapShot(animation: false)
     }
 
-    init(category: ClothesCategory? = nil, clothesManager: ClothesManager) {
+    init(items: [Clothes]?) {
         super.init(nibName: nil, bundle: nil)
-        self.clothesManager = clothesManager
-        self.category = category
+        self.items = items
     }
 
     required init?(coder: NSCoder) {
@@ -164,17 +162,16 @@ final class PickingItemViewController: UIViewController {
     }
 
     private func applySnapShot(animation: Bool) {
-        guard let category,
-              let selectedCategoryItems = clothesManager?.fetchCloset(of: category)
+        guard let items
         else {
-                  emptyGuideView.isHidden = false
-                  return
-              }
+            emptyGuideView.isHidden = false
+            return
+        }
         emptyGuideView.isHidden = true
 
         var snapShot = SnapShot()
         snapShot.appendSections([Section.main])
-        snapShot.appendItems(selectedCategoryItems)
+        snapShot.appendItems(items)
 
         dataSource.apply(snapShot, animatingDifferences: animation)
     }
@@ -228,15 +225,3 @@ extension PickingItemViewController: UICollectionViewDelegate {
     }
 
 }
-
-
-#if DEBUG
-import SwiftUI
-struct PickingItemViewController_Previews: PreviewProvider {
-    static var previews: some View { Container().edgesIgnoringSafeArea(.all) }
-    struct Container: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController { return PickingItemViewController(category: .footWaer,clothesManager: ClothesManager()) }
-        func updateUIViewController(_ uiViewController: UIViewController,context: Context) { }
-    }
-}
-#endif
