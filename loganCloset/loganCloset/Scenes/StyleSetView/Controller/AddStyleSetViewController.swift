@@ -48,7 +48,7 @@ final class AddStyleSetViewController: UIViewController {
     // MARK: - Properties
     var selectedStyleSet: StyleSet?
     var delegate: StyleSetDataProtocol?
-    var clotehsManager: ClothesManager?
+    var clothesManager: ClothesManager?
     var currentSelectedItemButton: ItemImageButton?
 
     // MARK: - UI Components
@@ -123,7 +123,7 @@ final class AddStyleSetViewController: UIViewController {
 
     init(clotheManager: ClothesManager) {
         super.init(nibName: nil, bundle: nil)
-        clotehsManager = clotheManager
+        clothesManager = clotheManager
     }
     
     required init?(coder: NSCoder) {
@@ -311,9 +311,9 @@ final class AddStyleSetViewController: UIViewController {
     @objc
     private func itemAddButtonTapped(sender: ItemImageButton) {
         guard let category = sender.category,
-              let clotehsManager else { return }
+              let clothesManager else { return }
         currentSelectedItemButton = sender
-        let items = clotehsManager.fetchCloset(of: category)
+        let items = clothesManager.fetchCloset(of: category)
         let ItemPickingVC = PickingItemViewController(items: items)
         ItemPickingVC.delegate = self
         self.present(ItemPickingVC, animated: true)
