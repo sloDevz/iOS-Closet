@@ -11,13 +11,10 @@ import SnapKit
 final class StyleItemCell: UICollectionViewCell {
     // MARK: - Constants
     enum Constants {
-        static let selectedSignImageName: String = "pawprint.fill"
         static let contentContainerCornerRadius: CGFloat = 16
         static let contentContainerShadowOffset: CGFloat = 1
         static let contentContainerShadowOpacity: Float = 0.1
         static let contentContainerShadowRadius: CGFloat = 40
-
-        static let selectedSignEdgeInset: CGFloat = 20
     }
 
     // MARK: - Properties
@@ -27,9 +24,7 @@ final class StyleItemCell: UICollectionViewCell {
     // MARK: - UI Components
     private let selectedSign: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: Constants.selectedSignImageName)
         imageView.tintColor = UIColor.separator
-        imageView.contentMode = .scaleAspectFit
         imageView.isHidden = true
         return imageView
     }()
@@ -85,8 +80,7 @@ final class StyleItemCell: UICollectionViewCell {
 
     private func configureLayout() {
         selectedSign.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.edges.equalToSuperview().inset(Constants.selectedSignEdgeInset)
+            make.edges.equalToSuperview()
         }
         contentContainer.snp.makeConstraints { make in
             make.edges.equalToSuperview()

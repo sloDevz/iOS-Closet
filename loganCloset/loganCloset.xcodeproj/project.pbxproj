@@ -140,8 +140,8 @@
 		F1188BF72A15EA47002B0835 /* loganCloset */ = {
 			isa = PBXGroup;
 			children = (
-				F1DE02842A24DA99007F9FF3 /* Protocol */,
 				F18D9E802A1FC13400B3BFF5 /* Constants.swift */,
+				F1DE02842A24DA99007F9FF3 /* Protocol */,
 				F1831CEA2A1C6F4B0050D50F /* Manager */,
 				F1188C132A160AE8002B0835 /* Util */,
 				F1188C0E2A1608C8002B0835 /* Model */,
