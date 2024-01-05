@@ -288,25 +288,6 @@ final class AddStyleSetViewController: UIViewController {
 
     }
 
-    private func popAlertViewWithTextField(title: String, message: String, placeholder: String,doneTitle: String, canelTitle: String, complition: @escaping (UIAlertAction) -> ()) {
-        let alertController = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-
-        alertController.addTextField { texField in
-            texField.placeholder = placeholder
-        }
-
-        let doneAction = UIAlertAction(title: doneTitle, style: .default,handler: complition)
-        let cancelAction = UIAlertAction(title: canelTitle, style: .cancel)
-
-        alertController.addAction(doneAction)
-        alertController.addAction(cancelAction)
-
-        present(alertController, animated: true)
-    }
 
     @objc
     private func itemAddButtonTapped(sender: ItemImageButton) {
