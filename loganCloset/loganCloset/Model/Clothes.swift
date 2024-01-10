@@ -53,23 +53,16 @@ struct Clothes: Hashable {
         if let item {
             self.itemID = item.itemID
             self.createdDate = item.createdDate
-            self.itemImage = itemImage
-            self.clothesCategory = clothesCategory
-            self.season = season
-            self.mainColor = mainColor
-            self.tags = tags
-            self.brandName = brandName
-            self.material = material
         } else {
             self.itemID = UUID()
             self.createdDate = Date()
-            self.itemImage = itemImage
-            self.clothesCategory = clothesCategory
-            self.season = season
-            self.mainColor = mainColor
-            self.tags = tags
-            self.brandName = brandName
-            self.material = material
         }
+        self.itemImage = itemImage
+        self.clothesCategory = clothesCategory
+        self.season = season
+        self.mainColor = mainColor
+        self.tags = tags
+        self.brandName = brandName
+        self.material = material
     }
 }

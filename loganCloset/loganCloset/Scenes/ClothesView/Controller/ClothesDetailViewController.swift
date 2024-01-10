@@ -141,7 +141,7 @@ extension ClothesDetailViewController {
             clothesManager?.delete(clothes: data)
             navigationController?.popViewController(animated: true)
         } else {
-            clothesManager?.replaceClothes(selectedItem, with: data)
+            clothesManager?.replace(clothes: selectedItem, with: data)
             selectedItem = data
             setItemInfoUIComponents()
         }

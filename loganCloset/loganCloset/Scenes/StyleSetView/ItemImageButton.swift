@@ -20,7 +20,7 @@ final class ItemImageButton: UIButton {
 
     // MARK: - Properties
     var category: ClothesCategory? = nil
-    var clothes: Clothes?
+    var clothes: Clothes? = nil
 
     // MARK: - UI Components
     private var iconNillIamge = UIImage(systemName: "tshirt")

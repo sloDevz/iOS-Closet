@@ -30,7 +30,8 @@ final class StyleSetDetailViewController: UIViewController {
     }
 
     // MARK: - Properties
-    private var styleSet: StyleSet?
+    private var clothesManager: ClothesManager
+    private var selectedStyleSet: StyleSet
     private lazy var dataSource: DataSource = configureDataSource()
     private var shouldSwapItem = true
 
@@ -52,9 +53,10 @@ final class StyleSetDetailViewController: UIViewController {
         applySnapShot(animation: false)
     }
 
-    init(styleSet: StyleSet? = nil) {
+    init(styleSet: StyleSet, clothesManager: ClothesManager) {
+        self.clothesManager = clothesManager
+        self.selectedStyleSet = styleSet
         super.init(nibName: nil, bundle: nil)
-        self.styleSet = styleSet
     }
 
     required init?(coder: NSCoder) {
@@ -142,7 +144,7 @@ final class StyleSetDetailViewController: UIViewController {
         section.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
         return section
     }
-    
+
 
     private func configureDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: styleDetailCollectionView) { collectionView, indexPath, item in
@@ -172,11 +174,10 @@ final class StyleSetDetailViewController: UIViewController {
     }
 
     private func applySnapShot(animation: Bool) {
-        guard let styleSet else { return }
         var snapShot = SnapShot()
 
         let sections = StyleSetCategory.allCases
-        let items = styleSet.items
+        let items = selectedStyleSet.items
 
         sections.forEach { section in
             let categorizedItem = items.filter { item in
@@ -189,11 +190,10 @@ final class StyleSetDetailViewController: UIViewController {
     }
 
     private func applySnapShotWithBodyItemsSwapping (animation: Bool) {
-        guard let styleSet else { return }
         var snapShot = SnapShot()
 
         let sections = StyleSetCategory.allCases
-        let items = styleSet.items
+        let items = selectedStyleSet.items
 
         sections.forEach { section in
             var categorizedItem = items.filter { item in
@@ -214,9 +214,20 @@ final class StyleSetDetailViewController: UIViewController {
 
     @objc
     func editButtonTapped() {
-        print(#function)
+        let editStyleSetViewController = AddStyleSetViewController(clotheManager: clothesManager, styleSet: selectedStyleSet)
+        editStyleSetViewController.delegate = self
+        navigationController?.pushViewController(editStyleSetViewController, animated: true)
     }
 
+}
+
+extension StyleSetDetailViewController: StyleSetDataProtocol {
+    func updateStyleSetData(data: StyleSet?) {
+        guard let newStyleSet = data else { return }
+        clothesManager.replace(styleSet: selectedStyleSet, with: newStyleSet)
+        selectedStyleSet = newStyleSet
+        applySnapShot(animation: false)
+    }
 }
 
 extension StyleSetDetailViewController: UICollectionViewDelegate {
@@ -228,18 +239,3 @@ extension StyleSetDetailViewController: UICollectionViewDelegate {
         }
     }
 }
-
-#if DEBUG
-import SwiftUI
-struct DetailStyleViewController_Previews: PreviewProvider {
-    static var previews: some View { Container().edgesIgnoringSafeArea(.all) }
-    struct Container: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController {
-            return StyleSetDetailViewController(
-                styleSet: ClothesManager().fetchStyleSets()[0]
-            )
-        }
-        func updateUIViewController(_ uiViewController: UIViewController,context: Context) { }
-    }
-}
-#endif

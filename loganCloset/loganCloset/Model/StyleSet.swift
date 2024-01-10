@@ -9,16 +9,29 @@ import UIKit
 
 struct StyleSet: Hashable {
 
-    let identifier = UUID()
+    let identifier: UUID
     let name: String
     let items: [Clothes]
 
-    func StyleSetItem(of parts: StyleSetCategory) -> [Clothes]? {
-        let styleItems = items.filter { item in
-            item.styleSetCategory == parts
+    init(
+        from: StyleSet? = nil,
+        name: String,
+        items: [Clothes]
+    )
+    {
+        if let from {
+            self.identifier = from.identifier
+        } else {
+            identifier = UUID()
         }
-        guard !styleItems.isEmpty else { return nil }
+        self.name = name
+        self.items = items
+    }
 
-        return styleItems
+    func StyleSetItem(of parts: ClothesCategory) -> [Clothes] {
+        let styleItem = items.filter { item in
+            item.clothesCategory == parts
+        }
+        return styleItem
     }
 }

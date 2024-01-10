@@ -35,7 +35,7 @@ final class StyleSetViewController: UIViewController {
     }
 
     // MARK: - Properties
-    private var clothesManager: ClothesManager?
+    private var clothesManager: ClothesManager
     private lazy var dataSource: DataSource = configureDataSource()
     private lazy var myStyleCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
@@ -63,15 +63,19 @@ final class StyleSetViewController: UIViewController {
     }()
 
     // MARK: - LifeCycle
-    init(clothesManager: ClothesManager? = nil) {
-        super.init(nibName: nil, bundle: nil)
+    init(clothesManager: ClothesManager) {
         self.clothesManager = clothesManager
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        applySnapShot(animation: true)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewAppearance()
@@ -163,7 +167,7 @@ final class StyleSetViewController: UIViewController {
 
     private func applySnapShot(animation: Bool) {
         var snapShot = SnapShot()
-        guard let styles = clothesManager?.fetchStyleSets() else { return }
+        let styles = clothesManager.fetchStyleSets()
 
         styles.isEmpty ? (emptyStyleSetGuideView.isHidden = false) : (emptyStyleSetGuideView.isHidden = true)
 
@@ -174,7 +178,6 @@ final class StyleSetViewController: UIViewController {
 
     @objc
     private func addStyleButtonTapped() {
-        guard let clothesManager else { return }
         let vc = AddStyleSetViewController(clotheManager: clothesManager)
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
@@ -185,7 +188,7 @@ extension StyleSetViewController: StyleSetDataProtocol {
 
     func updateStyleSetData(data: StyleSet?) {
         guard let data else { return }
-        clothesManager?.addStyleSet(styleSet: data)
+        clothesManager.add(styleSet: data)
         applySnapShot(animation: true)
     }
 
@@ -196,7 +199,7 @@ extension StyleSetViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let styleSet = dataSource.itemIdentifier(for: indexPath) else { return }
         navigationController?.pushViewController(
-            StyleSetDetailViewController(styleSet: styleSet),
+            StyleSetDetailViewController(styleSet: styleSet, clothesManager: clothesManager),
             animated: true
         )
     }
