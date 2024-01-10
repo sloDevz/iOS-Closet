@@ -121,15 +121,15 @@ final class AddStyleSetViewController: UIViewController {
         configureLayoutConstraint()
     }
 
-    init(clotheManager: ClothesManager) {
+    init(clotheManager: ClothesManager, styleSet: StyleSet? = nil) {
         super.init(nibName: nil, bundle: nil)
         clothesManager = clotheManager
+        selectedStyleSet = styleSet
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 
     // MARK: - Private
     private func setupUI() {
@@ -140,12 +140,34 @@ final class AddStyleSetViewController: UIViewController {
             target: self,
             action: #selector(doneButtonTapped)
         )
-        clothesItemButtons.forEach { button in
-            button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
+
+        if let selectedStyleSet {
+            clothesItemButtons.forEach { button in
+                button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
+                let items = selectedStyleSet.items
+                items.forEach { clothes in
+                    if clothes.clothesCategory == button.category {
+                        button.updateItemData(with: clothes)
+                    }
+                }
+            }
+            var accessories = selectedStyleSet.StyleSetItem(of: .accessory)
+                accessoryAddButtons.forEach { button in
+                button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
+                if !accessories.isEmpty {
+                    let item = accessories.removeFirst()
+                    button.updateItemData(with: item)
+                }
+            }
+        } else {
+            clothesItemButtons.forEach { button in
+                button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
+            }
+            accessoryAddButtons.forEach { button in
+                button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
+            }
         }
-        accessoryAddButtons.forEach { button in
-            button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
-        }
+
     }
 
     private func presentMessageAlert(title: String?, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
@@ -251,35 +273,33 @@ final class AddStyleSetViewController: UIViewController {
 
         let doneAction = UIAlertAction(
             title: Constant.alertConfirmButtonText,
-            style: .default) { _ in
-            let inputedSetTitle = alertController.textFields?.first?.text
+            style: .default) { [weak self] _ in
+                let inputedSetTitle = alertController.textFields?.first?.text
 
-            if let styleSetTitle = inputedSetTitle?.trimmingCharacters(in: .whitespacesAndNewlines), !styleSetTitle.isEmpty {
-                let newStyleSet = StyleSet(
-                    name: styleSetTitle,
-                    items: allSelectedItems
-                )
-                self.delegate?.updateStyleSetData(data: newStyleSet)
-                self.presentMessageAlert(
-                    title: Constant.completedRegestedStyleSetAlertTitle,
-                    message: Constant.completedRegestedStyleSetAlertMessage) { _ in
-                    self.navigationController?.popViewController(animated: true)
+                if let styleSetTitle = inputedSetTitle?.trimmingCharacters(in: .whitespacesAndNewlines), !styleSetTitle.isEmpty {
+                    let newStyleSet = StyleSet(from: self?.selectedStyleSet, name: styleSetTitle, items: allSelectedItems
+                    )
+                    self?.delegate?.updateStyleSetData(data: newStyleSet)
+                    self?.presentMessageAlert(
+                        title: Constant.completedRegestedStyleSetAlertTitle,
+                        message: Constant.completedRegestedStyleSetAlertMessage) { _ in
+                            self?.navigationController?.popViewController(animated: true)
+                        }
                 }
-            }
 
-                self.presentMessageAlert(
+                self?.presentMessageAlert(
                     title: Constant.inputErrorAlertTitle,
                     message: Constant.inputErrorAlertMessage ) { _ in
-                self.present(alertController, animated: true)
-            }
+                        self?.present(alertController, animated: true)
+                    }
 
-        }
+            }
 
         let cancelAction = UIAlertAction(
             title: Constant.cancelActionAlertButtonTitle,
             style: .cancel) { _ in
-            return
-        }
+                return
+            }
 
         alertController.addAction(doneAction)
         alertController.addAction(cancelAction)
@@ -291,8 +311,9 @@ final class AddStyleSetViewController: UIViewController {
 
     @objc
     private func itemAddButtonTapped(sender: ItemImageButton) {
+        print(#function)
         guard let category = sender.category,
-              let clothesManager else { return }
+              let clothesManager else { print("No category"); return }
         currentSelectedItemButton = sender
         let items = clothesManager.fetchCloset(of: category)
         let ItemPickingVC = PickingItemViewController(items: items)

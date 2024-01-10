@@ -38,7 +38,7 @@ final class ClothesManager {
         return styleSets
     }
 
-    func addStyleSet(styleSet: StyleSet?) {
+    func add(styleSet: StyleSet?) {
         guard let styleSet else { return }
         styleSets.append(styleSet)
     }
@@ -53,7 +53,7 @@ final class ClothesManager {
         }
     }
 
-    func replaceClothes(_ oldItem: Clothes, with newItem: Clothes) {
+    func replace(clothes oldItem: Clothes, with newItem: Clothes) {
         if newItem.clothesCategory == oldItem.clothesCategory {
             guard let items = closet[newItem.clothesCategory] else { return }
             let editedItems: [Clothes] = items.map { oldItem in
@@ -70,6 +70,21 @@ final class ClothesManager {
             add(clothes: newItem)
         }
     }
+
+    func replace(styleSet oldItems: StyleSet, with newItems: StyleSet) {
+        if oldItems != newItems {
+            print(#function)
+            let newStyles = styleSets.map { styleSet in
+                if newItems.identifier == styleSet.identifier {
+                    return newItems
+                } else {
+                    return styleSet
+                }
+            }
+            styleSets = newStyles
+        }
+    }
+
 
     func delete(clothes: Clothes) {
         guard var items = closet[clothes.clothesCategory],
