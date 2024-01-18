@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import PhotosUI
 
-final class AddStyleSetViewController: UIViewController {
+final class EditStyleSetViewController: UIViewController {
 
     // MARK: - Constants
     private enum Constant {
@@ -361,7 +361,7 @@ final class AddStyleSetViewController: UIViewController {
 
 }
 
-extension AddStyleSetViewController: ClothesDataProtocol {
+extension EditStyleSetViewController: ClothesDataProtocol {
 
     func updateClothesData(data: Clothes?, flag: Bool) {
         guard let data else { return }
@@ -377,7 +377,7 @@ struct AddStyleSetViewController_Previews: PreviewProvider {
     static var previews: some View { Container().edgesIgnoringSafeArea(.all) }
     struct Container: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            return AddStyleSetViewController(clotheManager: ClothesManager())
+            return EditStyleSetViewController(clotheManager: ClothesManager())
         }
         func updateUIViewController(_ uiViewController: UIViewController,context: Context) { }
     }

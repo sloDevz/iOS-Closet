@@ -42,7 +42,7 @@
 		F18D9E892A20CB0F00B3BFF5 /* StyleItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */; };
 		F18D9E8B2A20E1BF00B3BFF5 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E8A2A20E1BF00B3BFF5 /* Preview.swift */; };
 		F18D9E8D2A2234E100B3BFF5 /* StyleSetCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E8C2A2234E100B3BFF5 /* StyleSetCategory.swift */; };
-		F18D9E8F2A22FC2000B3BFF5 /* AddStyleSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E8E2A22FC2000B3BFF5 /* AddStyleSetViewController.swift */; };
+		F18D9E8F2A22FC2000B3BFF5 /* EditStyleSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18D9E8E2A22FC2000B3BFF5 /* EditStyleSetViewController.swift */; };
 		F1B300422B1708A000445998 /* TitleAndTextLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B300412B1708A000445998 /* TitleAndTextLabelView.swift */; };
 		F1B300442B18A42800445998 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B300432B18A42800445998 /* String+.swift */; };
 		F1DCEEAE2A1F113400ABD806 /* StyleSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */; };
@@ -94,7 +94,7 @@
 		F18D9E882A20CB0F00B3BFF5 /* StyleItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleItemCell.swift; sourceTree = "<group>"; };
 		F18D9E8A2A20E1BF00B3BFF5 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		F18D9E8C2A2234E100B3BFF5 /* StyleSetCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetCategory.swift; sourceTree = "<group>"; };
-		F18D9E8E2A22FC2000B3BFF5 /* AddStyleSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStyleSetViewController.swift; sourceTree = "<group>"; };
+		F18D9E8E2A22FC2000B3BFF5 /* EditStyleSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStyleSetViewController.swift; sourceTree = "<group>"; };
 		F1B300412B1708A000445998 /* TitleAndTextLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndTextLabelView.swift; sourceTree = "<group>"; };
 		F1B300432B18A42800445998 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		F1DCEEAD2A1F113400ABD806 /* StyleSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSetCell.swift; sourceTree = "<group>"; };
@@ -273,7 +273,7 @@
 			children = (
 				F1831CDD2A1B59FC0050D50F /* StyleSetViewController.swift */,
 				F18D9E842A20A30F00B3BFF5 /* StyleSetDetailViewController.swift */,
-				F18D9E8E2A22FC2000B3BFF5 /* AddStyleSetViewController.swift */,
+				F18D9E8E2A22FC2000B3BFF5 /* EditStyleSetViewController.swift */,
 				F1DE02802A235525007F9FF3 /* PickingItemViewController.swift */,
 			);
 			path = Controller;
@@ -393,7 +393,7 @@
 				F18D9E832A20896100B3BFF5 /* EmptyViewGuide.swift in Sources */,
 				F1B300442B18A42800445998 /* String+.swift in Sources */,
 				F1DE02862A24DAE3007F9FF3 /* ClothesDataProtocol.swift in Sources */,
-				F18D9E8F2A22FC2000B3BFF5 /* AddStyleSetViewController.swift in Sources */,
+				F18D9E8F2A22FC2000B3BFF5 /* EditStyleSetViewController.swift in Sources */,
 				F1188BFD2A15EA47002B0835 /* HomeViewController.swift in Sources */,
 				F1831CD22A1B0AD30050D50F /* Season.swift in Sources */,
 				F18D9E892A20CB0F00B3BFF5 /* StyleItemCell.swift in Sources */,
