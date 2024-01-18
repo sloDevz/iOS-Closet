@@ -93,6 +93,13 @@ final class ClothesManager {
         closet[clothes.clothesCategory] = items
     }
 
+    func delete(styleSet: StyleSet) {
+        let newStyleSets = styleSets.filter { style in
+            styleSet.identifier != style.identifier
+        }
+        styleSets = newStyleSets
+    }
+
     func fetchLatestItem() -> Clothes? {
         let items = fetchOrderedItems()
         return items.last

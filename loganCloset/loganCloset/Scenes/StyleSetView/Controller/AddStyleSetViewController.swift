@@ -196,7 +196,7 @@ final class AddStyleSetViewController: UIViewController {
         addStyleSetScrollView.addSubview(contentView)
         contentView.addSubview(clothesButtonContainer)
         contentView.addSubview(accessoryAddButtonHStackView)
-        if let selectedStyleSet {
+        if selectedStyleSet != nil {
             contentView.addSubview(deleteButton)
         }
         clothesButtonContainer.addSubview(headAddButton)
@@ -212,14 +212,13 @@ final class AddStyleSetViewController: UIViewController {
     }
 
     private func configureLayoutConstraint() {
-        let tabbarHeight = tabBarController?.tabBar.frame.height ?? 50
         let containerWidthHeight = view.frame.height/7
         addStyleSetScrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            if let selectedStyleSet {
+            if selectedStyleSet != nil {
                 make.bottom.equalTo(deleteButton.snp.bottom).offset(20)
             } else {
                 make.bottom.equalTo(accessoryAddButtonHStackView.snp.bottom).offset(20)
@@ -257,7 +256,7 @@ final class AddStyleSetViewController: UIViewController {
             make.top.equalTo(footwearAddButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
-        if let selectedStyleSet {
+        if selectedStyleSet != nil {
             deleteButton.snp.makeConstraints { make in
                 make.top.equalTo(accessoryAddButtonHStackView.snp.bottom).offset(35)
                 make.centerX.equalToSuperview()
@@ -308,7 +307,7 @@ final class AddStyleSetViewController: UIViewController {
                 if let styleSetTitle = inputedSetTitle?.trimmingCharacters(in: .whitespacesAndNewlines), !styleSetTitle.isEmpty {
                     let newStyleSet = StyleSet(from: self?.selectedStyleSet, name: styleSetTitle, items: allSelectedItems
                     )
-                    self?.delegate?.updateStyleSetData(data: newStyleSet)
+                    self?.delegate?.updateStyleSetData(data: newStyleSet, flag: false)
                     self?.presentMessageAlert(
                         title: Constant.completedRegestedStyleSetAlertTitle,
                         message: Constant.completedRegestedStyleSetAlertMessage) { _ in
@@ -351,7 +350,13 @@ final class AddStyleSetViewController: UIViewController {
 
     @objc
     private func deleteButtonTapped() {
-        print(#function)
+        AlertManager.popAlertWithConfirmAndCancel(viewController: self, title: "정말 삭제하시겠습니까?", message: "삭제된 StyleSet은 복구할 수 없어요", doneTitle: "삭제", canelTitle: "취소") { [weak self] _ in
+            guard let self = self else { return }
+            delegate?.updateStyleSetData(data: selectedStyleSet, flag: true)
+            AlertManager.presentMessageAlert(viewController: self, title: "삭제했습니다", message: nil) { _ in
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }
     }
 
 }

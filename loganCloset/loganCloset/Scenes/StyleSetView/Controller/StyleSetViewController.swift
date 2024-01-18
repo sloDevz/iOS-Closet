@@ -186,7 +186,7 @@ final class StyleSetViewController: UIViewController {
 
 extension StyleSetViewController: StyleSetDataProtocol {
 
-    func updateStyleSetData(data: StyleSet?) {
+    func updateStyleSetData(data: StyleSet?, flag: Bool) {
         guard let data else { return }
         clothesManager.add(styleSet: data)
         applySnapShot(animation: true)

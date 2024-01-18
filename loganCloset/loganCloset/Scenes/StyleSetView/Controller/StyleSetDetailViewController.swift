@@ -222,10 +222,14 @@ final class StyleSetDetailViewController: UIViewController {
 }
 
 extension StyleSetDetailViewController: StyleSetDataProtocol {
-    func updateStyleSetData(data: StyleSet?) {
-        guard let newStyleSet = data else { return }
-        clothesManager.replace(styleSet: selectedStyleSet, with: newStyleSet)
-        selectedStyleSet = newStyleSet
+    func updateStyleSetData(data: StyleSet?, flag: Bool) {
+        guard let styleSet = data else { return }
+        if flag {
+            clothesManager.delete(styleSet: styleSet)
+        } else {
+            clothesManager.replace(styleSet: selectedStyleSet, with: styleSet)
+            selectedStyleSet = styleSet
+        }
         applySnapShot(animation: false)
     }
 }

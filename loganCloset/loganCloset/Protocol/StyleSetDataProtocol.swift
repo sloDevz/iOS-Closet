@@ -8,5 +8,5 @@
 import Foundation
 
 protocol StyleSetDataProtocol {
-    func updateStyleSetData(data: StyleSet?)
+    func updateStyleSetData(data: StyleSet?, flag: Bool)
 }
