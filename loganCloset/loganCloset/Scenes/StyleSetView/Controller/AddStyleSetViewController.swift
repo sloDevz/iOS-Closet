@@ -13,11 +13,7 @@ final class AddStyleSetViewController: UIViewController {
 
     // MARK: - Constants
     private enum Constant {
-        static let clothesAddButtonContainerInset: CGFloat = 120
-        static let accessoryAddButtonSquareSize: CGFloat = 70
-        static let addHeadButtonTopInset: CGFloat = 100
         static let clothesItemsOffset: CGFloat = 10
-        static let accessoryHStackBottomInset: CGFloat = 50
         static let topItemAddButtonHStackViewSpacing: CGFloat = 15
         static let accessoryAddButtonHStackViewSpacing: CGFloat = 10
 
@@ -25,8 +21,7 @@ final class AddStyleSetViewController: UIViewController {
         static let alertActionTitle:String = "확인"
 
         static let buttonWidthHeightMulitiplyForClothes: CGFloat = 0.2
-        static let buttonWidthHeightMulitiplyForAccessory: CGFloat = 0.1
-        static let accessoryAddButtonHStackViewBottomInset: CGFloat = 25.0
+        static let buttonWidthHeightMulitiplyForAccessory: CGFloat = 0.2
 
         static let alertTitleForSelectedItemsIsEmpty: String = "아이템이 없어요"
         static let alertMessageForSelectedItemsIsEmpty: String = "StyleSet을 구성할 아이템들을 등록해주세요"
@@ -52,6 +47,8 @@ final class AddStyleSetViewController: UIViewController {
     var currentSelectedItemButton: ItemImageButton?
 
     // MARK: - UI Components
+    private var addStyleSetScrollView =  UIScrollView()
+    private var contentView = UIView()
     lazy var clothesButtonContainer: UIView = {
         let view = UIView()
         return view
@@ -112,6 +109,17 @@ final class AddStyleSetViewController: UIViewController {
         stackView.distribution = .fillEqually
         return stackView
     }()
+    private let deleteButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .clear
+        button.setTitle("삭제하기", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        button.setTitleColor(.cyan, for: .selected)
+        button.setTitleColor(.cyan, for: .highlighted)
+        button.titleLabel?.font = UIFont.importedUIFont(name: .pretendardLight, fontSize: 20)
+        button.isHidden = true
+        return button
+    }()
 
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -142,6 +150,9 @@ final class AddStyleSetViewController: UIViewController {
         )
 
         if let selectedStyleSet {
+            deleteButton.isHidden = false
+            deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+
             clothesItemButtons.forEach { button in
                 button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
                 let items = selectedStyleSet.items
@@ -161,9 +172,11 @@ final class AddStyleSetViewController: UIViewController {
             }
         } else {
             clothesItemButtons.forEach { button in
+                print("clotheButton")
                 button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
             }
             accessoryAddButtons.forEach { button in
+                print("AcceButton")
                 button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
             }
         }
@@ -181,58 +194,76 @@ final class AddStyleSetViewController: UIViewController {
     }
 
     private func configureHierarchy() {
-        topItemAddButtonHStackView.addArrangedSubview(topAddButton)
-        topItemAddButtonHStackView.addArrangedSubview(outerAddButton)
-
-        accessoryAddButtons.forEach { button in
-            accessoryAddButtonHStackView.addArrangedSubview(button)
+        view.addSubview(addStyleSetScrollView)
+        addStyleSetScrollView.addSubview(contentView)
+        contentView.addSubview(clothesButtonContainer)
+        contentView.addSubview(accessoryAddButtonHStackView)
+        if let selectedStyleSet {
+            contentView.addSubview(deleteButton)
         }
-
-        view.addSubview(clothesButtonContainer)
         clothesButtonContainer.addSubview(headAddButton)
         clothesButtonContainer.addSubview(topItemAddButtonHStackView)
         clothesButtonContainer.addSubview(bottomAddButton)
         clothesButtonContainer.addSubview(footwearAddButton)
-        view.addSubview(accessoryAddButtonHStackView)
+        topItemAddButtonHStackView.addArrangedSubview(topAddButton)
+        topItemAddButtonHStackView.addArrangedSubview(outerAddButton)
+        accessoryAddButtons.forEach { button in
+            accessoryAddButtonHStackView.addArrangedSubview(button)
+        }
+
     }
 
     private func configureLayoutConstraint() {
         let tabbarHeight = tabBarController?.tabBar.frame.height ?? 50
-        let containerInset = view.frame.height/8
-
+        let containerWidthHeight = view.frame.height/7
+        addStyleSetScrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            if let selectedStyleSet {
+                make.bottom.equalTo(deleteButton.snp.bottom).offset(20)
+            } else {
+                make.bottom.equalTo(accessoryAddButtonHStackView.snp.bottom).offset(20)
+            }
+            make.width.equalToSuperview()
+        }
+        clothesItemButtons.forEach { button in
+            button.snp.makeConstraints { make in
+                make.width.height.equalTo(containerWidthHeight)
+            }
+        }
         clothesButtonContainer.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(containerInset)
+            make.edges.equalToSuperview()
         }
-
         headAddButton.snp.makeConstraints { make in
-            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(Constant.buttonWidthHeightMulitiplyForClothes)
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().inset(20)
             make.centerX.equalToSuperview()
-        }
-        topAddButton.snp.makeConstraints { make in
-            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(Constant.buttonWidthHeightMulitiplyForClothes)
         }
         topItemAddButtonHStackView.snp.makeConstraints { make in
             make.top.equalTo(headAddButton.snp.bottom).offset(Constant.clothesItemsOffset)
             make.centerX.equalToSuperview()
         }
         bottomAddButton.snp.makeConstraints { make in
-            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(Constant.buttonWidthHeightMulitiplyForClothes)
             make.top.equalTo(topItemAddButtonHStackView.snp.bottom).offset(Constant.clothesItemsOffset)
             make.centerX.equalToSuperview()
         }
         footwearAddButton.snp.makeConstraints { make in
-            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(Constant.buttonWidthHeightMulitiplyForClothes)
             make.top.equalTo(bottomAddButton.snp.bottom).offset(Constant.clothesItemsOffset)
             make.centerX.equalToSuperview()
         }
-
-        accessoryAddButtons.first?.snp.makeConstraints({ make in
-            make.width.height.equalTo(clothesButtonContainer.snp.height).multipliedBy(Constant.buttonWidthHeightMulitiplyForAccessory)
-        })
+        accessoryAddButtons.first?.snp.makeConstraints { make in
+            make.width.height.equalTo(clothesButtonContainer.snp.width).multipliedBy(Constant.buttonWidthHeightMulitiplyForAccessory)
+        }
         accessoryAddButtonHStackView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(tabbarHeight + Constant.accessoryAddButtonHStackViewBottomInset)
+            make.top.equalTo(footwearAddButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
+        }
+        if let selectedStyleSet {
+            deleteButton.snp.makeConstraints { make in
+                make.top.equalTo(accessoryAddButtonHStackView.snp.bottom).offset(35)
+                make.centerX.equalToSuperview()
+            }
         }
     }
 
@@ -319,6 +350,11 @@ final class AddStyleSetViewController: UIViewController {
         let ItemPickingVC = PickingItemViewController(items: items)
         ItemPickingVC.delegate = self
         self.present(ItemPickingVC, animated: true)
+    }
+
+    @objc
+    private func deleteButtonTapped() {
+        print(#function)
     }
 
 }

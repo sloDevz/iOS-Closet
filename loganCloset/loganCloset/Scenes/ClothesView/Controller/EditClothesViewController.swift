@@ -153,7 +153,6 @@ final class EditClothesViewController: UIViewController {
         button.setTitleColor(.cyan, for: .selected)
         button.setTitleColor(.cyan, for: .highlighted)
         button.titleLabel?.font = titlefont
-        button.layer.cornerRadius = Constants.confirmButtonRadius
         button.isHidden = true
         return button
     }()
