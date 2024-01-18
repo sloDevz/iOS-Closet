@@ -172,11 +172,9 @@ final class AddStyleSetViewController: UIViewController {
             }
         } else {
             clothesItemButtons.forEach { button in
-                print("clotheButton")
                 button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
             }
             accessoryAddButtons.forEach { button in
-                print("AcceButton")
                 button.addTarget(self, action: #selector(itemAddButtonTapped), for: .touchUpInside)
             }
         }
@@ -342,7 +340,6 @@ final class AddStyleSetViewController: UIViewController {
 
     @objc
     private func itemAddButtonTapped(sender: ItemImageButton) {
-        print(#function)
         guard let category = sender.category,
               let clothesManager else { print("No category"); return }
         currentSelectedItemButton = sender
